@@ -23,8 +23,22 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-MODULES :=
-BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/helloworld
+CPU = cortex-m4f
 
-include module/base/makefile
+# Flash commandfor OpenOCD download target
+FLASH_WRITER_COMMANDS = -c "init" -c "halt 0" -c "flash write_image erase $(BIN_TARGET) $(FLASH_BASE_ADDRESS) bin" -c "reset run" -c "shutdown"
+
+# Variable with module name
+$(eval NAME = $(call module_name,board/$(BOARD)))
+
+# Variable with module root foder
+FOLDER := external/base/soc/$(SOC)
+
+# Variable with the list of folders containing header files for the module
+# $(eval $(NAME)_INC += $(FOLDER)/inc)
+
+# Variable with the list of folders containing source files for the module
+# $(eval $(NAME)_SRC += $(FOLDER)/src)
+
+STARTUP := $(FOLDER)/startup
+$(if $(findstring $(STARTUP),$(PROJECT_SRC)),,$(eval PROJECT_SRC += $(STARTUP)))

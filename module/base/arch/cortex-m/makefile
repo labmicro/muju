@@ -23,8 +23,48 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-MODULES :=
-BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/helloworld
+##################################################################################################
+# Toolchain commands
+# Preprocesor command
+PP = arm-none-eabi-gcc
+# C compiler command
+CC = arm-none-eabi-gcc
+# Library builder command
+AR = arm-none-eabi-ar
+# Linker command
+LD = arm-none-eabi-gcc
+# Assembler command
+AS = arm-none-eabi-as
+# Debbuger command
+GDB = arm-none-eabi-gdb
+# ??
+NM = arm-none-eabi-nm
 
-include module/base/makefile
+OBJ_COPY = arm-none-eabi-objcopy
+
+##################################################################################################
+# Toolchain settings
+# Preprocesor definitions
+
+# Compiler flags
+CFLAGS += -mthumb
+
+# Library builder flags
+AFLAGS += -mthumb
+
+# Linker flags
+LFLAGS += -Wl,-Map="$(TARGET_NAME).map",-gc-sections,--cref
+LFLAGS += -mthumb --specs=nano.specs --specs=nosys.specs -L $(MUJU) -T $(LINKSCRIPT)
+
+# define linker extension
+LD_EXTENSION = elf
+
+# Debugger flags
+GDB_FLAGS = $(LD_TARGET) -ex "target remote localhost:3333"
+
+# Debug server
+GDB_SERVER = openocd
+
+FLASH_WRITER = openocd
+
+BIN_TARGET = $(patsubst %.elf,%.bin,$(LD_TARGET))

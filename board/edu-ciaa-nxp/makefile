@@ -23,8 +23,4 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-MODULES :=
-BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/helloworld
-
-include module/base/makefile
+MCU         ?= lpc4337-m4
