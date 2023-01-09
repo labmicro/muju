@@ -23,8 +23,9 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-MODULES :=
-BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/edu-ciaa-nxp
+MCU         ?= lpc4337-m4
 
-include module/base/makefile
+# Enable only if board are in debug with semihosting support on debugger tool
+# DEFINES += ENABLE_ARM_SEMIHOSTING
+
+USE_LPC_OPEN := y

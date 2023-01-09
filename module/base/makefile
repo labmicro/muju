@@ -82,6 +82,14 @@ $(strip \
 endef
 
 ##################################################################################################
+# Function to generate defines from make variable
+define convert_defines
+$(strip \
+    $(foreach word,$1,$(subst -,_,$(call uc,$(word))))
+)
+endef
+
+##################################################################################################
 # Function to obtain the last directory of a path
 define lastdir
 $(strip \
@@ -205,7 +213,7 @@ endif
 ##################################################################################################
 #
 
-include $(call full_path,board/$(BOARD)/makefile)
+include $(call full_path,board/makefile)
 include $(call full_path,module/base/mcu/makefile)
 include $(call full_path,module/base/soc/makefile)
 include $(call full_path,module/base/cpu/makefile)
@@ -216,15 +224,10 @@ export CPU
 export SOC
 export MCU
 
-# CPU_PATHS = module/base/cpu/$(CPU)
-# SOC_PATHS = module/base/soc/$(SOC)
-
-# CPU_INC = $(foreach path,$(CPU_PATHS),$($(call uc,$(subst /,_,$(path)))_INC))
-# SOC_INC = $(foreach path,$(SOC_PATHS),$($(call uc,$(subst /,_,$(path)))_INC))
-
 MODULES += board/$(BOARD)
 
-DEFINES += BOARD=$(BOARD) CPU=$(CPU) ARCH=$(ARCH) SOC=$(SOC) MCU=$(MCU)
+DEFINES += BOARD=$(BOARD)  MCU=$(MCU) SOC=$(SOC) CPU=$(CPU) ARCH=$(ARCH)
+DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH))
 
 ##################################################################################################
 #

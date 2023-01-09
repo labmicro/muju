@@ -23,8 +23,18 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-MODULES :=
-BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/edu-ciaa-nxp
+$(if $(BOARD),,$(error BOARD variable is not set))
 
-include module/base/makefile
+# Variable with module root foder
+FOLDER := board/$(BOARD)
+
+# Variable with module name
+$(eval NAME = $(call module_name,$(FOLDER)))
+
+# Variable with the list of folders containing header files for the module
+$(eval $(NAME)_INC += board)
+
+# Variable with the list of folders containing source files for the module
+$(eval $(NAME)_SRC += $(FOLDER))
+
+include $(call full_path,board/$(BOARD)/makefile)
