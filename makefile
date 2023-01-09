@@ -25,6 +25,6 @@
 
 MODULES :=
 BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/helloworld
+PROJECT ?= examples/edu-ciaa-nxp
 
 include module/base/makefile

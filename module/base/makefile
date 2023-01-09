@@ -82,6 +82,14 @@ $(strip \
 endef
 
 ##################################################################################################
+# Function to generate defines from make variable
+define convert_defines
+$(strip \
+    $(foreach word,$1,$(subst -,_,$(call uc,$(word))))
+)
+endef
+
+##################################################################################################
 # Function to obtain the last directory of a path
 define lastdir
 $(strip \
@@ -218,7 +226,8 @@ export MCU
 
 MODULES += board/$(BOARD)
 
-DEFINES += BOARD=$(BOARD) CPU=$(CPU) ARCH=$(ARCH) SOC=$(SOC) MCU=$(MCU)
+DEFINES += BOARD=$(BOARD)  MCU=$(MCU) SOC=$(SOC) CPU=$(CPU) ARCH=$(ARCH)
+DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH))
 
 ##################################################################################################
 #
