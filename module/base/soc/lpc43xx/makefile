@@ -28,17 +28,26 @@ CPU = cortex-m4f
 # Flash commandfor OpenOCD download target
 FLASH_WRITER_COMMANDS = -c "init" -c "halt 0" -c "flash write_image erase $(BIN_TARGET) $(FLASH_BASE_ADDRESS) bin" -c "reset run" -c "shutdown"
 
+# Variable with LPC Open drivers module root foder
+LPC_OPEN := external/base/soc/$(SOC)/lpc_open
+
+# Variable with ARM CMSIS core module root foder
+CMSIS_CORE := external/base/arch/arm/cmsis_core
+
+# Variable with the list of folders containing header files for LPC Open drivers module
+LPC_OPEN_INC := $(CMSIS_CORE) $(LPC_OPEN)/inc $(LPC_OPEN)/inc/config_43xx
+
+# Variable with the list of folders containing header files for LPC Open drivers module
+LPC_OPEN_SRC := $(LPC_OPEN)/src
+
 # Variable with module name
 $(eval NAME = $(call module_name,board/$(BOARD)))
 
-# Variable with module root foder
-FOLDER := external/base/soc/$(SOC)
+# Variable with the list of folders containing header and sourcefiles for the module
+$(if $(findstring Y,$(call uc,$(USE_LPC_OPEN))), \
+$(eval $(NAME)_INC += $(LPC_OPEN_INC)) \
+$(eval $(NAME)_SRC += $(LPC_OPEN_SRC)) \
+)
 
-# Variable with the list of folders containing header files for the module
-# $(eval $(NAME)_INC += $(FOLDER)/inc)
-
-# Variable with the list of folders containing source files for the module
-# $(eval $(NAME)_SRC += $(FOLDER)/src)
-
-STARTUP := $(FOLDER)/startup
+STARTUP := external/base/soc/$(SOC)/startup
 $(if $(findstring $(STARTUP),$(PROJECT_SRC)),,$(eval PROJECT_SRC += $(STARTUP)))
