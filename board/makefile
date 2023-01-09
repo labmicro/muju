@@ -23,56 +23,18 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-##################################################################################################
-# Toolchain commands
-# Preprocesor command
-PP = arm-none-eabi-gcc
-# C compiler command
-CC = arm-none-eabi-gcc
-# Library builder command
-AR = arm-none-eabi-ar
-# Linker command
-LD = arm-none-eabi-gcc
-# Assembler command
-AS = arm-none-eabi-as
-# Debbuger command
-GDB = arm-none-eabi-gdb
-# ??
-NM = arm-none-eabi-nm
+$(if $(BOARD),,$(error BOARD variable is not set))
 
-OBJ_COPY = arm-none-eabi-objcopy
+# Variable with module root foder
+FOLDER := board/$(BOARD)
 
-##################################################################################################
-# Toolchain settings
-# Preprocesor definitions
+# Variable with module name
+$(eval NAME = $(call module_name,$(FOLDER)))
 
-# Compiler flags
-CFLAGS += -mthumb
+# Variable with the list of folders containing header files for the module
+$(eval $(NAME)_INC += board)
 
-# Library builder flags
-AFLAGS += -mthumb
+# Variable with the list of folders containing source files for the module
+$(eval $(NAME)_SRC += $(FOLDER))
 
-# Enable ARM Semihosting support
-$(if $(findstring ENABLE_ARM_SEMIHOSTING,$(DEFINES)),\
-$(eval SPECS = --specs=nano.specs --specs=rdimon.specs) \
-$(eval LFLAGS += -l rdimon) \
-, \
-$(eval SPECS = --specs=nano.specs --specs=nosys.specs) \
-)
-
-# Linker flags
-LFLAGS += -Wl,-Map="$(TARGET_NAME).map",-gc-sections,--cref
-LFLAGS += -mthumb $(SPECS) -L $(MUJU) -T $(LINKSCRIPT)
-
-# define linker extension
-LD_EXTENSION = elf
-
-# Debugger flags
-GDB_FLAGS = $(LD_TARGET) -ex "target remote localhost:3333"
-
-# Debug server
-GDB_SERVER = openocd
-
-FLASH_WRITER = openocd
-
-BIN_TARGET = $(patsubst %.elf,%.bin,$(LD_TARGET))
+include $(call full_path,board/$(BOARD)/makefile)

@@ -205,7 +205,7 @@ endif
 ##################################################################################################
 #
 
-include $(call full_path,board/$(BOARD)/makefile)
+include $(call full_path,board/makefile)
 include $(call full_path,module/base/mcu/makefile)
 include $(call full_path,module/base/soc/makefile)
 include $(call full_path,module/base/cpu/makefile)
@@ -215,12 +215,6 @@ export BOARD
 export CPU
 export SOC
 export MCU
-
-# CPU_PATHS = module/base/cpu/$(CPU)
-# SOC_PATHS = module/base/soc/$(SOC)
-
-# CPU_INC = $(foreach path,$(CPU_PATHS),$($(call uc,$(subst /,_,$(path)))_INC))
-# SOC_INC = $(foreach path,$(SOC_PATHS),$($(call uc,$(subst /,_,$(path)))_INC))
 
 MODULES += board/$(BOARD)
 

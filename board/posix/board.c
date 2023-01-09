@@ -1,9 +1,5 @@
 /************************************************************************************************
-Copyright (c) 2022-2023, Laboratorio de Microprocesadores
-Facultad de Ciencias Exactas y Tecnología, Universidad Nacional de Tucumán
-https://www.microprocesadores.unt.edu.ar/
-
-Copyright (c) 2022-2023, Esteban Volentini <evolentini@herrera.unt.edu.ar>
+Copyright (c) <year>, <copyright holders>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -23,16 +19,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-/** \brief Hello World sample application
+/** \brief Posix board configuration implementation
  **
- ** \addtogroup samples Samples
- ** \brief Samples applications with MUJU Framwork
+ ** \addtogroup board Board support
+ ** \brief Board agnostic configuration module
  ** @{ */
 
 /* === Headers files inclusions =============================================================== */
 
 #include "board.h"
-#include <stdio.h>
 
 /* === Macros definitions ====================================================================== */
 
@@ -50,13 +45,7 @@ SPDX-License-Identifier: MIT
 
 /* === Public function implementation ========================================================== */
 
-int main(void) {
-
-    BoardSetup();
-
-    printf("Hello World!!!\n");
-
-    return 0;
+void BoardSetup(void) {
 }
 
 /* === End of documentation ==================================================================== */
