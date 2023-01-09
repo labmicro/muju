@@ -1,0 +1,6 @@
+All software contained in this folder was not developed by the project owners
+and is therefore not included in the general license terms.
+
+The original license statements are retained in each file,
+and when a separate license file is supplied by the original owner,
+this license file is included in the appropriate folder.
