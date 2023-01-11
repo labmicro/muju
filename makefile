@@ -23,8 +23,8 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-MODULES :=
+MODULES := module/hal
 BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/edu-ciaa-nxp
+PROJECT ?= examples/demo_hal
 
 include module/base/makefile
