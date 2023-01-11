@@ -23,26 +23,20 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef HAL_H
-#define HAL_H
+#ifndef SOC_SCI_H
+#define SOC_SCI_H
 
 /** @file
- ** @brief Harware abstraction layer declarations
+ ** @brief Serial portson lpc43xx declarations
  **
- ** @addtogroup hal HAL
- ** @brief Hardware abstraction layer
+ ** @addtogroup lpc43xx LPC43xx
+ ** @ingroup hal
+ ** @brief LPC43xx SOC Hardware abstraction layer
  ** @{ */
 
 /* === Headers files inclusions ================================================================ */
 
-#include "hal_pin.h"
 #include "hal_sci.h"
-#include "hal_gpio.h"
-#include "hal_tick.h"
-#include "soc_pin.h"
-#include "soc_sci.h"
-#include "soc_gpio.h"
-#include "soc_tick.h"
 
 /* === Cabecera C++ ============================================================================ */
 
@@ -56,6 +50,13 @@ extern "C" {
 
 /* === Public variable declarations ============================================================ */
 
+/** @cond !INTERNAL */
+extern const hal_sci_t HAL_SCI_USART0; /**< Constant to define serial port 0 */
+extern const hal_sci_t HAL_SCI_UART1;  /**< Constant to define serial port 1 */
+extern const hal_sci_t HAL_SCI_USART2; /**< Constant to define serial port 2 */
+extern const hal_sci_t HAL_SCI_USART4; /**< Constant to define serial port 3 */
+/** @endcond */
+
 /* === Public function declarations ============================================================ */
 
 /* === End of documentation ==================================================================== */
@@ -66,4 +67,4 @@ extern "C" {
 
 /** @} End of module definition for doxygen */
 
-#endif /* HAL_H */
+#endif /* SOC_SCI_H */

@@ -35,6 +35,7 @@ SPDX-License-Identifier: MIT
 
 #include "board.h"
 #include "hal.h"
+#include <string.h>
 
 /* === Macros definitions ====================================================================== */
 
@@ -77,6 +78,7 @@ typedef struct board_s {
     hal_gpio_bit_t tec_2;     /**< Gpio output used to read status of key 2 on board */
     hal_gpio_bit_t tec_3;     /**< Gpio output used to read status of key 3 on board */
     hal_gpio_bit_t tec_4;     /**< Gpio output used to read status of key 4 on board */
+    hal_sci_t console;        /**< Serial port used as console on board */
 } const * const board_t;
 
 /* === Private variable declarations =========================================================== */
@@ -98,11 +100,29 @@ static board_t BoardCreate(void);
 static void TickEvent(void * object);
 
 /**
+ * @brief Function to handle events of serial port used as console by board
+ *
+ * @param  console  Pointer to structure with descriptor of serial port that raises the event
+ * @param  status   Pointer to structure with flags that raises the event
+ * @param  data     Pointer to user data declared when handler event has installed
+ */
+static void ConsoleEvent(hal_sci_t console, sci_status_t status, void * data);
+
+/**
+ * @brief Function to make a blocking sending of a string through the serial port used as console
+ *
+ * @param  console  Pointer to structure with descriptor of serial port used as console
+ * @param  message  Pointer to string to send by serial port used as console
+ */
+static void ConsoleSend(hal_sci_t console, char const * message);
+
+/**
  * @brief Function to flash RGB led in sequence
  *
  * @param  led      Pointer to structure with gpio outputs used by rgb led
+ * @param  console  Pointer to structure with serial port used by console
  */
-static void FlashLed(led_rgb_t led);
+static void FlashLed(led_rgb_t led, hal_sci_t console);
 
 /**
  * @brief Function to switch on and off a led with two keys
@@ -136,6 +156,12 @@ static void TestLed(hal_gpio_bit_t key, hal_gpio_bit_t led);
 /* === Private function implementation ========================================================= */
 
 static board_t BoardCreate(void) {
+    static const struct hal_sci_line_s console_config = {
+        .baud_rate = 115200,
+        .data_bits = 8,
+        .parity = HAL_SCI_NO_PARITY,
+    };
+    struct hal_sci_pins_s console_pins = {0};
     static struct board_s board;
 
 #ifdef EDU_CIAA_NXP
@@ -151,6 +177,10 @@ static board_t BoardCreate(void) {
     board.tec_2 = HAL_GPIO0_8;
     board.tec_3 = HAL_GPIO0_9;
     board.tec_4 = HAL_GPIO1_9;
+
+    board.console = HAL_SCI_USART2;
+    console_pins.txd_pin = HAL_PIN_P7_1;
+    console_pins.rxd_pin = HAL_PIN_P7_2;
 #elif POSIX
     board.led_rgb.red = HAL_GPIO3_7;
     board.led_rgb.green = HAL_GPIO3_6;
@@ -180,6 +210,7 @@ static board_t BoardCreate(void) {
     GpioSetDirection(board.tec_3, false);
     GpioSetDirection(board.tec_4, false);
 
+    SciSetConfig(board.console, &console_config, &console_pins);
     return &board;
 }
 
@@ -187,7 +218,37 @@ static void TickEvent(void * object) {
     *((bool *)object) = true;
 }
 
-static void FlashLed(led_rgb_t led) {
+static void ConsoleEvent(hal_sci_t console, sci_status_t status, void * data) {
+    board_t board = data;
+    char key;
+    uint8_t received;
+
+    if (status->data_ready) {
+        received = SciReceiveData(console, &key, sizeof(key));
+        if (received) {
+            if (key == '1') {
+                GpioSetState(board->led_1, true);
+            } else if (key == '2') {
+                GpioSetState(board->led_1, false);
+            } else if (key == '3') {
+                GpioBitToogle(board->led_2);
+            }
+        }
+    }
+}
+
+static void ConsoleSend(hal_sci_t console, char const * message) {
+    uint8_t pending = strlen(message);
+    uint8_t sended;
+
+    while (pending) {
+        sended = SciSendData(console, message, pending);
+        message += sended;
+        pending -= sended;
+    }
+}
+
+static void FlashLed(led_rgb_t led, hal_sci_t console) {
     static int divisor = 0;
     static rgb_color_t state = LED_BLUE_OFF;
 
@@ -201,21 +262,25 @@ static void FlashLed(led_rgb_t led) {
             GpioBitClear(led->green);
             GpioBitClear(led->blue);
             GpioBitSet(led->red);
+            ConsoleSend(console, "RED Channel of RGB led is on\n");
             break;
         case LED_GREEN_ON:
             GpioBitClear(led->red);
             GpioBitClear(led->blue);
             GpioBitSet(led->green);
+            ConsoleSend(console, "GREEN Channel of RGB led is on\n");
             break;
         case LED_BLUE_ON:
             GpioBitClear(led->red);
             GpioBitClear(led->green);
             GpioBitSet(led->blue);
+            ConsoleSend(console, "BLUE Channel of RGB led is on\n");
             break;
         default:
             GpioBitClear(led->red);
             GpioBitClear(led->green);
             GpioBitClear(led->blue);
+            ConsoleSend(console, "All Channels of RGB led are off\n");
             break;
         }
     }
@@ -255,7 +320,9 @@ int main(void) {
     int divisor = 0;
     volatile bool new_tick = false;
     board_t board = BoardCreate();
+
     TickStart(TickEvent, (void *)&new_tick, 1000);
+    SciSetEventHandler(board->console, ConsoleEvent, (void *)board);
 
     while (true) {
         while (!new_tick) {
@@ -263,7 +330,7 @@ int main(void) {
         }
         new_tick = false;
 
-        FlashLed(&board->led_rgb);
+        FlashLed(&board->led_rgb, board->console);
 
         divisor++;
         if (divisor == 150) {

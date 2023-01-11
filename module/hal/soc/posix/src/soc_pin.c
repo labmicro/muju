@@ -23,47 +23,45 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef HAL_H
-#define HAL_H
-
 /** @file
- ** @brief Harware abstraction layer declarations
+ ** @brief Chip pins on posix implementation
  **
- ** @addtogroup hal HAL
- ** @brief Hardware abstraction layer
+ ** @addtogroup posix Posix
+ ** @ingroup hal
+ ** @brief Posix SOC Hardware abstraction layer
+ ** @cond INTERNAL
  ** @{ */
 
-/* === Headers files inclusions ================================================================ */
+/* === Headers files inclusions =============================================================== */
 
-#include "hal_pin.h"
-#include "hal_sci.h"
-#include "hal_gpio.h"
-#include "hal_tick.h"
 #include "soc_pin.h"
-#include "soc_sci.h"
-#include "soc_gpio.h"
-#include "soc_tick.h"
 
-/* === Cabecera C++ ============================================================================ */
+/* === Macros definitions ====================================================================== */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/* === Private data type declarations ========================================================== */
 
-/* === Public macros definitions =============================================================== */
+/* === Private variable declarations =========================================================== */
 
-/* === Public data type declarations =========================================================== */
+/* === Private function declarations =========================================================== */
 
-/* === Public variable declarations ============================================================ */
+/* === Public variable definitions ============================================================= */
 
-/* === Public function declarations ============================================================ */
+/* === Private variable definitions ============================================================ */
+
+/* === Private function implementation ========================================================= */
+
+/* === Public function implementation ========================================================== */
+
+void ChipPinSetFunction(hal_chip_pin_t pin, uint8_t function, bool pullup, bool puldown) {
+}
+
+void ChipPinSetPullUp(hal_chip_pin_t pin, bool enable) {
+}
+
+void ChipPinSetPullDown(hal_chip_pin_t pin, bool enable) {
+}
 
 /* === End of documentation ==================================================================== */
 
-#ifdef __cplusplus
-}
-#endif
-
-/** @} End of module definition for doxygen */
-
-#endif /* HAL_H */
+/** @} End of module definition for doxygen
+ ** @endcond */

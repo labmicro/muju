@@ -23,11 +23,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef HAL_H
-#define HAL_H
+#ifndef HAL_PIN_H
+#define HAL_PIN_H
 
 /** @file
- ** @brief Harware abstraction layer declarations
+ ** @brief Chip pins declarations
  **
  ** @addtogroup hal HAL
  ** @brief Hardware abstraction layer
@@ -35,14 +35,8 @@ SPDX-License-Identifier: MIT
 
 /* === Headers files inclusions ================================================================ */
 
-#include "hal_pin.h"
-#include "hal_sci.h"
-#include "hal_gpio.h"
-#include "hal_tick.h"
-#include "soc_pin.h"
-#include "soc_sci.h"
-#include "soc_gpio.h"
-#include "soc_tick.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 /* === Cabecera C++ ============================================================================ */
 
@@ -54,9 +48,44 @@ extern "C" {
 
 /* === Public data type declarations =========================================================== */
 
+/**
+ * @brief Pointer to the structure with the chip pin descriptor
+ */
+typedef struct hal_chip_pin_s const * hal_chip_pin_t;
+
 /* === Public variable declarations ============================================================ */
 
 /* === Public function declarations ============================================================ */
+
+/**
+ * @brief Function to configure a chip pin with function and pull resistors
+ *
+ * @param  pin      Pointer to the structure with the chip pin descriptor
+ * @param  function Numeric function asineg to chip pin
+ * @param  pullup   State to be assigned to the internal pullup resistor
+ * @param  puldown  State to be assigned to the internal pulldown resistor
+ */
+void ChipPinSetFunction(hal_chip_pin_t pin, uint8_t function, bool pullup, bool puldown);
+
+/**
+ * @brief Function to change the internal pullup resistor configuratioxn on chip pin
+ *
+ * @param  pin      Pointer to the structure with the chip pin descriptor
+ * @param  enable   State to be assigned to the internal pullup resistor
+ * @arg @c true     The internal pullup resistor must be enabled
+ * @arg @c false    The internal pullup resistor must be disabled
+ */
+void ChipPinSetPullUp(hal_chip_pin_t pin, bool enable);
+
+/**
+ * @brief Function to change the internal pulldown resistor configuration on chip pin
+ *
+ * @param  pin      Pointer to the structure with the chip pin descriptor
+ * @param  enable   State to be assigned to the internal pullup resistor
+ * @arg @c true     The internal pulldown resistor must be enabled
+ * @arg @c false    The internal pulldown resistor must be disabled
+ */
+void ChipPinSetPullDown(hal_chip_pin_t pin, bool enable);
 
 /* === End of documentation ==================================================================== */
 
@@ -66,4 +95,4 @@ extern "C" {
 
 /** @} End of module definition for doxygen */
 
-#endif /* HAL_H */
+#endif /* HAL_PIN_H */
