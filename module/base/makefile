@@ -219,20 +219,24 @@ include $(call full_path,module/base/soc/makefile)
 include $(call full_path,module/base/cpu/makefile)
 include $(call full_path,module/base/arch/makefile)
 
+MODULES += board/$(BOARD)
+$(foreach module,$(MODULES),$(eval $(call define_library_rules,$(module))))
+
+##################################################################################################
+#
+RTOS ?= BAREMETAL
+
 export BOARD
 export CPU
 export SOC
 export MCU
+export RTOS
 
-MODULES += board/$(BOARD)
-
-DEFINES += BOARD=$(BOARD)  MCU=$(MCU) SOC=$(SOC) CPU=$(CPU) ARCH=$(ARCH)
-DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH))
+DEFINES += BOARD=$(BOARD)  MCU=$(MCU) SOC=$(SOC) CPU=$(CPU) ARCH=$(ARCH) RTOS=$(RTOS)
+DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH) $(RTOS))
 
 ##################################################################################################
 #
-$(foreach module,$(MODULES),$(eval $(call define_library_rules,$(module))))
-
 TARGET_NAME ?= $(BIN_DIR)/$(PROJECT_NAME)
 LD_TARGET = $(TARGET_NAME).$(LD_EXTENSION)
 
