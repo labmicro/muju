@@ -35,6 +35,7 @@ SPDX-License-Identifier: MIT
 /* === Headers files inclusions =============================================================== */
 
 #include "soc_sci.h"
+#include <string.h>
 
 /* === Macros definitions ====================================================================== */
 
@@ -52,16 +53,20 @@ SPDX-License-Identifier: MIT
 
 /* === Public function implementation ========================================================== */
 
-void SciSetConfig(hal_sci_t sci, hal_sci_line_t line, hal_sci_pins_t pins) {
+bool SciSetConfig(hal_sci_t sci, hal_sci_line_t line, hal_sci_pins_t pins) {
+    return false;
 }
 
 uint16_t SciSendData(hal_sci_t sci, void const * const data, uint16_t size) {
+    return size;
 }
 
 uint16_t SciReceiveData(hal_sci_t sci, void * data, uint16_t size) {
+    return size;
 }
 
-void SciReadStatus(hal_sci_t sci, sci_status_t result, bool clear_status) {
+void SciReadStatus(hal_sci_t sci, sci_status_t result) {
+    memset(result, 0, sizeof(*result));
 }
 
 void SciSetEventHandler(hal_sci_t sci, hal_sci_event_t handler, void * data) {
