@@ -36,6 +36,7 @@ SPDX-License-Identifier: MIT
 #include "bsp.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
 #include <string.h>
 
 /* === Macros definitions ====================================================================== */
@@ -112,6 +113,14 @@ static void TestLed(void * object);
 
 /* === Private variable definitions ============================================================ */
 
+static const char LED_IS_ON[] = "Led 1 is on\n";
+
+static const char LED_IS_OFF[] = "Led 1 is off\n";
+
+static const char LED_TOGGLED[] = "Led 2 was taggled\n";
+
+static SemaphoreHandle_t console_mutex;
+
 /* === Private function implementation ========================================================= */
 
 static void ConsoleEvent(hal_sci_t console, sci_status_t status, void * data) {
@@ -137,11 +146,13 @@ static void ConsoleSend(hal_sci_t console, char const * message) {
     uint8_t pending = strlen(message);
     uint8_t sended;
 
+    xSemaphoreTake(console_mutex, portMAX_DELAY);
     while (pending) {
         sended = SciSendData(console, message, pending);
         message += sended;
         pending -= sended;
     }
+    xSemaphoreGive(console_mutex);
 }
 
 static void FlashLed(void * object) {
@@ -186,10 +197,16 @@ static void SwitchLed(void * object) {
 
     while (true) {
         if (GpioGetState(key_on) == 0) {
-            GpioSetState(led, true);
+            if (GpioGetState(led) != true) {
+                GpioSetState(led, true);
+                ConsoleSend(board->console, LED_IS_ON);
+            }
         }
         if (GpioGetState(key_off) == 0) {
-            GpioSetState(led, false);
+            if (GpioGetState(led) != false) {
+                GpioSetState(led, false);
+                ConsoleSend(board->console, LED_IS_OFF);
+            }
         }
         vTaskDelay(pdMS_TO_TICKS(150));
     }
@@ -206,6 +223,7 @@ static void ToggleLed(void * object) {
         current_state = (GpioGetState(key) == 0);
         if ((current_state) && (!last_state)) {
             GpioBitToogle(led);
+            ConsoleSend(board->console, LED_TOGGLED);
         }
         last_state = current_state;
         vTaskDelay(pdMS_TO_TICKS(150));
@@ -234,10 +252,14 @@ int main(void) {
     board_t board = BoardCreate();
 
     /* Creación de las tareas */
+    console_mutex = xSemaphoreCreateMutex();
+
     xTaskCreate(FlashLed, "FlashLed", 256, (void *)board, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate(ToggleLed, "ToogleLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
     xTaskCreate(SwitchLed, "SwitchLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
     xTaskCreate(TestLed, "TestLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
+
+    SciSetEventHandler(board->console, ConsoleEvent, (void *)board);
 
     /* Arranque del sistema operativo */
     vTaskStartScheduler();
