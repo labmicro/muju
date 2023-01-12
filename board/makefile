@@ -32,9 +32,9 @@ FOLDER := board/$(BOARD)
 $(eval NAME = $(call module_name,$(FOLDER)))
 
 # Variable with the list of folders containing header files for the module
-$(eval $(NAME)_INC += board)
+$(eval $(NAME)_INC += $(FOLDER)/inc)
 
 # Variable with the list of folders containing source files for the module
-$(eval $(NAME)_SRC += $(FOLDER))
+$(eval $(NAME)_SRC += $(FOLDER)/src)
 
 include $(call full_path,board/$(BOARD)/makefile)

@@ -28,7 +28,7 @@ SPDX-License-Identifier: MIT
 /* === Headers files inclusions =============================================================== */
 
 #include "board.h"
-#include "chip.h"
+#include <stdlib.h>
 
 /* === Macros definitions ====================================================================== */
 
@@ -114,6 +114,11 @@ void BoardSetup(void) {
     initialise_monitor_handles();
 #endif
 }
+
+#ifdef FREERTOS
+#include "FreeRTOSConfig.h"
+__attribute__((section(".data.$RAM2"))) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
+#endif
 
 /* === End of documentation ====================================================================
  */
