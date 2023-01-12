@@ -27,7 +27,7 @@ SOC = lpc43xx
 
 DEFINES += CORE_M4
 
-LINKSCRIPT = external/base/mcu/$(MCU)/linker/debug.ld
+LINKSCRIPT = external/base/mcu/$(MCU)/linker/release.ld
 
 # Command flags for OpenOCD download target
 FLASH_WRITER_FLAGS = -f $(MUJU)/external/base/mcu/$(MCU)/openocd/lpc4337_new.cfg
