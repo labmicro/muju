@@ -23,8 +23,8 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-MODULES := module/hal
+MODULES := module/hal module/freertos
 BOARD ?= edu-ciaa-nxp
-PROJECT ?= examples/demo_hal
+PROJECT ?= examples/freertos
 
 include module/base/makefile

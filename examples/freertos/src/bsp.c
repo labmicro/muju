@@ -24,17 +24,17 @@ SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
 /** @file
- ** @brief Serial ports on posix implementation
+ ** @brief Board support hardware abstraction layer implementation
  **
- ** @addtogroup posix Posix
- ** @ingroup hal
- ** @brief Posix SOC Hardware abstraction layer
- ** @cond INTERNAL
+ ** @addtogroup sample-freertos FreeRTOS Sample
+ ** @ingroup samples
+ ** @brief Samples applications with MUJU Framwork
  ** @{ */
 
 /* === Headers files inclusions =============================================================== */
 
-#include "soc_sci.h"
+#include "bsp.h"
+#include "board.h"
 #include <string.h>
 
 /* === Macros definitions ====================================================================== */
@@ -51,28 +51,73 @@ SPDX-License-Identifier: MIT
 
 /* === Private function implementation ========================================================= */
 
-/* === Public function implementation ========================================================== */
+static board_t AssignResources(struct hal_sci_pins_s * console_pins) {
+    static struct board_s board = {0};
 
-bool SciSetConfig(hal_sci_t sci, hal_sci_line_t line, hal_sci_pins_t pins) {
-    return false;
+#ifdef EDU_CIAA_NXP
+    board.led_rgb[0].red = HAL_GPIO5_0;
+    board.led_rgb[0].green = HAL_GPIO5_1;
+    board.led_rgb[0].blue = HAL_GPIO5_2;
+
+    board.led_1 = HAL_GPIO0_14;
+    board.led_2 = HAL_GPIO1_11;
+    board.led_3 = HAL_GPIO1_12;
+
+    board.tec_1 = HAL_GPIO0_4;
+    board.tec_2 = HAL_GPIO0_8;
+    board.tec_3 = HAL_GPIO0_9;
+    board.tec_4 = HAL_GPIO1_9;
+
+    board.console = HAL_SCI_USART2;
+    console_pins->txd_pin = HAL_PIN_P7_1;
+    console_pins->rxd_pin = HAL_PIN_P7_2;
+#elif POSIX
+    board.led_rgb[0].red = HAL_GPIO3_7;
+    board.led_rgb[0].green = HAL_GPIO3_6;
+    board.led_rgb[0].blue = HAL_GPIO3_5;
+
+    board.led_1 = HAL_GPIO3_2;
+    board.led_2 = HAL_GPIO3_1;
+    board.led_3 = HAL_GPIO3_0;
+
+    board.tec_1 = HAL_GPIO0_0;
+    board.tec_2 = HAL_GPIO0_1;
+    board.tec_3 = HAL_GPIO0_2;
+    board.tec_4 = HAL_GPIO0_3;
+#endif
+    return (board_t)&board;
 }
 
-uint16_t SciSendData(hal_sci_t sci, void const * const data, uint16_t size) {
-    return size;
-}
+/* === Public function implementation ========================================================= */
 
-uint16_t SciReceiveData(hal_sci_t sci, void * data, uint16_t size) {
-    return size;
-}
+board_t BoardCreate(void) {
+    static const struct hal_sci_line_s console_config = {
+        .baud_rate = 115200,
+        .data_bits = 8,
+        .parity = HAL_SCI_NO_PARITY,
+    };
+    struct hal_sci_pins_s console_pins = {0};
 
-void SciReadStatus(hal_sci_t sci, sci_status_t result) {
-    memset(result, 0, sizeof(*result));
-}
+    BoardSetup();
+    board_t board = AssignResources(&console_pins);
 
-void SciSetEventHandler(hal_sci_t sci, hal_sci_event_t handler, void * data) {
+    GpioSetDirection(board->led_rgb->red, true);
+    GpioSetDirection(board->led_rgb->green, true);
+    GpioSetDirection(board->led_rgb->blue, true);
+
+    GpioSetDirection(board->led_1, true);
+    GpioSetDirection(board->led_2, true);
+    GpioSetDirection(board->led_3, true);
+
+    GpioSetDirection(board->tec_1, false);
+    GpioSetDirection(board->tec_2, false);
+    GpioSetDirection(board->tec_3, false);
+    GpioSetDirection(board->tec_4, false);
+
+    SciSetConfig(board->console, &console_config, &console_pins);
+    return board;
 }
 
 /* === End of documentation ==================================================================== */
 
-/** @} End of module definition for doxygen
- ** @endcond */
+/** @} End of module definition for doxygen */

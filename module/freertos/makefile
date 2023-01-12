@@ -23,18 +23,26 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-$(if $(BOARD),,$(error BOARD variable is not set))
-
 # Variable with module root foder
-FOLDER := board/$(BOARD)
+FOLDER := external/freertos
+
+RTOS := FREERTOS
 
 # Variable with module name
-$(eval NAME = $(call module_name,$(FOLDER)))
+$(eval NAME = $(call uc,$(subst /,_,$(FOLDER))))
+
+ifeq ($(BOARD),posix)
+    PORT := $(FOLDER)/portable/ThirdParty/GCC/Posix $(FOLDER)/portable/ThirdParty/GCC/Posix/utils
+    $(NAME)_OBJ += $(OBJ_DIR)/$(FOLDER)/portable/MemMang/heap_3.o
+else
+    PORT = $(FOLDER)/portable/GCC/ARM_CM4F
+    $(NAME)_OBJ += $(OBJ_DIR)/$(FOLDER)/portable/MemMang/heap_4.o
+endif
 
 # Variable with the list of folders containing header files for the module
-$(eval $(NAME)_INC += $(FOLDER)/inc)
+$(NAME)_INC := $(FOLDER)/include $(PORT) $(PROJECT_INC) boards/$(BOARD)/inc
 
 # Variable with the list of folders containing source files for the module
-$(eval $(NAME)_SRC += $(FOLDER)/src)
+$(NAME)_SRC := $(FOLDER) $(PORT)
 
-include $(call full_path,board/$(BOARD)/makefile)
+$(eval $(call c_compiler_rule,$(FOLDER)/portable/MemMang,$(NAME)_INC))
