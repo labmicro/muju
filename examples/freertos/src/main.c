@@ -79,46 +79,53 @@ static void ConsoleSend(hal_sci_t console, char const * message);
 /**
  * @brief Function to flash RGB led in sequence
  *
- * @param  led      Pointer to structure with gpio outputs used by rgb led
- * @param  console  Pointer to structure with serial port used by console
+ * @param  object   Pointer to board structure, used as parameter when task created
  */
-static void FlashLed(void * object);
+static void FlashTask(void * object);
 
 /**
  * @brief Function to switch on and off a led with two keys
  *
- * @param  key_on   Gpio input used by the key that turns on the led
- * @param  key_off  Gpio input used by the key that turns off the led
- * @param  led      Gpio output used by the led drived by the keys
+ * @param  object   Pointer to board structure, used as parameter when task created
  */
-static void SwitchLed(void * object);
+static void SwitchTask(void * object);
 
 /**
  * @brief Function to switch on and off a led with a single key
  *
- * @param  key      Gpio input used by the key that turn on and off the led
- * @param  led      Gpio output used by the led drived by the key
+ * @param  object   Pointer to board structure, used as parameter when task created
  */
-static void ToggleLed(void * object);
+static void ToggleTask(void * object);
 
 /**
  * @brief Function to turn on a led while a key is pressed
  *
- * @param  key      Gpio input used by the key that turn on the led
- * @param  led      Gpio output used by the led drived by the key
+ * @param  object   Pointer to board structure, used as parameter when task created
  */
-static void TestLed(void * object);
+static void TestTask(void * object);
 
 /* === Public variable definitions ============================================================= */
 
 /* === Private variable definitions ============================================================ */
 
+/**
+ * @brief Constant with led on message to send by console
+ */
 static const char LED_IS_ON[] = "Led 1 is on\n";
 
+/**
+ * @brief Constant with led off message to send by console
+ */
 static const char LED_IS_OFF[] = "Led 1 is off\n";
 
+/**
+ * @brief Constant with led toggle message to send by console
+ */
 static const char LED_TOGGLED[] = "Led 2 was taggled\n";
 
+/**
+ * @brief Mutex to protect serial console transmission
+ */
 static SemaphoreHandle_t console_mutex;
 
 /* === Private function implementation ========================================================= */
@@ -155,7 +162,7 @@ static void ConsoleSend(hal_sci_t console, char const * message) {
     xSemaphoreGive(console_mutex);
 }
 
-static void FlashLed(void * object) {
+static void FlashTask(void * object) {
     static rgb_color_t state = LED_BLUE_OFF;
 
     board_t board = object;
@@ -189,7 +196,7 @@ static void FlashLed(void * object) {
     }
 }
 
-static void SwitchLed(void * object) {
+static void SwitchTask(void * object) {
     board_t board = object;
     hal_gpio_bit_t key_on = board->tec_1;
     hal_gpio_bit_t key_off = board->tec_2;
@@ -212,7 +219,7 @@ static void SwitchLed(void * object) {
     }
 }
 
-static void ToggleLed(void * object) {
+static void ToggleTask(void * object) {
     board_t board = object;
     hal_gpio_bit_t key = board->tec_3;
     hal_gpio_bit_t led = board->led_2;
@@ -230,7 +237,7 @@ static void ToggleLed(void * object) {
     }
 }
 
-static void TestLed(void * object) {
+static void TestTask(void * object) {
     board_t board = object;
     hal_gpio_bit_t key = board->tec_4;
     hal_gpio_bit_t led = board->led_3;
@@ -254,10 +261,10 @@ int main(void) {
     /* Creación de las tareas */
     console_mutex = xSemaphoreCreateMutex();
 
-    xTaskCreate(FlashLed, "FlashLed", 256, (void *)board, tskIDLE_PRIORITY + 2, NULL);
-    xTaskCreate(ToggleLed, "ToogleLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate(SwitchLed, "SwitchLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate(TestLed, "TestLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(FlashTask, "FlashLed", 256, (void *)board, tskIDLE_PRIORITY + 2, NULL);
+    xTaskCreate(ToggleTask, "ToogleLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(SwitchTask, "SwitchLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(TestTask, "TestLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
 
     SciSetEventHandler(board->console, ConsoleEvent, (void *)board);
 
