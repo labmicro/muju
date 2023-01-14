@@ -36,6 +36,7 @@ SPDX-License-Identifier: MIT
 
 #include "soc_gpio.h"
 #include "chip.h"
+#include <string.h>
 
 /* === Macros definitions ====================================================================== */
 
@@ -65,9 +66,34 @@ struct hal_gpio_bit_s {
     uint8_t port : 4;     /**< Number of pin in terminal port */
 };
 
+/**
+ * @brief Structure to store a gpio bit event handler
+ */
+typedef struct event_handler_s {
+    hal_gpio_bit_t gpio;      /**< Pointer to the structure with the gpio terminal descriptor */
+    hal_gpio_event_t handler; /**< Function to call on the serial port events */
+    void * object;            /**< Pointer to user data sended as parameter in handler calls */
+} * event_handler_t;
+
 /* === Private variable declarations =========================================================== */
 
 /* === Private function declarations =========================================================== */
+
+/**
+ * @brief Function to find the handler used by an gpio or an empty if none was assigned before
+ *
+ * @param  gpio         Pointer to the structure with the gpio terminal descriptor
+ * @param  descriptor   Pointer to variable te return the selected descriptor
+ * @return uint8_t      Index descriptor in array, used to assign the channel interrupt
+ */
+static uint8_t FindHandlerDescriptor(hal_gpio_bit_t gpio, event_handler_t * descriptor);
+
+/**
+ * @brief Function to dispatch an gpio bit event when then raises an interrupt
+ *
+ * @param  index    Index of gpio interrupt channel that raises the event
+ */
+static void GpioHandleEvent(uint8_t index);
 
 /* === Public variable definitions ============================================================= */
 
@@ -140,7 +166,43 @@ const hal_gpio_bit_t GPIO_BIT(9, 6, 0, 4, 11); /**< Constant to define Bit 11 on
 
 /* === Private variable definitions ============================================================ */
 
+/**
+ * @brief Vector to store the event handlers of the serial ports
+ */
+static struct event_handler_s event_handlers[8] = {0};
+
 /* === Private function implementation ========================================================= */
+
+static uint8_t FindHandlerDescriptor(hal_gpio_bit_t gpio, event_handler_t * descriptor) {
+    uint8_t index;
+    *descriptor = NULL;
+
+    for (index = 0; index < 7; index++) {
+        if (event_handlers[index].gpio == gpio) {
+            *descriptor = &event_handlers[index];
+            break;
+        }
+    }
+    if (*descriptor == NULL) {
+        for (index = 0; index < 7; index++) {
+            if (event_handlers[index].gpio == NULL) {
+                *descriptor = &event_handlers[index];
+                break;
+            }
+        }
+    }
+    return index;
+}
+
+static void GpioHandleEvent(uint8_t index) {
+    event_handler_t descriptor = &event_handlers[index];
+    bool rissing = (Chip_PININT_GetRiseStates(LPC_GPIO_PIN_INT) & (1 << index));
+    Chip_PININT_ClearIntStatus(LPC_GPIO_PIN_INT, 1 << index);
+
+    if (descriptor->handler != NULL) {
+        descriptor->handler(descriptor->gpio, rissing, descriptor->object);
+    }
+}
 
 /* === Public function implementation ========================================================== */
 
@@ -188,6 +250,66 @@ void GpioBitToogle(hal_gpio_bit_t gpio) {
     if (gpio) {
         Chip_GPIO_SetPinToggle(LPC_GPIO_PORT, gpio->gpio, gpio->bit);
     }
+}
+
+void GpioSetEventHandler(hal_gpio_bit_t gpio, hal_gpio_event_t handler, void * object, bool rising,
+                         bool falling) {
+
+    event_handler_t descriptor;
+    uint8_t index = FindHandlerDescriptor(gpio, &descriptor);
+
+    if (descriptor != NULL) {
+        if (((rising) || (falling)) && (handler)) {
+            descriptor->gpio = gpio;
+            descriptor->handler = handler;
+            descriptor->object = object;
+
+            Chip_SCU_GPIOIntPinSel(index, gpio->gpio, gpio->bit);
+            Chip_PININT_ClearIntStatus(LPC_GPIO_PIN_INT, 1 << index);
+            if (rising) {
+                Chip_PININT_EnableIntHigh(LPC_GPIO_PIN_INT, 1 << index);
+            }
+            if (falling) {
+                Chip_PININT_EnableIntLow(LPC_GPIO_PIN_INT, 1 << index);
+            }
+            NVIC_EnableIRQ(PIN_INT0_IRQn + index);
+
+        } else {
+            memset(descriptor, 0, sizeof(*descriptor));
+            NVIC_EnableIRQ(PIN_INT0_IRQn + index);
+        }
+    }
+}
+
+void GPIO0_IRQHandler(void) {
+    GpioHandleEvent(0);
+}
+
+void GPIO1_IRQHandler(void) {
+    GpioHandleEvent(1);
+}
+
+void GPIO2_IRQHandler(void) {
+    GpioHandleEvent(2);
+}
+
+void GPIO3_IRQHandler(void) {
+    GpioHandleEvent(3);
+}
+
+void GPIO4_IRQHandler(void) {
+    GpioHandleEvent(4);
+}
+
+void GPIO5_IRQHandler(void) {
+    GpioHandleEvent(5);
+}
+
+void GPIO6_IRQHandler(void) {
+    GpioHandleEvent(6);
+}
+void GPIO7_IRQHandler(void) {
+    GpioHandleEvent(7);
 }
 
 /* === End of documentation ==================================================================== */

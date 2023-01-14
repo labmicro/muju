@@ -98,11 +98,13 @@ static void SwitchTask(void * object);
 static void ToggleTask(void * object);
 
 /**
- * @brief Function to turn on a led while a key is pressed
+ * @brief Function to handle events of gpio bit used by a key
  *
- * @param  object   Pointer to board structure, used as parameter when task created
+ * @param  gpio     Gpio input used by the key that rise event
+ * @param  rissing  Flag to indicate if is an rissing edge or and falling edge
+ * @param  data     Pointer to board structure, used as parameter when handler installed
  */
-static void TestTask(void * object);
+static void KeyEvent(hal_gpio_bit_t gpio, bool rissing, void * object);
 
 /* === Public variable definitions ============================================================= */
 
@@ -237,18 +239,14 @@ static void ToggleTask(void * object) {
     }
 }
 
-static void TestTask(void * object) {
+static void KeyEvent(hal_gpio_bit_t gpio, bool rissing, void * object) {
     board_t board = object;
-    hal_gpio_bit_t key = board->tec_4;
     hal_gpio_bit_t led = board->led_3;
 
-    while (true) {
-        if (GpioGetState(key) == 0) {
-            GpioSetState(led, true);
-        } else {
-            GpioSetState(led, false);
-        }
-        vTaskDelay(pdMS_TO_TICKS(150));
+    if (!rissing) {
+        GpioSetState(led, true);
+    } else {
+        GpioSetState(led, false);
     }
 }
 
@@ -264,9 +262,9 @@ int main(void) {
     xTaskCreate(FlashTask, "FlashLed", 256, (void *)board, tskIDLE_PRIORITY + 2, NULL);
     xTaskCreate(ToggleTask, "ToogleLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
     xTaskCreate(SwitchTask, "SwitchLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
-    xTaskCreate(TestTask, "TestLed", 256, (void *)board, tskIDLE_PRIORITY + 1, NULL);
 
     SciSetEventHandler(board->console, ConsoleEvent, (void *)board);
+    GpioSetEventHandler(board->tec_4, KeyEvent, (void *)board, true, true);
 
     /* Arranque del sistema operativo */
     vTaskStartScheduler();

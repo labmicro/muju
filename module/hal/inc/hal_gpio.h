@@ -53,6 +53,14 @@ extern "C" {
  */
 typedef struct hal_gpio_bit_s const * hal_gpio_bit_t;
 
+/**
+ * @brief Callback function to handle a gpio port events
+ *
+ * @param  gpio     Pointer to the structure with the gpio terminal descriptor
+ * @param  object   Pointer to user data declared when handler event has installed
+ */
+typedef void (*hal_gpio_event_t)(hal_gpio_bit_t gpio, bool rissing, void * object);
+
 /* === Public variable declarations ============================================================ */
 
 /* === Public function declarations ============================================================ */
@@ -107,6 +115,16 @@ void GpioBitClear(hal_gpio_bit_t gpio);
  * @param  gpio     Pointer to the structure with the gpio terminal descriptor
  */
 void GpioBitToogle(hal_gpio_bit_t gpio);
+
+/**
+ * @brief Function to enable gpio port interrupts and handle its as events
+ *
+ * @param  gpio     Pointer to the structure with the gpio terminal descriptor
+ * @param  handler  Function to call on the gpio bit events
+ * @param  object   Pointer to user data sended as parameter in handler calls
+ */
+void GpioSetEventHandler(hal_gpio_bit_t gpio, hal_gpio_event_t handler, void * object, bool rising,
+                         bool falling);
 
 /* === End of documentation ==================================================================== */
 
