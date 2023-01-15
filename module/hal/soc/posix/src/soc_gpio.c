@@ -63,12 +63,27 @@ struct hal_gpio_bit_s {
     uint8_t bit : 5;  /**< Number of GPIO terminal in port */
 };
 
+/**
+ * @brief Structure to store a gpio bit event handler
+ */
+typedef struct event_handler_s {
+    hal_gpio_event_t handler; /**< Function to call on the gpio bits events */
+    void * object;            /**< Pointer to user data sended as parameter in handler calls */
+    bool rising : 1;          /**< Flag to indicate if rissig edge raises an event */
+    bool falling : 1;         /**< Flag to indicate if falling edge raises an event */
+} * event_handler_t;
+
 /* === Private variable declarations =========================================================== */
 
 /**
  * @brief Variable to maintain the state of the emulated gpio terminals
  */
 static uint8_t gpio_emulation[4];
+
+/**
+ * @brief Vector to store the event handlers of the gpio bits
+ */
+static struct event_handler_s event_handlers[32] = {0};
 
 /* === Private function declarations =========================================================== */
 
@@ -156,6 +171,19 @@ static void * KeyboardThread(void * _) {
             gpio.gpio = 0;
             gpio.bit = key - '1';
             GpioBitToogle(&gpio);
+
+            event_handler_t descriptor = &event_handlers[8 * gpio.gpio + gpio.bit];
+            if (descriptor->handler != NULL) {
+                if (GpioGetState(&gpio)) {
+                    if (descriptor->rising) {
+                        descriptor->handler(&gpio, true, descriptor->object);
+                    }
+                } else {
+                    if (descriptor->falling) {
+                        descriptor->handler(&gpio, false, descriptor->object);
+                    }
+                }
+            }
         }
     }
     return 0;
@@ -242,6 +270,18 @@ void GpioBitToogle(hal_gpio_bit_t gpio) {
         gpio_emulation[gpio->gpio] ^= (1 << gpio->bit);
         RefreshStatus(gpio);
     }
+}
+
+void GpioSetEventHandler(hal_gpio_bit_t gpio, hal_gpio_event_t handler, void * object, bool rising,
+                         bool falling) {
+
+    uint8_t index = 8 * gpio->gpio + gpio->bit;
+    event_handler_t descriptor = &event_handlers[index];
+
+    descriptor->handler = handler;
+    descriptor->object = object;
+    descriptor->rising = rising;
+    descriptor->falling = falling;
 }
 
 /* === End of documentation ==================================================================== */
