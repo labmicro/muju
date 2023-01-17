@@ -36,3 +36,5 @@ $(NAME)_INC := $(FOLDER)/inc $(FOLDER)/soc/$(SOC)/inc
 $(NAME)_SRC := $(FOLDER)/src $(FOLDER)/soc/$(SOC)/src
 
 PROJECT_INC += module/hal/inc module/hal/soc/$(SOC)/inc
+
+$(if HAL_CONFIG,$(eval DEFINES += HAL_CONFIG_FILE=$(HAL_CONFIG)))
