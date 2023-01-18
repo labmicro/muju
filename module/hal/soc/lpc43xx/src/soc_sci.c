@@ -38,7 +38,23 @@ SPDX-License-Identifier: MIT
 #include "soc_pin.h"
 #include "chip.h"
 
+/**
+ *  @brief Include global project config file if it's defined
+ */
+#ifdef HAL_CONFIG_FILE
+#define STR(x)    #x     /**< Macro to convert the argument string to a constant string */
+#define TO_STR(x) STR(x) /**< Macro to convert the argument value to a constant string */
+#include TO_STR(HAL_CONFIG_FILE)
+#endif
+
 /* === Macros definitions ====================================================================== */
+
+/**
+ * @brief Macro to configure priority to set on NVIC for serial port interrupts
+ */
+#ifndef HAL_SCI_NVIC_PRIORITY
+#define HAL_SCI_NVIC_PRIORITY 0
+#endif
 
 /* === Private data type declarations ========================================================== */
 
@@ -400,6 +416,7 @@ void SciSetEventHandler(hal_sci_t sci, hal_sci_event_t handler, void * data) {
 
         Chip_UART_ReadLineStatus(sci->port);
         NVIC_ClearPendingIRQ(sci->interupt);
+        NVIC_SetPriority(sci->interupt, HAL_SCI_NVIC_PRIORITY);
         NVIC_EnableIRQ(sci->interupt);
         Chip_UART_IntEnable(sci->port, UART_IER_RBRINT);
         Chip_UART_IntEnable(sci->port, UART_IER_THREINT);

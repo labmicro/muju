@@ -38,7 +38,23 @@ SPDX-License-Identifier: MIT
 #include "chip.h"
 #include <string.h>
 
+/**
+ *  @brief Include global project config file if it's defined
+ */
+#ifdef HAL_CONFIG_FILE
+#define STR(x)    #x     /**< Macro to convert the argument string to a constant string */
+#define TO_STR(x) STR(x) /**< Macro to convert the argument value to a constant string */
+#include TO_STR(HAL_CONFIG_FILE)
+#endif
+
 /* === Macros definitions ====================================================================== */
+
+/**
+ * @brief Macro to configure priority to set on NVIC for serial port interrupts
+ */
+#ifndef HAL_GPIO_NVIC_PRIORITY
+#define HAL_GPIO_NVIC_PRIORITY 0
+#endif
 
 /**
  * @brief Macro to generate the name of an descriptor from the gpio port and bit
@@ -272,8 +288,9 @@ void GpioSetEventHandler(hal_gpio_bit_t gpio, hal_gpio_event_t handler, void * o
             if (falling) {
                 Chip_PININT_EnableIntLow(LPC_GPIO_PIN_INT, 1 << index);
             }
+            NVIC_ClearPendingIRQ(PIN_INT0_IRQn + index);
+            NVIC_SetPriority(PIN_INT0_IRQn + index, HAL_GPIO_NVIC_PRIORITY);
             NVIC_EnableIRQ(PIN_INT0_IRQn + index);
-
         } else {
             memset(descriptor, 0, sizeof(*descriptor));
             NVIC_EnableIRQ(PIN_INT0_IRQn + index);
