@@ -31,5 +31,26 @@ FLASH_WRITER_COMMANDS = -c "init" -c "halt 0" -c "reset halt" -c "stm32f1x unloc
 # Variable with MCU drivers module root foder
 MCU_FOLDER := external/base/mcu/$(MCU)
 
+# Variable with SOC drivers module root foder
+SOC_FOLDER := external/base/soc/$(SOC)
+
+# Variable with ARM CMSIS core module root foder
+CMSIS_CORE := external/base/arch/arm/cmsis_core
+
+# Variable with the list of folders containing header files for LPC Open drivers module
+DRIVERS_INC := $(CMSIS_CORE) $(SOC_FOLDER)/stm_hal/inc $(SOC_FOLDER)/legacy/inc $(SOC_FOLDER)/device/inc $(MCU_FOLDER)/device
+
+# Variable with the list of folders containing header files for LPC Open drivers module
+DRIVERS_SRC := $(SOC_FOLDER)/stm_hal/src $(SOC_FOLDER)/device/src
+
+# Variable with module name
+$(eval NAME = $(call module_name,board/$(BOARD)))
+
+# Variable with the list of folders containing header and sourcefiles for the module
+$(if $(findstring Y,$(call uc,$(USE_DRIVERS))), \
+$(eval $(NAME)_INC += $(DRIVERS_INC)) \
+$(eval $(NAME)_SRC += $(DRIVERS_SRC)) \
+)
+
 STARTUP := $(MCU_FOLDER)/startup
 $(if $(findstring $(STARTUP),$(PROJECT_SRC)),,$(eval PROJECT_SRC += $(STARTUP)))

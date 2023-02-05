@@ -30,6 +30,8 @@ SPDX-License-Identifier: MIT
 
 /* === Headers files inclusions ================================================================ */
 
+#include "stm32f1xx_hal.h"
+
 /* === Cabecera C++ ============================================================================ */
 
 #ifdef __cplusplus
