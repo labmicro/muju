@@ -44,7 +44,7 @@ LPC_OPEN_SRC := $(LPC_OPEN)/src
 $(eval NAME = $(call module_name,board/$(BOARD)))
 
 # Variable with the list of folders containing header and sourcefiles for the module
-$(if $(findstring Y,$(call uc,$(USE_LPC_OPEN))), \
+$(if $(findstring Y,$(call uc,$(USE_DRIVERS))), \
 $(eval $(NAME)_INC += $(LPC_OPEN_INC)) \
 $(eval $(NAME)_SRC += $(LPC_OPEN_SRC)) \
 )

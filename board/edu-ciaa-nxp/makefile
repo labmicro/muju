@@ -28,4 +28,4 @@ MCU         ?= lpc4337-m4
 # Enable only if board are in debug with semihosting support on debugger tool
 # DEFINES += ENABLE_ARM_SEMIHOSTING
 
-USE_LPC_OPEN := y
+USE_DRIVERS := n
