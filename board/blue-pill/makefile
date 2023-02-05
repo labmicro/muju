@@ -27,3 +27,5 @@ MCU         ?= stm32f103c8
 
 # Enable only if board are in debug with semihosting support on debugger tool
 # DEFINES += ENABLE_ARM_SEMIHOSTING
+
+USE_DRIVERS := y
