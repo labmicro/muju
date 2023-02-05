@@ -1,0 +1,70 @@
+/************************************************************************************************
+Copyright (c) <year>, <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+SPDX-License-Identifier: MIT
+*************************************************************************************************/
+
+/** \brief Blue Pill STM32 board configuration implementation
+ **
+ ** \addtogroup board Board support
+ ** \brief Board agnostic configuration module
+ ** @{ */
+
+/* === Headers files inclusions =============================================================== */
+
+#include "board.h"
+#include <stdlib.h>
+
+/* === Macros definitions ====================================================================== */
+
+/* === Private data type declarations ========================================================== */
+
+/* === Private variable declarations =========================================================== */
+
+/* === Private function declarations =========================================================== */
+
+/**
+ * @brief Function defined by ARM to initializate SemiHosting transfer mode
+ */
+extern void initialise_monitor_handles(void);
+
+/* === Public variable definitions ============================================================= */
+
+/* === Private variable definitions ============================================================ */
+
+/* === Private function implementation ========================================================= */
+
+/* === Public function implementation ========================================================== */
+
+void SystemInit(void) {
+}
+
+void BoardSetup(void) {
+    /*
+    If this function is called before enabling the semihosting in the server,
+    a HardFault may occur due to an unexpected debug event and, therefore,
+    the program does not execute when the board is not in debugging
+    */
+#if (ENABLE_ARM_SEMIHOSTING)
+    initialise_monitor_handles();
+#endif
+}
+
+/* === End of documentation ==================================================================== */
+
+/** @} End of module definition for doxygen */
