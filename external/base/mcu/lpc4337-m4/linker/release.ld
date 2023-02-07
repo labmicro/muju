@@ -103,6 +103,7 @@ SECTIONS
         *(.ramfunc.$RamLoc40)
         *(.data.$RAM2*)
         *(.data.$RamLoc40*)
+        *(.bss.ucHeap)
         . = ALIGN(4) ;
         PROVIDE(__end_data_RAM2 = .) ;
      } > RamLoc40 AT>MFlashA512
