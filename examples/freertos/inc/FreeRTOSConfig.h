@@ -50,10 +50,10 @@
 #define configUSE_TICK_HOOK              0
 #define configCPU_CLOCK_HZ               (SystemCoreClock)
 #define configTICK_RATE_HZ               ((TickType_t)1000) // 1000 ticks per second => 1ms tick rate
-#define configMAX_PRIORITIES             (7)
-#define configMINIMAL_STACK_SIZE         ((uint16_t)90)
-#define configAPPLICATION_ALLOCATED_HEAP 1
-#define configTOTAL_HEAP_SIZE            ((size_t)(40 * 1024)) /* 85 Kbytes. */
+#define configMAX_PRIORITIES             (15)
+#define configMINIMAL_STACK_SIZE         ((uint16_t)128)
+#define configAPPLICATION_ALLOCATED_HEAP 0
+#define configTOTAL_HEAP_SIZE            ((size_t)(16 * 1024)) /* 16 Kbytes. */
 #define configMAX_TASK_NAME_LEN          (16)
 #define configUSE_TRACE_FACILITY         1
 #define configUSE_16_BIT_TICKS           0
@@ -100,7 +100,7 @@
 
 /* The lowest interrupt priority that can be used in a call to a "set priority"
  * function. */
-#define configLIBRARY_LOWEST_INTERRUPT_PRIORITY 0x7
+#define configLIBRARY_LOWEST_INTERRUPT_PRIORITY ((1 << configPRIO_BITS) - 1)
 
 /* The highest interrupt priority that can be used by any interrupt service
  * routine that makes calls to interrupt safe FreeRTOS API functions.  DO NOT CALL
@@ -167,33 +167,5 @@ void vMainPostStopProcessing(void);
 /* IMPORTANT: This define MUST be commented when used with STM32Cube firmware,
  *            to prevent overwriting SysTick_Handler defined within STM32Cube HAL. */
 /* #define xPortSysTickHandler SysTick_Handler */
-
-/*********************************************
- * FreeRTOS specific demos
- ********************************************/
-
-/* The address of an echo server that will be used by the two demo echo client
- * tasks.
- * http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/TCP_Echo_Clients.html
- * http://www.freertos.org/FreeRTOS-Plus/FreeRTOS_Plus_TCP/UDP_Echo_Clients.html */
-#define configECHO_SERVER_ADDR0    192
-#define configECHO_SERVER_ADDR1    168
-#define configECHO_SERVER_ADDR2    2
-#define configECHO_SERVER_ADDR3    6
-#define configTCP_ECHO_CLIENT_PORT 7
-
-/* Prevent the assembler seeing code it doesn't understand. */
-#ifdef __ICCARM__
-/* Logging task definitions. */
-extern void vMainUARTPrintString(char * pcString);
-void vLoggingPrintf(const char * pcFormat, ...);
-
-extern int iMainRand32(void);
-
-/* Pseudo random number generator, just used by demos so does not have to be
- * secure.  Do not use the standard C library rand() function as it can cause
- * unexpected behaviour, such as calls to malloc(). */
-#define configRAND32() iMainRand32()
-#endif
 
 #endif /* FREERTOS_CONFIG_H */

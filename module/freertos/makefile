@@ -35,7 +35,7 @@ ifeq ($(BOARD),posix)
     PORT := $(FOLDER)/portable/ThirdParty/GCC/Posix $(FOLDER)/portable/ThirdParty/GCC/Posix/utils
     $(NAME)_OBJ += $(OBJ_DIR)/$(FOLDER)/portable/MemMang/heap_3.o
 else
-    PORT = $(FOLDER)/portable/GCC/ARM_CM4F
+    PORT = $(FOLDER)/portable/GCC/$(call uc,$(subst cortex-,arm_c,$(CPU)))
     $(NAME)_OBJ += $(OBJ_DIR)/$(FOLDER)/portable/MemMang/heap_4.o
 endif
 

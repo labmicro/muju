@@ -71,6 +71,13 @@ static board_t AssignResources(struct hal_sci_pins_s * console_pins) {
     board.console = HAL_SCI_USART2;
     console_pins->txd_pin = HAL_PIN_P7_1;
     console_pins->rxd_pin = HAL_PIN_P7_2;
+#elif BLUE_PILL
+    board.led_2 = HAL_GPIO_PB9;
+    board.tec_3 = HAL_GPIO_PB13;
+
+    board.console = HAL_SCI_USART1;
+    console_pins->txd_pin = HAL_PIN_PA9;
+    console_pins->rxd_pin = HAL_PIN_PA10;
 #elif POSIX
     board.led_rgb[0].red = HAL_GPIO3_7;
     board.led_rgb[0].green = HAL_GPIO3_6;
@@ -84,6 +91,8 @@ static board_t AssignResources(struct hal_sci_pins_s * console_pins) {
     board.tec_2 = HAL_GPIO0_1;
     board.tec_3 = HAL_GPIO0_2;
     board.tec_4 = HAL_GPIO0_3;
+#else
+#error "This program does not have support for the selected board"
 #endif
     return (board_t)&board;
 }
