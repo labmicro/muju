@@ -115,11 +115,6 @@ void BoardSetup(void) {
 #endif
 }
 
-#ifdef FREERTOS
-#include "FreeRTOSConfig.h"
-__attribute__((section(".data.$RAM2"))) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
-#endif
-
 /* === End of documentation ====================================================================
  */
 
