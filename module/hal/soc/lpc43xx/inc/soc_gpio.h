@@ -88,7 +88,6 @@ extern const hal_gpio_bit_t HAL_GPIO3_4;  /**< Constant to define Bit 4 on GPIO 
 extern const hal_gpio_bit_t HAL_GPIO3_5;  /**< Constant to define Bit 5 on GPIO 3 */
 extern const hal_gpio_bit_t HAL_GPIO3_6;  /**< Constant to define Bit 6 on GPIO 3 */
 extern const hal_gpio_bit_t HAL_GPIO3_7;  /**< Constant to define Bit 7 on GPIO 3 */
-extern const hal_gpio_bit_t HAL_GPIO3_8;  /**< Constant to define Bit 8 on GPIO 3 */
 extern const hal_gpio_bit_t HAL_GPIO3_12; /**< Constant to define Bit 12 on GPIO 3 */
 extern const hal_gpio_bit_t HAL_GPIO3_13; /**< Constant to define Bit 13 on GPIO 3 */
 extern const hal_gpio_bit_t HAL_GPIO3_14; /**< Constant to define Bit 14 on GPIO 3 */

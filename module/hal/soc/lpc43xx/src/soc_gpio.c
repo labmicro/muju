@@ -64,7 +64,7 @@ SPDX-License-Identifier: MIT
 /**
  * @brief Macro to define an gpio descriptor
  */
-#define GPIO_BIT(PORT, PIN, FUNC, GPIO, BIT)                                                       \
+#define GPIO_BIT(GPIO, BIT, FUNC, PORT, PIN)                                                       \
     GPIO_NAME(GPIO, BIT) = &(struct hal_gpio_bit_s) {                                              \
         .gpio = GPIO, .bit = BIT, .function = FUNC, .port = PORT, .pin = PIN                       \
     }
@@ -118,66 +118,63 @@ static void GpioHandleEvent(uint8_t index);
  * @brief Constant for gpio terminals on board
  * @{
  */
-const hal_gpio_bit_t GPIO_BIT(0, 0, 0, 0, 0); /**< Constant to define Bit 0 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(0, 1, 0, 0, 1); /**< Constant to define Bit 1 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 0, 0, 0, 0);   /**< Constant to define Bit 0 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 1, 0, 0, 1);   /**< Constant to define Bit 1 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 2, 0, 1, 15);  /**< Constant to define Bit 2 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 3, 0, 1, 16);  /**< Constant to define Bit 3 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 4, 0, 1, 0);   /**< Constant to define Bit 4 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 5, 0, 6, 6);   /**< Constant to define Bit 5 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 7, 0, 2, 7);   /**< Constant to define Bit 7 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 8, 0, 1, 1);   /**< Constant to define Bit 8 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 9, 0, 1, 2);   /**< Constant to define Bit 9 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 10, 0, 1, 3);  /**< Constant to define Bit 10 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 11, 0, 1, 4);  /**< Constant to define Bit 11 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 12, 0, 1, 17); /**< Constant to define Bit 12 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 13, 0, 1, 18); /**< Constant to define Bit 13 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 14, 0, 2, 10); /**< Constant to define Bit 14 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(0, 15, 0, 1, 20); /**< Constant to define Bit 15 on GPIO 0 */
 
-const hal_gpio_bit_t GPIO_BIT(1, 0, 0, 0, 4);   /**< Constant to define Bit 4 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 1, 0, 0, 8);   /**< Constant to define Bit 8 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 2, 0, 0, 9);   /**< Constant to define Bit 9 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 3, 0, 0, 10);  /**< Constant to define Bit 10 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 4, 0, 0, 11);  /**< Constant to define Bit 11 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 5, 0, 1, 8);   /**< Constant to define Bit 8 on GPIO 1 */
-const hal_gpio_bit_t GPIO_BIT(1, 6, 0, 1, 9);   /**< Constant to define Bit 9 on GPIO 1 */
-const hal_gpio_bit_t GPIO_BIT(1, 15, 0, 0, 2);  /**< Constant to define Bit 2 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 16, 0, 0, 3);  /**< Constant to define Bit 3 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 17, 0, 0, 12); /**< Constant to define Bit 12 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 18, 0, 0, 13); /**< Constant to define Bit 13 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(1, 20, 0, 0, 15); /**< Constant to define Bit 15 on GPIO 0 */
+const hal_gpio_bit_t GPIO_BIT(1, 8, 0, 1, 5);   /**< Constant to define Bit 4 on GPIO 1 */
+const hal_gpio_bit_t GPIO_BIT(1, 9, 0, 1, 6);   /**< Constant to define Bit 8 on GPIO 1 */
+const hal_gpio_bit_t GPIO_BIT(1, 11, 0, 2, 11); /**< Constant to define Bit 9 on GPIO 1 */
+const hal_gpio_bit_t GPIO_BIT(1, 12, 0, 2, 12); /**< Constant to define Bit 10 on GPIO 1 */
 
-const hal_gpio_bit_t GPIO_BIT(2, 0, 4, 5, 0);   /**< Constant to define Bit 0 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(2, 1, 4, 5, 1);   /**< Constant to define Bit 1 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(2, 2, 4, 5, 2);   /**< Constant to define Bit 2 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(2, 3, 4, 5, 3);   /**< Constant to define Bit 3 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(2, 4, 4, 5, 4);   /**< Constant to define Bit 4 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(2, 7, 0, 0, 7);   /**< Constant to define Bit 7 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(2, 10, 0, 0, 14); /**< Constant to define Bit 14 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(2, 11, 0, 1, 11); /**< Constant to define Bit 11 on GPIO 1 */
-const hal_gpio_bit_t GPIO_BIT(2, 12, 0, 1, 12); /**< Constant to define Bit 12 on GPIO 1 */
+const hal_gpio_bit_t GPIO_BIT(2, 0, 0, 4, 0); /**< Constant to define Bit 0 on GPIO 2 */
+const hal_gpio_bit_t GPIO_BIT(2, 1, 0, 4, 1); /**< Constant to define Bit 1 on GPIO 2 */
+const hal_gpio_bit_t GPIO_BIT(2, 2, 0, 4, 2); /**< Constant to define Bit 2 on GPIO 2 */
+const hal_gpio_bit_t GPIO_BIT(2, 3, 0, 4, 3); /**< Constant to define Bit 3 on GPIO 2 */
+const hal_gpio_bit_t GPIO_BIT(2, 4, 0, 4, 4); /**< Constant to define Bit 4 on GPIO 2 */
+const hal_gpio_bit_t GPIO_BIT(2, 5, 0, 4, 5); /**< Constant to define Bit 5 on GPIO 2 */
+const hal_gpio_bit_t GPIO_BIT(2, 6, 0, 4, 6); /**< Constant to define Bit 6 on GPIO 2 */
 
-const hal_gpio_bit_t GPIO_BIT(3, 1, 4, 5, 8);   /**< Constant to define Bit 8 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(3, 2, 4, 5, 9);   /**< Constant to define Bit 9 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(4, 8, 4, 5, 12);  /**< Constant to define Bit 12 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(4, 9, 4, 5, 13);  /**< Constant to define Bit 13 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(4, 10, 4, 5, 14); /**< Constant to define Bit 14 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(3, 0, 0, 6, 1);  /**< Constant to define Bit 0 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 1, 0, 6, 2);  /**< Constant to define Bit 1 on GPIO 4 */
+const hal_gpio_bit_t GPIO_BIT(3, 2, 0, 6, 3);  /**< Constant to define Bit 2 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 3, 0, 6, 4);  /**< Constant to define Bit 3 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 4, 0, 6, 5);  /**< Constant to define Bit 4 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 5, 0, 6, 9);  /**< Constant to define Bit 5 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 6, 0, 6, 10); /**< Constant to define Bit 6 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 7, 0, 6, 11); /**< Constant to define Bit 7 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 12, 0, 7, 4); /**< Constant to define Bit 12 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 13, 0, 7, 5); /**< Constant to define Bit 13 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 14, 0, 7, 6); /**< Constant to define Bit 14 on GPIO 3 */
+const hal_gpio_bit_t GPIO_BIT(3, 15, 0, 7, 7); /**< Constant to define Bit 15 on GPIO 3 */
 
-const hal_gpio_bit_t GPIO_BIT(4, 0, 0, 2, 0); /**< Constant to define Bit 0 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(4, 1, 0, 2, 1); /**< Constant to define Bit 1 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(4, 2, 0, 2, 2); /**< Constant to define Bit 2 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(4, 3, 0, 2, 3); /**< Constant to define Bit 3 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(4, 4, 0, 2, 4); /**< Constant to define Bit 4 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(4, 5, 0, 2, 5); /**< Constant to define Bit 5 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(4, 6, 0, 2, 6); /**< Constant to define Bit 6 on GPIO 2 */
+const hal_gpio_bit_t GPIO_BIT(4, 11, 0, 9, 6); /**< Constant to define Bit 11 on GPIO 4 */
 
-const hal_gpio_bit_t GPIO_BIT(6, 1, 0, 3, 0);  /**< Constant to define Bit 0 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 2, 0, 3, 1);  /**< Constant to define Bit 1 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 3, 0, 3, 2);  /**< Constant to define Bit 2 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 4, 0, 3, 3);  /**< Constant to define Bit 3 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 5, 0, 3, 4);  /**< Constant to define Bit 4 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 6, 0, 0, 5);  /**< Constant to define Bit 5 on GPIO 0 */
-const hal_gpio_bit_t GPIO_BIT(6, 7, 4, 5, 15); /**< Constant to define Bit 15 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(6, 8, 4, 5, 16); /**< Constant to define Bit 16 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(6, 9, 0, 3, 5);  /**< Constant to define Bit 5 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 10, 0, 3, 6); /**< Constant to define Bit 6 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 11, 0, 3, 7); /**< Constant to define Bit 7 on GPIO 3 */
-const hal_gpio_bit_t GPIO_BIT(6, 12, 0, 2, 8); /**< Constant to define Bit 8 on GPIO 2 */
-
-const hal_gpio_bit_t GPIO_BIT(7, 4, 0, 2, 12); /**< Constant to define Bit 12 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(7, 5, 0, 2, 13); /**< Constant to define Bit 13 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(7, 6, 0, 2, 14); /**< Constant to define Bit 14 on GPIO 2 */
-const hal_gpio_bit_t GPIO_BIT(7, 7, 0, 2, 15); /**< Constant to define Bit 15 on GPIO 2 */
-
-const hal_gpio_bit_t GPIO_BIT(9, 5, 4, 5, 18); /**< Constant to define Bit 18 on GPIO 5 */
-const hal_gpio_bit_t GPIO_BIT(9, 6, 0, 4, 11); /**< Constant to define Bit 11 on GPIO 4 */
+const hal_gpio_bit_t GPIO_BIT(5, 0, 4, 2, 0);   /**< Constant to define Bit 0 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 1, 4, 2, 1);   /**< Constant to define Bit 1 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 2, 4, 2, 2);   /**< Constant to define Bit 2 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 3, 4, 2, 3);   /**< Constant to define Bit 3 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 4, 4, 2, 4);   /**< Constant to define Bit 4 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 8, 4, 3, 1);   /**< Constant to define Bit 8 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 9, 4, 3, 2);   /**< Constant to define Bit 9 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 12, 4, 4, 8);  /**< Constant to define Bit 12 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 13, 4, 4, 9);  /**< Constant to define Bit 13 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 14, 4, 4, 10); /**< Constant to define Bit 14 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 15, 4, 6, 7);  /**< Constant to define Bit 15 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 16, 4, 6, 8);  /**< Constant to define Bit 16 on GPIO 5 */
+const hal_gpio_bit_t GPIO_BIT(5, 18, 4, 9, 5);  /**< Constant to define Bit 18 on GPIO 5 */
 /** @} End of group lpc43xxGpio */
 
 /* === Private variable definitions ============================================================ */
