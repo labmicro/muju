@@ -26,6 +26,8 @@
 # Variable with module root foder
 FOLDER := module/hal
 
+DEFINES += USE_HAL
+
 # Variable with module name
 $(eval NAME = $(call module_name,$(FOLDER)))
 
