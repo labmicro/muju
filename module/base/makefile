@@ -272,6 +272,13 @@ clean:
 $(BIN_TARGET): $(LD_TARGET)
 	@$(OBJ_COPY) -v -O binary $< $@
 
+gdbserver:
+ifeq ($(GDB_SERVER),)
+	$(error Flash write operation is not available for the board $(BOARD))
+else
+	@$(GDB_SERVER) $(GDB_SERVER_FLAGS)
+endif
+
 download: $(BIN_TARGET)
 ifeq ($(FLASH_WRITER),)
 	$(error Flash write operation is not available for the board $(BOARD))
