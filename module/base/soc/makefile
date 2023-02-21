@@ -23,6 +23,8 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
+$(if $(findstring Y,$(call uc,$(USE_DRIVERS))),$(eval DEFINES += USE_DRIVERS))
+
 $(if $(SOC),,$(error SOC variable is not set))
 
 -include $(call full_path,module/base/soc/$(SOC)/makefile)
