@@ -29,8 +29,10 @@ DEFINES += CORE_M4
 
 LINKSCRIPT = external/base/mcu/$(MCU)/linker/release.ld
 
+GDB_SERVER_FLAGS = -f $(MUJU)/external/base/mcu/$(MCU)/openocd/openocd.cfg
+
 # Command flags for OpenOCD download target
-FLASH_WRITER_FLAGS = -f $(MUJU)/external/base/mcu/$(MCU)/openocd/lpc4337_new.cfg
+FLASH_WRITER_FLAGS = -f $(MUJU)/external/base/mcu/$(MCU)/openocd/openocd.cfg
 
 # Flash base address for OpenOCD download target
 FLASH_BASE_ADDRESS := 0x1A000000
