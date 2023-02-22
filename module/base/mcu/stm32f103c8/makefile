@@ -29,10 +29,13 @@ DEFINES += STM32F103xB
 
 LINKSCRIPT = external/base/mcu/$(MCU)/linker/stm32f103c8tx_flash.ld
 
-# Command flags for OpenOCD download target
-FLASH_WRITER_FLAGS = -f $(MUJU)/external/base/mcu/$(MCU)/openocd/openocd.cfg
+# Command flags for gdb server
+GDB_SERVER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
+GDB_SERVER_FLAGS +=-f $(MUJU)/external/base/mcu/$(MCU)/openocd/openocd.cfg
 
-GDB_SERVER_FLAGS = -f $(MUJU)/external/base/mcu/$(MCU)/openocd/openocd.cfg
+# Command flags for download target
+FLASH_WRITER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
+FLASH_WRITER_FLAGS += -f $(MUJU)/external/base/mcu/$(MCU)/openocd/openocd.cfg
 
 # Flash base address for OpenOCD download target
 FLASH_BASE_ADDRESS := 0x08000000
