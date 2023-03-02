@@ -66,6 +66,35 @@ $(strip \
 endef
 
 ##################################################################################################
+# Function to display info messages when dynamic rules are generated
+define show_message
+$(if $(findstring Y,$(call uc,$(VERBOSE))),$(info $1))
+endef
+
+##################################################################################################
+# Function to display info messages when rules are executed
+define show_action
+$(strip \
+    $(if $(findstring Y,$(call uc,$(VERBOSE))),\
+        @echo $(DIVISION_LINE), \
+        @echo $1 \
+    ) 
+)
+endef
+
+##################################################################################################
+# Variable to separate every comand when execution rules are show
+DIVISION_LINE = ===============================================================================
+
+##################################################################################################
+# Variable to show or hide command lines when rules are executed
+ifeq ($(call uc,$(VERBOSE)),Y)
+QUIET =
+else
+QUIET = @
+endif
+
+##################################################################################################
 # Function to generate the compilation parameters with the list of include paths
 define include_directories
 $(strip \
@@ -112,32 +141,32 @@ endef
 ##################################################################################################
 # Dynamic rule to compile single folder with c source files
 define c_compiler_rule
-    $(info Definiendo regla de compilacion para $1/*.c en $3)
+    $(call show_message,Definiendo regla de compilacion para $1/*.c en $3)
 $3/%.o: $(call full_path,$1)/%.c
-	@echo ===============================================================================
+	$$(call show_action,Compiling $$(call short_path,$$<))
 	-@mkdir -p $$(@D)
-	$$(CC) $$(strip $$(CFLAGS) $$(call defines_list) $$(call include_directories,$2)) -MMD -c $$< -o $$@
+	$$(QUIET) $$(CC) $$(strip $$(CFLAGS) $$(call defines_list) $$(call include_directories,$2)) -MMD -c $$< -o $$@
 endef
 
 ##################################################################################################
 # Dynamic rule to compile single folder with s source files
 define assembler_rule
-    $(info Definiendo regla de compilacion para $1/*.s en $3)
+    $(call show_message,Definiendo regla de compilacion para $1/*.s en $3)
 $3/%.o: $(call full_path,$1)/%.s
-	@echo ===============================================================================
+	$$(call show_action,Compiling $$(call short_path,$$<))
 	-@mkdir -p $$(@D)
-	$$(CC) $$(strip $$(AFLAGS) $$(call defines_list) $$(call include_directories,$2)) -MMD -c $$< -o $$@
+	$$(QUIET) $$(CC) $$(strip $$(AFLAGS) $$(call defines_list) $$(call include_directories,$2)) -MMD -c $$< -o $$@
 endef
 
 ##################################################################################################
 # Dynamic rule to link static library file from module with source code
 define library_link_rule
-    $(info Definiendo regla de enlazar $(LIB_DIR)/$1.a)
+    $(call show_message,Definiendo regla de enlazar $(LIB_DIR)/$1.a)
 PROJECT_LIB += $(LIB_DIR)/$1.a
 $(LIB_DIR)/$1.a: $$($2_OBJ)
-	@echo ===============================================================================
+	$$(call show_action,Building $$(call short_path,$$<))
 	-@mkdir -p $$(@D)
-	$$(AR) rcs $$@ $$^
+	$$(QUIET) $$(AR) rcs $$@ $$^
 endef
 
 ##################################################################################################
@@ -151,15 +180,15 @@ endef
 # Function to analize a path and include the module makefile if it exists
 define analize_path
     $(eval path = $(call full_path,$1)) \
-    $(info ---------------------------------------------------) \
-    $(info Analizando la carpeta $(path)) \
+    $(call show_message,$(DIVISION_LINE)) \
+    $(call show_message,Analizando la carpeta $(path)) \
     $(if $(wildcard $(path)/makefile), \
-        $(info Incluyendo el makefile de la carpeta $(path)) \
+        $(call show_message,Incluyendo el makefile de la carpeta $(path)) \
         $(eval include $(path)/makefile) \
     , \
         $(if $(wildcard $(path)/inc),$(eval $2_INC += $(path)/inc)) \
         $(if $(wildcard $(path)/src), \
-            $(info Usando el codigo fuente $(path)/src) \
+            $(call show_message,Usando el codigo fuente $(path)/src) \
             $(eval $2_SRC += $(path)/src) \
             $(foreach path,$(wildcard $(path)/*),$(eval $(call analize_path,$(path),$2))) \
         ) \
@@ -252,15 +281,13 @@ $(foreach path,$(PROJECT_SRC),$(eval $(call assembler_rule,$(path),$($1_INC),$(O
 
 ##################################################################################################
 $(LD_TARGET): $(PROJECT_LIB) $(PROJECT_OBJ)
-	@echo ===============================================================================
+	$(call show_action,Linking $(call short_path,$(LD_TARGET)))
 	-@mkdir -p $(BIN_DIR)
-	$(CC) $(strip $(LFLAGS) $(PROJECT_OBJ) $(LFLAGS_BEGIN_LIBS) $(PROJECT_LIB) $(LFLAGS_END_LIBS)) -o $(LD_TARGET)
+	$(QUIET) $(CC) $(strip $(LFLAGS) $(PROJECT_OBJ) $(LFLAGS_BEGIN_LIBS) $(PROJECT_LIB) $(LFLAGS_END_LIBS)) -o $(LD_TARGET)
 	-@cp -f $(LD_TARGET) $(BIN_DIR)/project.$(LD_EXTENSION)
 	@echo ' '
 
 .DEFAULT_GOAL := all
-
-# $(PROJECT_NAME): $(LD_TARGET)
 
 all: $(LD_TARGET) $(POST_BUILD_TARGETS)
 
@@ -297,17 +324,17 @@ check:
 ##################################################################################################
 #
 info:
-	@echo =====================================================================================
+	@echo $(DIVISION_LINE)
 	@echo Nombre del proyecto: $(PROJECT_NAME)
 	@echo Ruta definida para el proyecto: $(PROJECT)
 	@echo Ruta absoluta del Proyecto: $(PROJECT_DIR)
 	@echo Binario final: $(LD_TARGET)
 	@echo Binario para OpenOCD: $(BIN_TARGET)
-	@echo -------------------------------------------------------------------------------------
+	@echo -------------------------------------------------------------------------------
 	@echo Modulos: $(MODULES)
 	@echo Board: $(BOARD), Arch: $(ARCH), Cpu: $(CPU), Soc: $(SOC), Mcu: $(MCU)
-	@echo -------------------------------------------------------------------------------------
+	@echo -------------------------------------------------------------------------------
 	@echo Fuentes: $(PROJECT_SRC)
 	@echo Cabeceras: $(PROJECT_INC)
 	@echo Objetos: $(PROJECT_OBJ)
-	@echo -------------------------------------------------------------------------------------
+	@echo -------------------------------------------------------------------------------
