@@ -286,6 +286,16 @@ else
 	@$(FLASH_WRITER) $(FLASH_WRITER_FLAGS) $(FLASH_WRITER_COMMANDS)
 endif
 
+##################################################################################################
+#
+CPP_SUPPRESS ?= unmatchedSuppression missingInclude missingIncludeSystem unusedFunction
+CPP_FLAGS ?= --force --enable=all --inconclusive --std=c89 --xml --xml-version=2
+CPP_FLAGS += $(foreach SUPRESS,$(CPP_SUPPRESS),--suppress=$(SUPRESS)) $(call include_directories)
+check:
+	cppcheck $(CPP_FLAGS) $(PROJECT_SRC) 2> $(BUILD_DIR)/artifacts/cppcheck.xml
+
+##################################################################################################
+#
 info:
 	@echo =====================================================================================
 	@echo Nombre del proyecto: $(PROJECT_NAME)
