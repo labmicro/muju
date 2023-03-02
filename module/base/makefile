@@ -322,7 +322,7 @@ CPP_FLAGS += $(foreach SUPRESS,$(CPP_SUPPRESS),--suppress=$(SUPRESS)) $(call inc
 ifeq ($(call uc,$(VERBOSE)),Y)
     CPP_OUTPUT = 2> $(BUILD_DIR)/artifacts/cppcheck.xml
 else
-    CPP_OUTPUT = 1> NULL 2> $(BUILD_DIR)/artifacts/cppcheck.xml
+    CPP_OUTPUT = 1> /dev/null 2> $(BUILD_DIR)/artifacts/cppcheck.xml
 endif
 
 check:
