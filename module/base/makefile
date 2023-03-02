@@ -78,7 +78,7 @@ $(strip \
     $(if $(findstring Y,$(call uc,$(VERBOSE))),\
         @echo $(DIVISION_LINE), \
         @echo $1 \
-    ) 
+    )
 )
 endef
 
