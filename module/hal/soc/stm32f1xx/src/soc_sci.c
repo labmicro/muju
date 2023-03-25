@@ -192,7 +192,6 @@ static bool ConfigPinsUart1(hal_sci_pins_t pins) {
 
         pin_config.Mode = GPIO_MODE_INPUT;
         pin_config.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOA, &pin_config);
         if (option == 1) {
             pin_config.Pin = GPIO_PIN_10;
             HAL_GPIO_Init(GPIOA, &pin_config);
@@ -304,8 +303,6 @@ static void SciHandleEvent(hal_sci_t sci) {
         event_handler_t event_handler = &event_handlers[sci->index];
         struct sci_status_s status;
 
-        // (void)Chip_UART_ReadIntIDReg(sci->port);
-
         SciReadStatus(sci, &status);
         if (event_handler->handler) {
             event_handler->handler(sci, &status, event_handler->data);
@@ -357,8 +354,8 @@ uint16_t SciSendData(hal_sci_t sci, void const * const data, uint16_t size) {
         UART_HandleTypeDef * handler = &usart_handlers[sci->index];
         event_handler_t event_handler = &event_handlers[sci->index];
 
-        HAL_UART_Transmit(handler, (uint8_t *)data, size, 0);
-        result = handler->TxXferSize - handler->TxXferCount;
+        HAL_UART_Transmit(handler, (uint8_t *)data, 1, 1);
+        result = 1;
 
         if ((result < size) && (event_handler->handler != NULL)) {
             UART_HandleTypeDef * handler = &usart_handlers[sci->index];
@@ -373,8 +370,8 @@ uint16_t SciReceiveData(hal_sci_t sci, void * data, uint16_t size) {
     if (sci) {
         UART_HandleTypeDef * handler = &usart_handlers[sci->index];
 
-        HAL_UART_Receive(handler, (uint8_t *)data, size, 0);
-        result = handler->RxXferSize - handler->RxXferCount;
+        HAL_UART_Receive(handler, (uint8_t *)data, 1, 1);
+        result = 1;
     }
     return result;
 }
@@ -389,9 +386,6 @@ void SciReadStatus(hal_sci_t sci, sci_status_t result) {
         result->break_signal = __HAL_UART_GET_FLAG(handler, UART_FLAG_LBD);
         result->fifo_empty = __HAL_UART_GET_FLAG(handler, UART_FLAG_TXE);
         result->tramition_completed = __HAL_UART_GET_FLAG(handler, UART_FLAG_TC);
-
-        // __HAL_UART_CLEAR_FLAG(handler, UART_FLAG_RXNE | UART_FLAG_LBD | UART_FLAG_TC);
-        // __HAL_UART_CLEAR_PEFLAG(handler);
     }
 }
 
@@ -406,7 +400,6 @@ void SciSetEventHandler(hal_sci_t sci, hal_sci_event_t handler, void * data) {
         NVIC_EnableIRQ(sci->interupt);
 
         UART_HandleTypeDef * handler = &usart_handlers[sci->index];
-        // __HAL_UART_ENABLE_IT(handler, UART_IT_RXNE | UART_IT_TXE | UART_IT_TC);
         __HAL_UART_ENABLE_IT(handler, UART_IT_RXNE);
         __HAL_UART_ENABLE_IT(handler, UART_IT_PE | UART_IT_LBD | UART_IT_PE);
     }
