@@ -46,18 +46,43 @@ extern "C" {
 /* === Public macros definitions =============================================================== */
 
 #if defined(USE_HAL)
-#define LED_R HAL_GPIO5_0
-#define LED_G HAL_GPIO5_1
-#define LED_B HAL_GPIO5_2
+#define LED_R  HAL_GPIO5_0
+#define LED_G  HAL_GPIO5_1
+#define LED_B  HAL_GPIO5_2
 
-#define LED_1 HAL_GPIO0_14
-#define LED_2 HAL_GPIO1_11
-#define LED_3 HAL_GPIO1_12
+#define LED_1  HAL_GPIO0_14
+#define LED_2  HAL_GPIO1_11
+#define LED_3  HAL_GPIO1_12
 
-#define TEC_1 HAL_GPIO0_4
-#define TEC_2 HAL_GPIO0_8
-#define TEC_3 HAL_GPIO0_9
-#define TEC_4 HAL_GPIO1_9
+#define TEC_1  HAL_GPIO0_4
+#define TEC_2  HAL_GPIO0_8
+#define TEC_3  HAL_GPIO0_9
+#define TEC_4  HAL_GPIO1_9
+
+#define GPIO0  HAL_GPIO3_0
+#define GPIO1  HAL_GPIO3_3
+#define GPIO2  HAL_GPIO3_4
+#define GPIO3  HAL_GPIO5_15
+#define GPIO4  HAL_GPIO5_16
+#define GPIO5  HAL_GPIO3_5
+#define GPIO6  HAL_GPIO3_6
+#define GPIO7  HAL_GPIO3_7
+#define GPIO8  HAL_GPIO2_8
+
+#define LCD1   HAL_GPIO2_4
+#define LCD2   HAL_GPIO2_5
+#define LCD3   HAL_GPIO2_6
+#define LCD4   HAL_GPIO5_14
+#define LCD_RS HAL_GPIO5_12
+#define LCD_EN HAL_GPIO5_13
+
+#define T_FIL0 HAL_GPIO2_0
+#define T_FIL1 HAL_GPIO2_1
+#define T_FIL2 HAL_GPIO2_2
+#define T_FIL3 HAL_GPIO2_3
+#define T_COL0 HAL_GPIO1_8
+#define T_COL1 HAL_GPIO3_12
+#define T_COL2 HAL_GPIO3_13
 #elif defined(USE_DRIVERS)
 #define LED_R_PORT 2
 #define LED_R_PIN  0
