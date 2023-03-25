@@ -260,7 +260,7 @@ extern "C" {
 #endif /* HAL_CAN_MODULE_ENABLED */
 
 #ifdef HAL_CAN_LEGACY_MODULE_ENABLED
-#include "Legacy/stm32f1xx_hal_can_legacy.h"
+#include "legacy/stm32f1xx_hal_can_legacy.h"
 #endif /* HAL_CAN_LEGACY_MODULE_ENABLED */
 
 #ifdef HAL_CEC_MODULE_ENABLED
