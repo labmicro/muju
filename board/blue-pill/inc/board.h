@@ -30,7 +30,12 @@ SPDX-License-Identifier: MIT
 
 /* === Headers files inclusions ================================================================ */
 
+#if defined(USE_HAL)
+#include "hal.h"
+#endif
+#if defined(USE_DRIVERS)
 #include "stm32f1xx_hal.h"
+#endif
 
 /* === Cabecera C++ ============================================================================ */
 
@@ -39,6 +44,13 @@ extern "C" {
 #endif
 
 /* === Public macros definitions =============================================================== */
+
+#if defined(USE_HAL)
+#define LED HAL_GPIO_PC13
+#elif defined(USE_DRIVERS)
+// #define LED_PORT GPIOC
+// #define LED_PIN  GPIO_PIN_3
+#endif
 
 /* === Public data type declarations =========================================================== */
 

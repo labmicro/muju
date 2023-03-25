@@ -70,15 +70,6 @@ typedef struct event_handler_s {
 /* === Private function declarations =========================================================== */
 
 /**
- * @brief Function to find the handler used by an gpio or an empty if none was assigned before
- *
- * @param  gpio         Pointer to the structure with the gpio terminal descriptor
- * @param  descriptor   Pointer to variable te return the selected descriptor
- * @return uint8_t      Index descriptor in array, used to assign the channel interrupt
- */
-// static uint8_t FindHandlerDescriptor(hal_gpio_bit_t gpio, event_handler_t * descriptor);
-
-/**
  * @brief Function to dispatch an gpio bit event when then raises an interrupt
  *
  * @param  index    Index of gpio interrupt channel that raises the event
@@ -92,7 +83,7 @@ static void GpioHandleEvent(uint8_t index);
 /**
  * @brief Vector to store the event handlers of the serial ports
  */
-static struct event_handler_s event_handlers[8] = {0};
+static struct event_handler_s event_handlers[16] = {0};
 
 /**
  * @brief Vector to store the port address required to operate with ST HAL functions
@@ -101,35 +92,14 @@ static GPIO_TypeDef * const gpio_ports[] = {GPIOA, GPIOB, GPIOC, GPIOD};
 
 /* === Private function implementation ========================================================= */
 
-static uint8_t FindHandlerDescriptor(hal_gpio_bit_t gpio, event_handler_t * descriptor) {
-    uint8_t index;
-    *descriptor = NULL;
-
-    for (index = 0; index < 7; index++) {
-        if (event_handlers[index].gpio == gpio) {
-            *descriptor = &event_handlers[index];
-            break;
-        }
-    }
-    if (*descriptor == NULL) {
-        for (index = 0; index < 7; index++) {
-            if (event_handlers[index].gpio == NULL) {
-                *descriptor = &event_handlers[index];
-                break;
-            }
-        }
-    }
-    return index;
-}
-
 static void GpioHandleEvent(uint8_t index) {
-    // event_handler_t descriptor = &event_handlers[index];
-    // bool rissing = (Chip_PININT_GetRiseStates(LPC_GPIO_PIN_INT) & (1 << index));
-    // Chip_PININT_ClearIntStatus(LPC_GPIO_PIN_INT, 1 << index);
+    event_handler_t descriptor = &event_handlers[index];
+    SET_BIT(EXTI->PR, 1 << index);
+    bool rissing = GpioGetState(descriptor->gpio);
 
-    // if (descriptor->handler != NULL) {
-    //     descriptor->handler(descriptor->port, rissing, descriptor->object);
-    // }
+    if (descriptor->handler != NULL) {
+        descriptor->handler(descriptor->gpio, rissing, descriptor->object);
+    }
 }
 
 /* === Public function implementation ========================================================== */
@@ -211,29 +181,97 @@ void GpioBitToogle(hal_gpio_bit_t gpio) {
 void GpioSetEventHandler(hal_gpio_bit_t gpio, hal_gpio_event_t handler, void * object, bool rising,
                          bool falling) {
 
-    event_handler_t descriptor;
-    uint8_t index = FindHandlerDescriptor(gpio, &descriptor);
+    uint32_t value;
+    IRQn_Type irq_number;
+    hal_chip_pin_t input = (hal_chip_pin_t)gpio;
+    event_handler_t descriptor = &event_handlers[input->pin];
 
-    if (descriptor != NULL) {
-        if (((rising) || (falling)) && (handler)) {
-            // descriptor->port = gpio;
+    if (input->pin >= 10) {
+        irq_number = EXTI15_10_IRQn;
+    } else if (input->pin >= 5) {
+        irq_number = EXTI9_5_IRQn;
+    } else {
+        irq_number = EXTI0_IRQn + input->pin;
+    }
+
+    if (((rising) || (falling)) && (handler)) {
+        if (descriptor->handler == NULL) {
+            descriptor->gpio = gpio;
             descriptor->handler = handler;
             descriptor->object = object;
 
-            // Chip_SCU_GPIOIntPinSel(index, gpio->port, gpio->pin);
-            // Chip_PININT_ClearIntStatus(LPC_GPIO_PIN_INT, 1 << index);
-            // if (rising) {
-            //     Chip_PININT_EnableIntHigh(LPC_GPIO_PIN_INT, 1 << index);
-            // }
-            // if (falling) {
-            //     Chip_PININT_EnableIntLow(LPC_GPIO_PIN_INT, 1 << index);
-            // }
-            // NVIC_ClearPendingIRQ(PIN_INT0_IRQn + index);
-            // NVIC_SetPriority(PIN_INT0_IRQn + index, HAL_GPIO_NVIC_PRIORITY);
-            // NVIC_EnableIRQ(PIN_INT0_IRQn + index);
-        } else {
-            memset(descriptor, 0, sizeof(*descriptor));
-            // NVIC_EnableIRQ(PIN_INT0_IRQn + index);
+            /* Enable AFIO Clock */
+            __HAL_RCC_AFIO_CLK_ENABLE();
+            value = AFIO->EXTICR[input->pin >> 2u];
+            CLEAR_BIT(value, (0x0Fu) << (4u * (input->pin & 0x03u)));
+            SET_BIT(value, (input->port) << (4u * (input->pin & 0x03u)));
+            AFIO->EXTICR[input->pin >> 2u] = value;
+
+            /* Configure the interrupt mask */
+            SET_BIT(EXTI->IMR, 1 << input->pin);
+
+            /* Configure the event mask */
+            CLEAR_BIT(EXTI->EMR, 1 << input->pin);
+
+            /* Enable or disable the rising trigger */
+            if (rising) {
+                SET_BIT(EXTI->RTSR, 1 << input->pin);
+            } else {
+                CLEAR_BIT(EXTI->RTSR, 1 << input->pin);
+            }
+
+            /* Enable or disable the falling trigger */
+            if (falling) {
+                SET_BIT(EXTI->FTSR, 1 << input->pin);
+            } else {
+                CLEAR_BIT(EXTI->FTSR, 1 << input->pin);
+            }
+
+            SET_BIT(EXTI->PR, 1 << input->pin);
+            NVIC_ClearPendingIRQ(irq_number);
+            NVIC_SetPriority(irq_number, HAL_GPIO_NVIC_PRIORITY);
+            NVIC_EnableIRQ(irq_number);
+        }
+    } else {
+        descriptor->handler = NULL;
+        SET_BIT(EXTI->PR, 1 << input->pin);
+        NVIC_ClearPendingIRQ(irq_number);
+        NVIC_DisableIRQ(irq_number);
+    }
+}
+
+void EXTI0_IRQHandler(void) {
+    GpioHandleEvent(0);
+}
+
+void EXTI1_IRQHandler(void) {
+    GpioHandleEvent(1);
+}
+
+void EXTI2_IRQHandler(void) {
+    GpioHandleEvent(2);
+}
+
+void EXTI3_IRQHandler(void) {
+    GpioHandleEvent(3);
+}
+
+void EXTI4_IRQHandler(void) {
+    GpioHandleEvent(4);
+}
+
+void EXTI9_5_IRQHandler(void) {
+    for (int index = 5; index <= 9; index++) {
+        if (READ_BIT(EXTI->PR, 1 << index)) {
+            GpioHandleEvent(index);
+        }
+    }
+}
+
+void EXTI15_10_IRQHandler(void) {
+    for (int index = 10; index <= 15; index++) {
+        if (READ_BIT(EXTI->PR, 1 << index)) {
+            GpioHandleEvent(index);
         }
     }
 }
