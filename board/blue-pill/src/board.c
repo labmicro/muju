@@ -107,6 +107,24 @@ void BoardSetup(void) {
     SystemClock_Config();
     SystemCoreClockUpdate();
 
+#if defined(USE_HAL)
+    GpioSetDirection(LED, true);
+#elif defined(USE_DRIVERS)
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    /* GPIO Ports Clock Enable */
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
+
+    /*Configure LED GPIO pin : PC13 */
+    GPIO_InitStruct.Pin = LED_PIN GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
+#endif
+
     /*
     If this function is called before enabling the semihosting in the server,
     a HardFault may occur due to an unexpected debug event and, therefore,
