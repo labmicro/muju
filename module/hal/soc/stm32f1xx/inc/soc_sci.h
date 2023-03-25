@@ -51,7 +51,7 @@ extern "C" {
 /* === Public variable declarations ============================================================ */
 
 /** @cond !INTERNAL */
-extern const hal_sci_t HAL_SCI_USART1; /**< Constant to define serial port 0 */
+extern const hal_sci_t HAL_SCI_USART1; /**< Constant to define serial port 1 */
 extern const hal_sci_t HAL_SCI_USART2; /**< Constant to define serial port 2 */
 extern const hal_sci_t HAL_SCI_USART3; /**< Constant to define serial port 3 */
 /** @endcond */
