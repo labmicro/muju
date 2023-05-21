@@ -231,7 +231,7 @@ static void ConsoleEvent(hal_sci_t console, sci_status_t status, void * data) {
             } else if (key == '2') {
                 GpioSetState(board->led_1, false);
             } else if (key == '3') {
-                GpioBitToogle(board->led_2);
+                GpioBitToggle(board->led_2);
             }
         }
     }
@@ -301,7 +301,7 @@ static void ToggleLed(hal_gpio_bit_t key, hal_gpio_bit_t led) {
 
     current_state = (GpioGetState(key) == 0);
     if ((current_state) && (!last_state)) {
-        GpioBitToogle(led);
+        GpioBitToggle(led);
     }
     last_state = current_state;
 }

@@ -171,7 +171,7 @@ void GpioBitClear(hal_gpio_bit_t gpio) {
     }
 }
 
-void GpioBitToogle(hal_gpio_bit_t gpio) {
+void GpioBitToggle(hal_gpio_bit_t gpio) {
     if (gpio) {
         hal_chip_pin_t output = (hal_chip_pin_t)gpio;
         HAL_GPIO_TogglePin(gpio_ports[output->port], 1 << output->pin);
