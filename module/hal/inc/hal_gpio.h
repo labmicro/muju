@@ -114,7 +114,7 @@ void GpioBitClear(hal_gpio_bit_t gpio);
  *
  * @param  gpio     Pointer to the structure with the gpio terminal descriptor
  */
-void GpioBitToogle(hal_gpio_bit_t gpio);
+void GpioBitToggle(hal_gpio_bit_t gpio);
 
 /**
  * @brief Function to enable gpio port interrupts and handle its as events
