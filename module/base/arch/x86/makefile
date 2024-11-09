@@ -23,18 +23,26 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
+##################################################################################################
+# Toolchain commands
 # Preprocesor command
-PP = gcc
+PP = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gcc
 # C compiler command
-CC = gcc
+CC = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gcc
 # Library builder command
-AR = ar
+AR = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)ar
 # Linker command
-LD = gcc
+LD = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gcc
 # Assembler command
-AS = as
+AS = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)as
 # Debbuger command
-GDB = gdb
+GDB = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gdb
+# List simbols command
+NM = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)nm
+# Object dump command
+OD = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)objdump
 
+##################################################################################################
+# Toolchain settings
 # define linker extension
 LD_EXTENSION = out

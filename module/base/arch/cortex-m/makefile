@@ -24,23 +24,27 @@
 ##################################################################################################
 
 ##################################################################################################
+# Toolchain settings
+TOOLCHAIN_PREFIX ?= arm-none-eabi-
+
+##################################################################################################
 # Toolchain commands
 # Preprocesor command
-PP = arm-none-eabi-gcc
+PP = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gcc
 # C compiler command
-CC = arm-none-eabi-gcc
+CC = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gcc
 # Library builder command
-AR = arm-none-eabi-ar
+AR = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)ar
 # Linker command
-LD = arm-none-eabi-gcc
+LD = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gcc
 # Assembler command
-AS = arm-none-eabi-as
+AS = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)as
 # Debbuger command
-GDB = arm-none-eabi-gdb
-# ??
-NM = arm-none-eabi-nm
-
-OBJ_COPY = arm-none-eabi-objcopy
+GDB = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)gdb
+# List simbols command
+NM = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)nm
+# Object dump command
+OD = $(TOOLCHAIN_LOCATION)$(TOOLCHAIN_PREFIX)objdump
 
 ##################################################################################################
 # Toolchain settings
@@ -68,11 +72,9 @@ LFLAGS += -mthumb $(SPECS) -L $(MUJU) -T $(LINKSCRIPT)
 LD_EXTENSION = elf
 
 # Debugger flags
-GDB_FLAGS = $(LD_TARGET) -ex "target remote localhost:3333"
+GDB_FLAGS = $(TARGET_ELF) -ex "target remote localhost:3333"
 
 # Debug server
 GDB_SERVER = openocd
 
 FLASH_WRITER = openocd
-
-BIN_TARGET = $(patsubst %.elf,%.bin,$(LD_TARGET))
