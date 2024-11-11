@@ -51,6 +51,10 @@ SPDX-License-Identifier: MIT
 /* === Public function implementation ========================================================== */
 
 void BoardSetup(void) {
+#ifdef USE_DRIVERS
+    SystemInit();
+    SystemCoreClockUpdate();
+#endif
 }
 
 /* === End of documentation ====================================================================
