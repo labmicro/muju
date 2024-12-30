@@ -26,10 +26,10 @@
 ARCH = rv32
 
 # Compiler flags
-CFLAGS += -march=rv32imac -mcmodel=medlow
+CFLAGS += -march=rv32imaczicsr -mcmodel=medlow
 
 # Assembler flags
-AFLAGS += -march=rv32imac -mcmodel=medlow
+AFLAGS += -march=rv32imaczicsr -mcmodel=medlow
 
 # Linker flags
-LFLAGS += -march=rv32imac -mcmodel=medlow -nostartfiles
+LFLAGS += -march=rv32imaczicsr -mcmodel=medlow -nostartfiles

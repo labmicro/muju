@@ -1,12 +1,13 @@
 /*!
-    \file  gd32vf103_wwdgt.h
-    \brief definitions for the WWDGT
+    \file    gd32vf103_wwdgt.h
+    \brief   definitions for the WWDGT
 
-    \version 2019-6-5, V1.0.0, firmware for GD32VF103
+    \version 2019-06-05, V1.0.0, firmware for GD32VF103
+    \version 2020-08-04, V1.1.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2019, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -76,11 +77,11 @@ void wwdgt_counter_update(uint16_t counter_value);
 /* configure counter value, window value, and prescaler divider value */
 void wwdgt_config(uint16_t counter, uint16_t window, uint32_t prescaler);
 
-/* enable early wakeup interrupt of WWDGT */
-void wwdgt_interrupt_enable(void);
 /* check early wakeup interrupt state of WWDGT */
 FlagStatus wwdgt_flag_get(void);
 /* clear early wakeup interrupt state of WWDGT */
 void wwdgt_flag_clear(void);
+/* enable early wakeup interrupt of WWDGT */
+void wwdgt_interrupt_enable(void);
 
 #endif /* GD32VF103_WWDGT_H */

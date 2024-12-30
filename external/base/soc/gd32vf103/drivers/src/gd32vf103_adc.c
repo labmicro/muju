@@ -1,12 +1,13 @@
 /*!
-    \file  gd32vf103_adc.c
-    \brief ADC driver
+    \file    gd32vf103_adc.c
+    \brief   ADC driver
 
-    \version 2019-6-5, V1.0.0, firmware for GD32VF103
+    \version 2020-06-05, V1.0.0, firmware for GD32VF103
+    \version 2020-08-04, V1.1.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2019, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -175,7 +176,7 @@ void adc_data_alignment_config(uint32_t adc_periph, uint32_t data_alignment)
 */
 void adc_enable(uint32_t adc_periph)
 {
-    if(RESET == (ADC_CTL1(adc_periph) & ADC_CTL1_ADCON)){
+    if((uint32_t)RESET == (ADC_CTL1(adc_periph) & ADC_CTL1_ADCON)){
         /* enable ADC */
         ADC_CTL1(adc_periph) |= (uint32_t)ADC_CTL1_ADCON;
     }
@@ -204,12 +205,12 @@ void adc_calibration_enable(uint32_t adc_periph)
     /* reset the selected ADC1 calibration registers */
     ADC_CTL1(adc_periph) |= (uint32_t) ADC_CTL1_RSTCLB;
     /* check the RSTCLB bit state */
-    while(RESET != (ADC_CTL1(adc_periph) & ADC_CTL1_RSTCLB)){
+    while((uint32_t)RESET != (ADC_CTL1(adc_periph) & ADC_CTL1_RSTCLB)){
     }
     /* enable ADC calibration process */
     ADC_CTL1(adc_periph) |= ADC_CTL1_CLB;
     /* check the CLB bit state */
-    while(RESET != (ADC_CTL1(adc_periph) & ADC_CTL1_CLB)){
+    while((uint32_t)RESET != (ADC_CTL1(adc_periph) & ADC_CTL1_CLB)){
     }
 }
 

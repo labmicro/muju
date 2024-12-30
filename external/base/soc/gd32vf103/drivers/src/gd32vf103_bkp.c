@@ -2,11 +2,12 @@
     \file    gd32vf103_bkp.c
     \brief   BKP driver
 
-    \version 2019-6-5, V1.0.0, firmware for GD32VF103
+    \version 2019-06-05, V1.0.0, firmware for GD32VF103
+    \version 2020-08-04, V1.1.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2019, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -62,9 +63,9 @@ void bkp_deinit(void)
 void bkp_data_write(bkp_data_register_enum register_number, uint16_t data)
 {
     if((register_number >= BKP_DATA_10) && (register_number <= BKP_DATA_41)){
-        BKP_DATA10_41(register_number - 1U) = data;
+        BKP_DATA10_41((uint32_t)register_number - 1U) = data;
     }else if((register_number >= BKP_DATA_0) && (register_number <= BKP_DATA_9)){
-        BKP_DATA0_9(register_number - 1U) = data;
+        BKP_DATA0_9((uint32_t)register_number - 1U) = data;
     }else{
         /* illegal parameters */
     }
@@ -84,9 +85,9 @@ uint16_t bkp_data_read(bkp_data_register_enum register_number)
 
     /* get the data from the BKP data register */
     if((register_number >= BKP_DATA_10) && (register_number <= BKP_DATA_41)){
-        data = BKP_DATA10_41(register_number - 1U);
+        data = BKP_DATA10_41((uint32_t)register_number - 1U);
     }else if((register_number >= BKP_DATA_0) && (register_number <= BKP_DATA_9)){
-        data = BKP_DATA0_9(register_number - 1U);
+        data = BKP_DATA0_9((uint32_t)register_number - 1U);
     }else{
         /* illegal parameters */
     }
@@ -247,7 +248,7 @@ void bkp_interrupt_disable(void)
 */
 FlagStatus bkp_flag_get(void)
 {
-    if(RESET != (BKP_TPCS & BKP_FLAG_TAMPER)){
+    if(BKP_TPCS & BKP_FLAG_TAMPER){
         return SET;
     }else{
         return RESET;
@@ -273,7 +274,7 @@ void bkp_flag_clear(void)
 */
 FlagStatus bkp_interrupt_flag_get(void)
 {
-    if(RESET != (BKP_TPCS & BKP_INT_FLAG_TAMPER)){
+    if(BKP_TPCS & BKP_INT_FLAG_TAMPER){
         return SET;
     }else{
         return RESET;

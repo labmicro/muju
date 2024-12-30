@@ -2,11 +2,12 @@
     \file    gd32vf103_pmu.c
     \brief   PMU driver
 
-    \version 2019-6-5, V1.0.0, firmware for GD32VF103
+    \version 2019-06-05, V1.0.0, firmware for GD32VF103
+    \version 2020-08-04, V1.1.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2019, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -99,16 +100,16 @@ void pmu_lvd_disable(void)
 void pmu_to_sleepmode(uint8_t sleepmodecmd)
 {
     /* clear sleepdeep bit of RISC-V system control register */
-    clear_csr(0x811, 0x1);
+    clear_csr(0x811U, 0x1U);
 
     /* select WFI or WFE command to enter sleep mode */
     if(WFI_CMD == sleepmodecmd){
         __WFI();
     }else{
         clear_csr(mstatus, MSTATUS_MIE);
-        set_csr(0x810, 0x1);
+        set_csr(0x810U, 0x1U);
         __WFI();
-        clear_csr(0x810, 0x1);
+        clear_csr(0x810U, 0x1U);
         set_csr(mstatus, MSTATUS_MIE);
     }
 }
@@ -133,19 +134,19 @@ void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
     /* set ldolp bit according to pmu_ldo */
     PMU_CTL |= ldo;
     /* set CSR_SLEEPVALUE bit of RISC-V system control register */
-    set_csr(0x811, 0x1);
+    set_csr(0x811U, 0x1U);
     /* select WFI or WFE command to enter deepsleep mode */
     if(WFI_CMD == deepsleepmodecmd){
         __WFI();
     }else{
         clear_csr(mstatus, MSTATUS_MIE);
-        set_csr(0x810, 0x1);
+        set_csr(0x810U, 0x1U);
         __WFI();
-        clear_csr(0x810, 0x1);
+        clear_csr(0x810U, 0x1U);
         set_csr(mstatus, MSTATUS_MIE);
     }
     /* reset sleepdeep bit of RISC-V system control register */
-    clear_csr(0x811, 0x1);
+    clear_csr(0x811U, 0x1U);
 }
 
 /*!
@@ -160,7 +161,7 @@ void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
 void pmu_to_standbymode(uint8_t standbymodecmd)
 {
     /* set CSR_SLEEPVALUE bit of RISC-V system control register */
-    set_csr(0x811, 0x1);
+    set_csr(0x811U, 0x1U);
 
     /* set stbmod bit */
     PMU_CTL |= PMU_CTL_STBMOD;
@@ -173,12 +174,12 @@ void pmu_to_standbymode(uint8_t standbymodecmd)
         __WFI();
     }else{
         clear_csr(mstatus, MSTATUS_MIE);
-        set_csr(0x810, 0x1);
+        set_csr(0x810U, 0x1U);
         __WFI();
-        clear_csr(0x810, 0x1);
+        clear_csr(0x810U, 0x1U);
         set_csr(mstatus, MSTATUS_MIE);
     }
-    clear_csr(0x811, 0x1);
+    clear_csr(0x811U, 0x1U);
 }
 
 /*!

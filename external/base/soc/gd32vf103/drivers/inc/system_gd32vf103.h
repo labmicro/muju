@@ -3,11 +3,12 @@
    \brief   RISC-V Device Peripheral Access Layer Header File for
             GD32VF103 Device Series
 
-    \version 2019-6-5, V1.0.0, firmware for GD32VF103
+    \version 2019-06-05, V1.0.0, firmware for GD32VF103
+    \version 2020-08-04, V1.1.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2019, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -43,6 +44,10 @@ extern "C" {
 #endif
 
 #include <stdint.h>
+
+#if   defined (__ICCRISCV__)
+    #include "compiler.h"
+#endif
 
 /* system clock frequency (core clock) */
 extern uint32_t SystemCoreClock;
