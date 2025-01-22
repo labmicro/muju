@@ -343,3 +343,4 @@ info:
 	@echo Cabeceras: $(PROJECT_INC)
 	@echo Objetos: $(PROJECT_OBJ)
 	@echo -------------------------------------------------------------------------------
+	@echo Definciones: $(DEFINES)

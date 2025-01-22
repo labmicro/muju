@@ -57,8 +57,8 @@ CFLAGS += -mabi=ilp32
 AFLAGS += -mabi=ilp32  -x assembler-with-cpp
 
 # Linker flags
-LFLAGS += -mabi=ilp32 -Wl,--Map="$(TARGET_NAME).map",--gc-sections,--cref,--no-relax
-LFLAGS += -L $(MUJU) -T $(LINKSCRIPT)
+LFLAGS += -mabi=ilp32 -Wl,--Map="$(TARGET_NAME).map",--gc-sections,--cref,--no-relax,--no-warn-rwx-segments
+LFLAGS += --specs=nano.specs --specs=nosys.specs -L $(MUJU) -T $(LINKSCRIPT) 
 
 # define linker extension
 LD_EXTENSION = elf
