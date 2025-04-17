@@ -23,44 +23,6 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-CPU = nuclei-n200
+MCU         ?= gd32vf103cbt6
 
-# Variable with RV core module root foder
-RV_CORE := external/base/arch/rv32/core
-
-# Variable with SOC drivers module root foder
-CPU_FOLDER := external/base/cpu/$(CPU)
-
-# Variable with SOC drivers module root foder
-SOC_FOLDER := external/base/soc/$(SOC)
-
-# Variable with the list of folders containing source files for device support
-DEVICE_SRC :=  $(RV_CORE)/src $(SOC_FOLDER)/device/src
-
-# Variable with the list of folders containing header files for statup device
-$(if $(findstring $(DEVICE_SRC),$(PROJECT_SRC)),,$(eval PROJECT_SRC += $(DEVICE_SRC)))
-
-# Variable with module name
-$(eval NAME = $(call module_name,board/$(BOARD)))
-
-# Folder with device header to board module headers
-$(eval $(NAME)_INC += $(RV_CORE)/inc $(CPU_FOLDER)/inc $(SOC_FOLDER)/device/inc)
-
-# Folder with architeture source code to board module
-$(eval $(NAME)_SRC += $(CPU_FOLDER)/src)
-
-# Variable with the list of folders containing header and sourcefiles for the module
-$(if $(findstring Y,$(call uc,$(USE_DRIVERS))), \
-$(eval $(NAME)_INC += $(SOC_FOLDER)/drivers/inc) \
-$(eval $(NAME)_SRC += $(SOC_FOLDER)/drivers/src) \
-)
-
-DAP ?= ftdi/um232h
-
-# Command flags for gdb server
-GDB_SERVER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-GDB_SERVER_FLAGS += -f interface/$(DAP).cfg -f target/gd32vf103.cfg
-
-# Command flags for download target
-FLASH_WRITER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-FLASH_WRITER_FLAGS += -f interface/$(DAP).cfg -f target/gd32vf103.cfg
+USE_DRIVERS ?= y
