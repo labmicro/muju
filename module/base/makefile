@@ -213,7 +213,7 @@ endef
 # Definition of directories variables
 # out dir
 # BUILD_DIR = $(PROJECT_DIR)/build
-BUILD_DIR = build
+BUILD_DIR ?= build
 # object dir
 OBJ_DIR = $(BUILD_DIR)/obj
 # lib dir
