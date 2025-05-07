@@ -32,12 +32,12 @@ include $(MUJU)/external/gmsl/gmsl
 ifneq ($(PROJECT), )
     -include $(PROJECT)/makefile
     PROJECT_NAME ?= $(lastword $(subst /, , $(PROJECT)))
+    PROJECT_DIR = $(abspath $(PROJECT))
 else
     PROJECT = .
     PROJECT_NAME ?= $(lastword $(subst /, , $(CURDIR)))
+    PROJECT_DIR = $(PROJECT)
 endif
-
-PROJECT_DIR = $(abspath $(PROJECT))
 
 ##################################################################################################
 # Function to generate the full path of directory
