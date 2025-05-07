@@ -2,11 +2,12 @@
     \file    gd32vf103.h
     \brief   general definitions for GD32VF103
 
-    \version 2019-6-5, V1.0.0, firmware for GD32VF103
+    \version 2019-06-05, V1.0.0, firmware for GD32VF103
+    \version 2020-08-04, V1.1.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2019, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -35,7 +36,7 @@ OF SUCH DAMAGE.
 #ifndef GD32VF103_H
 #define GD32VF103_H
 
-#ifdef cplusplus
+#ifdef __cplusplus
  extern "C" {
 #endif
 
@@ -59,7 +60,7 @@ OF SUCH DAMAGE.
    #ifdef GD32VF103R_START
    #define HXTAL_VALUE    ((uint32_t)25000000) /*!< value of the external oscillator in Hz */
    #define HXTAL_VALUE_8M  HXTAL_VALUE
-   #elif defined(GD32VF103V_EVAL) || defined(GD32VF103C_START)
+#elif defined(GD32VF103V_EVAL) || defined(GD32VF103C_START) || defined(GD32VF103T_START)
    #define HXTAL_VALUE    ((uint32_t)8000000) /*!< value of the external oscillator in Hz */
    #define HXTAL_VALUE_25M  HXTAL_VALUE
    #else
@@ -96,23 +97,23 @@ OF SUCH DAMAGE.
 typedef enum IRQn
 {
 
-	CLIC_INT_RESERVED        	 = 0,      			/*!< RISC-V reserved		*/
-	CLIC_INT_SFT         		 = 3,				/*!< Software interrupt		*/
-	CLIC_INT_TMR         		 = 7,				/*!< CPU Timer interrupt	*/
-	CLIC_INT_BWEI        		 = 17,				/*!< Bus Error interrupt	*/
-	CLIC_INT_PMOVI       		 = 18,				/*!< Performance Monitor	*/
+    CLIC_INT_RESERVED            = 0,       /*!< RISC-V reserved                                        */
+    CLIC_INT_SFT                 = 3,       /*!< Software interrupt                                     */
+    CLIC_INT_TMR                 = 7,       /*!< CPU Timer interrupt                                    */
+    CLIC_INT_BWEI                = 17,      /*!< Bus Error interrupt                                    */
+    CLIC_INT_PMOVI               = 18,      /*!< Performance Monitor                                    */
 
     /* interruput numbers */
-    WWDGT_IRQn                   = 19,      /*!< window watchDog timer interrupt                          */
-    LVD_IRQn                     = 20,      /*!< LVD through EXTI line detect interrupt                   */
-    TAMPER_IRQn                  = 21,      /*!< tamper through EXTI line detect                          */
-    RTC_IRQn                     = 22,      /*!< RTC alarm interrupt                                      */
-    FMC_IRQn                     = 23,      /*!< FMC interrupt                                            */
-    RCU_CTC_IRQn                 = 24,      /*!< RCU and CTC interrupt                                    */
-    EXTI0_IRQn                   = 25,      /*!< EXTI line 0 interrupts                                   */
-    EXTI1_IRQn                   = 26,      /*!< EXTI line 1 interrupts                                   */
-    EXTI2_IRQn                   = 27,      /*!< EXTI line 2 interrupts                                   */
-    EXTI3_IRQn                   = 28,      /*!< EXTI line 3 interrupts                                   */
+    WWDGT_IRQn                   = 19,      /*!< window watchDog timer interrupt                         */
+    LVD_IRQn                     = 20,      /*!< LVD through EXTI line detect interrupt                  */
+    TAMPER_IRQn                  = 21,      /*!< tamper through EXTI line detect                         */
+    RTC_IRQn                     = 22,      /*!< RTC alarm interrupt                                     */
+    FMC_IRQn                     = 23,      /*!< FMC interrupt                                           */
+    RCU_CTC_IRQn                 = 24,      /*!< RCU and CTC interrupt                                   */
+    EXTI0_IRQn                   = 25,      /*!< EXTI line 0 interrupts                                  */
+    EXTI1_IRQn                   = 26,      /*!< EXTI line 1 interrupts                                  */
+    EXTI2_IRQn                   = 27,      /*!< EXTI line 2 interrupts                                  */
+    EXTI3_IRQn                   = 28,      /*!< EXTI line 3 interrupts                                  */
     EXTI4_IRQn                   = 29,     /*!< EXTI line 4 interrupts                                   */
     DMA0_Channel0_IRQn           = 30,     /*!< DMA0 channel0 interrupt                                  */
     DMA0_Channel1_IRQn           = 31,     /*!< DMA0 channel1 interrupt                                  */
@@ -167,24 +168,21 @@ typedef enum IRQn
     CAN1_EWMC_IRQn               = 85,     /*!< CAN1 EWMC interrupt                                      */
     USBFS_IRQn                   = 86,     /*!< USBFS global interrupt                                   */
 
-	ECLIC_NUM_INTERRUPTS
+    ECLIC_NUM_INTERRUPTS
 } IRQn_Type;
 
 /* includes */
 #ifdef USE_DRIVERS
   #include "system_gd32vf103.h"
 #endif
-#include <stdbool.h>
+
 #include <stdint.h>
 
 /* enum definitions */
 typedef enum {DISABLE = 0, ENABLE = !DISABLE} EventStatus, ControlStatus;
-typedef enum {RESET = 0, SET = 1,MAX = 0X7FFFFFFF} FlagStatus;
+typedef enum {FALSE = 0, TRUE = !FALSE} bool;
+typedef enum {RESET = 0, SET = !RESET} FlagStatus;
 typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrStatus;
-
-/* defines for older code that used TRUE/FALSE instead of true/false */
-#define FALSE false
-#define TRUE true
 
 /* bit operations */
 #define REG32(addr)                  (*(volatile uint32_t *)(uint32_t)(addr))
@@ -258,7 +256,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrStatus;
   #include "n200_func.h"
 #endif /* USE_DRIVERS */
 
-#ifdef cplusplus
+#ifdef __cplusplus
 }
 #endif
 #endif

@@ -25,4 +25,4 @@
 
 MCU         ?= gd32vf103cbt6
 
-USE_DRIVERS ?= n
+USE_DRIVERS ?= y
