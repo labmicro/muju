@@ -38,9 +38,8 @@ SPDX-License-Identifier: MIT
 #include "hal.h"
 #endif
 #if defined(USE_DRIVERS)
-// #include "chip.h"
-#endif
 #include "gd32vf103.h"
+#endif
 
 /* === Cabecera C++ ============================================================================ */
 
