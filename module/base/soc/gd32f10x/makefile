@@ -70,10 +70,12 @@ $(eval $(NAME)_SRC += $(DRIVERS_SRC)) \
 STARTUP := $(MCU_FOLDER)/startup
 $(if $(findstring $(STARTUP),$(PROJECT_SRC)),,$(eval PROJECT_SRC += $(STARTUP)))
 
+DAP ?= ftdi/um232h
+
 # Command flags for gdb server
 GDB_SERVER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-GDB_SERVER_FLAGS += -f interface/ftdi/um232h.cfg -f target/gd32vf103.cfg
+GDB_SERVER_FLAGS += -f interface/$(DAP).cfg -f target/stm32f1x.cfg
 
 # Command flags for download target
 FLASH_WRITER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-FLASH_WRITER_FLAGS += -f interface/cmsis-dap.cfg -f target/stm32f1x.cfg
+FLASH_WRITER_FLAGS += -f interface/$(DAP).cfg -f target/stm32f1x.cfg

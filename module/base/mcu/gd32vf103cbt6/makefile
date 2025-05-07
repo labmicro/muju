@@ -32,5 +32,5 @@ LINKSCRIPT = external/base/mcu/$(MCU)/linker/release.ld
 
 # Flash commandfor OpenOCD download target
 FLASH_WRITER_COMMANDS = -c "init" -c "reset halt" -c "flash protect 0 0 last off"
-FLASH_WRITER_COMMANDS += -c "program $(TARGET_ELF) verify; mww 0xe004200c 0x4b5a6978; mww 0xe0042008 0x01"
-FLASH_WRITER_COMMANDS += -c "resume; exit 0;"
+FLASH_WRITER_COMMANDS += -c "program $(TARGET_ELF) verify;"
+FLASH_WRITER_COMMANDS += -c "reset run; exit 0;"
