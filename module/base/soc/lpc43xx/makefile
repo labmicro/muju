@@ -26,7 +26,7 @@
 CPU = cortex-m4f
 
 # Flash commandfor OpenOCD download target
-FLASH_WRITER_COMMANDS = -c "init" -c "halt 0" -c "flash write_image erase $(BIN_TARGET) $(FLASH_BASE_ADDRESS) bin" -c "reset run" -c "shutdown"
+FLASH_WRITER_COMMANDS = -c "init" -c "halt 0" -c "flash write_image erase $(TARGET_ELF)" -c "reset run" -c "shutdown"
 
 # Variable with LPC Open drivers module root foder
 LPC_OPEN := external/base/soc/$(SOC)/lpc_open

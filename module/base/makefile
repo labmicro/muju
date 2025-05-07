@@ -267,7 +267,7 @@ DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH) $(RTOS)
 ##################################################################################################
 #
 TARGET_NAME ?= $(BIN_DIR)/$(PROJECT_NAME)
-LD_TARGET = $(TARGET_NAME).$(LD_EXTENSION)
+TARGET_ELF = $(TARGET_NAME).$(LD_EXTENSION)
 
 -include $(patsubst %.o,%.d,$(PROJECT_OBJ))
 
@@ -280,24 +280,21 @@ PROJECT_OBJ += $(call objects_list,$(PROJECT_SRC),s)
 $(foreach path,$(PROJECT_SRC),$(eval $(call assembler_rule,$(path),$($1_INC),$(OBJ_DIR)/$(call short_path,$(path)))))
 
 ##################################################################################################
-$(LD_TARGET): $(PROJECT_LIB) $(PROJECT_OBJ)
-	$(call show_action,Linking $(call short_path,$(LD_TARGET)))
+$(TARGET_ELF): $(PROJECT_LIB) $(PROJECT_OBJ)
+	$(call show_action,Linking $(call short_path,$(TARGET_ELF)))
 	-@mkdir -p $(BIN_DIR)
-	$(QUIET) $(CC) $(strip $(LFLAGS) $(PROJECT_OBJ) $(LFLAGS_BEGIN_LIBS) $(PROJECT_LIB) $(LFLAGS_END_LIBS)) -o $(LD_TARGET)
-	-@cp -f $(LD_TARGET) $(BIN_DIR)/project.$(LD_EXTENSION)
-	@echo ' '
+	$(QUIET) $(CC) $(strip $(LFLAGS) $(PROJECT_OBJ) $(LFLAGS_BEGIN_LIBS) $(PROJECT_LIB) $(LFLAGS_END_LIBS)) -o $(TARGET_ELF)
+	-@cp -f $(TARGET_ELF) $(BIN_DIR)/project.$(LD_EXTENSION)
+	$(QUIET) $(OD) $(TARGET_ELF) -xS > $(TARGET_NAME).s
 
 .DEFAULT_GOAL := all
 
-all: $(LD_TARGET) $(POST_BUILD_TARGETS)
+all: $(TARGET_ELF) $(POST_BUILD_TARGET)
 
 ##################################################################################################
 #
 clean:
 	-@rm -r $(BUILD_DIR)
-
-$(BIN_TARGET): $(LD_TARGET)
-	$(QUIET) $(OBJ_COPY) -v -O binary $< $@
 
 gdbserver:
 ifeq ($(GDB_SERVER),)
@@ -306,7 +303,7 @@ else
 	$(QUIET) $(GDB_SERVER) $(GDB_SERVER_FLAGS)
 endif
 
-download: $(BIN_TARGET)
+download: $(TARGET_ELF)
 ifeq ($(FLASH_WRITER),)
 	$(error Flash write operation is not available for the board $(BOARD))
 else
@@ -337,8 +334,7 @@ info:
 	@echo Nombre del proyecto: $(PROJECT_NAME)
 	@echo Ruta definida para el proyecto: $(PROJECT)
 	@echo Ruta absoluta del Proyecto: $(PROJECT_DIR)
-	@echo Binario final: $(LD_TARGET)
-	@echo Binario para OpenOCD: $(BIN_TARGET)
+	@echo Binario final: $(TARGET_ELF)
 	@echo -------------------------------------------------------------------------------
 	@echo Modulos: $(MODULES)
 	@echo Board: $(BOARD), Arch: $(ARCH), Cpu: $(CPU), Soc: $(SOC), Mcu: $(MCU)
@@ -347,3 +343,4 @@ info:
 	@echo Cabeceras: $(PROJECT_INC)
 	@echo Objetos: $(PROJECT_OBJ)
 	@echo -------------------------------------------------------------------------------
+	@echo Definciones: $(DEFINES)

@@ -26,7 +26,7 @@
 CPU = cortex-m3
 
 # Flash commandfor OpenOCD download target
-FLASH_WRITER_COMMANDS = -c "init" -c "halt 0" -c "reset halt" -c "stm32f1x unlock 0" -c "reset halt" -c "flash write_image erase $(BIN_TARGET) $(FLASH_BASE_ADDRESS) bin" -c "reset halt" -c "reset run" -c "shutdown"
+FLASH_WRITER_COMMANDS = -c "init" -c "halt 0" -c "reset halt" -c "stm32f1x unlock 0" -c "reset halt" -c "flash write_image erase $(TARGET_ELF)" -c "reset halt" -c "reset run" -c "shutdown"
 
 # Variable with MCU drivers module root foder
 MCU_FOLDER := external/base/mcu/$(MCU)
