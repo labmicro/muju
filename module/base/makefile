@@ -353,15 +353,14 @@ SPACE := $(EMPTY) $(EMPTY)
 
 json_list = $(subst $(SPACE),$(COMMA)$(SPACE),$(strip $(foreach w,$1,"$w")))
 
-SYSTEM_INCLUDES = $(strip $(shell gcc -v -E -x c nul 2>&1 | awk '$$2 == "<...>", $$1 == "End" {if ($$2 != "<...>" && $$1 != "End") printf $$0 }'))
 MY_INCLUDES = $(strip $(foreach p,$(PROJECT_INC),$(subst $(abspath $(PROJECT_DIR)),$(PROJECT_DIR),$(call full_path,$(p)))))
 
-define vscode_config
+define vscode_c_config
 {
   "configurations": [
     {
       "name": "MUJU",
-      "includePath": [$(call json_list,$(strip $(MY_INCLUDES) $(SYSTEM_INCLUDES)))],
+      "includePath": [$(call json_list,$(MY_INCLUDES))],
       "defines": [$(call json_list,$(DEFINES))],
       "cStandard": "c99",
       "intelliSenseMode": "$${default}",
@@ -376,7 +375,7 @@ VSCODE_DIR=$(PROJECT_DIR)/.vscode
 VSCODE_CFG=$(VSCODE_DIR)/c_cpp_properties.json
 
 config_vscode: |$(VSCODE_DIR)
-	@echo "Creating or replacing $(VSCODE_CFG) $(file > $(VSCODE_CFG),$(vscode_config))"
+	@echo "Creating or replacing $(VSCODE_CFG) $(file > $(VSCODE_CFG),$(vscode_c_config))"
 
 $(VSCODE_DIR):
 	QUIET mkdir -p $(VSCODE_DIR) 
