@@ -364,7 +364,7 @@ define vscode_c_config
       "defines": [$(call json_list,$(DEFINES))],
       "cStandard": "c99",
       "intelliSenseMode": "$${default}",
-      "compilerPath":"$(subst \,\\,$(shell gcc -v 2>&1 | awk '/COLLECT_GCC=/ {sub(/[^=]+=/,"");print}'))"
+      "compilerPath":"$(subst \,\\,$(shell $(CC) -v 2>&1 | awk '/COLLECT_GCC=/ {sub(/[^=]+=/,"");print}'))"
     }
   ],
   "version": 4
