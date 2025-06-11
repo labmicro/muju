@@ -269,8 +269,6 @@ DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH) $(RTOS)
 TARGET_NAME ?= $(BIN_DIR)/$(PROJECT_NAME)
 TARGET_ELF = $(TARGET_NAME).$(LD_EXTENSION)
 
--include $(patsubst %.o,%.d,$(PROJECT_OBJ))
-
 ##################################################################################################
 #
 PROJECT_OBJ += $(call objects_list,$(PROJECT_SRC),c)
@@ -278,6 +276,9 @@ $(foreach path,$(PROJECT_SRC),$(eval $(call c_compiler_rule,$(path),$($1_INC),$(
 
 PROJECT_OBJ += $(call objects_list,$(PROJECT_SRC),s)
 $(foreach path,$(PROJECT_SRC),$(eval $(call assembler_rule,$(path),$($1_INC),$(OBJ_DIR)/$(call short_path,$(path)))))
+
+# Load project compile dependencies if present (must be placed after PROJECT_OBJ is completely defined)
+-include $(patsubst %.o,%.d,$(PROJECT_OBJ))
 
 ##################################################################################################
 $(TARGET_ELF): $(PROJECT_LIB) $(PROJECT_OBJ)
