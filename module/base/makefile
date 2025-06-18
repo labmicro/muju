@@ -345,3 +345,47 @@ info:
 	@echo Objetos: $(PROJECT_OBJ)
 	@echo -------------------------------------------------------------------------------
 	@echo Definciones: $(DEFINES)
+
+##################################################################################################
+#
+define NEWLINE
+
+
+endef
+COMMA := ,
+EMPTY :=
+SPACE := $(EMPTY) $(EMPTY)
+TAB := $(SPACE)$(SPACE)$(SPACE)$(SPACE)
+INDENT := $(COMMA)\n$(TAB)$(TAB)$(TAB)$(TAB)
+
+define json_list
+$(subst $(SPACE),$(INDENT),$(strip $(foreach w,$1,"$w")))
+endef
+
+VSCODE_INCLUDES = $(strip $(foreach p,$(PROJECT_INC),$(subst $(abspath $(PROJECT_DIR)),$(PROJECT_DIR),$(call full_path,$(p)))))
+
+define vscode_c_config
+{
+    "configurations": [
+        {
+            "name": "MUJU",
+            "includePath": [$(call json_list,$(VSCODE_INCLUDES))],
+            "defines": [$(call json_list,$(DEFINES))],
+            "cStandard": "c99",
+            "intelliSenseMode": "$${default}",
+            "compilerPath":"$(subst \,\\,$(shell $(CC) -v 2>&1 | awk '/COLLECT_GCC=/ {sub(/[^=]+=/,"");print}'))"
+        }
+    ],
+	"version": 4
+}
+endef
+
+VSCODE_DIR=$(PROJECT_DIR)/.vscode
+VSCODE_CFG=$(VSCODE_DIR)/c_cpp_properties.json
+
+vscode: |$(VSCODE_DIR)
+	@echo "Creating or replacing $(VSCODE_CFG)"
+	@echo '$(subst $(NEWLINE),\n,${vscode_c_config})' > $(VSCODE_CFG)
+
+$(VSCODE_DIR):
+	-@mkdir -p $(VSCODE_DIR)
