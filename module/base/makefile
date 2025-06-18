@@ -269,8 +269,6 @@ DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH) $(RTOS)
 TARGET_NAME ?= $(BIN_DIR)/$(PROJECT_NAME)
 TARGET_ELF = $(TARGET_NAME).$(LD_EXTENSION)
 
--include $(patsubst %.o,%.d,$(PROJECT_OBJ))
-
 ##################################################################################################
 #
 PROJECT_OBJ += $(call objects_list,$(PROJECT_SRC),c)
@@ -278,6 +276,9 @@ $(foreach path,$(PROJECT_SRC),$(eval $(call c_compiler_rule,$(path),$($1_INC),$(
 
 PROJECT_OBJ += $(call objects_list,$(PROJECT_SRC),s)
 $(foreach path,$(PROJECT_SRC),$(eval $(call assembler_rule,$(path),$($1_INC),$(OBJ_DIR)/$(call short_path,$(path)))))
+
+# Load project compile dependencies if present (must be placed after PROJECT_OBJ is completely defined)
+-include $(patsubst %.o,%.d,$(PROJECT_OBJ))
 
 ##################################################################################################
 $(TARGET_ELF): $(PROJECT_LIB) $(PROJECT_OBJ)
@@ -344,3 +345,47 @@ info:
 	@echo Objetos: $(PROJECT_OBJ)
 	@echo -------------------------------------------------------------------------------
 	@echo Definciones: $(DEFINES)
+
+##################################################################################################
+#
+define NEWLINE
+
+
+endef
+COMMA := ,
+EMPTY :=
+SPACE := $(EMPTY) $(EMPTY)
+TAB := $(SPACE)$(SPACE)$(SPACE)$(SPACE)
+INDENT := $(COMMA)\n$(TAB)$(TAB)$(TAB)$(TAB)
+
+define json_list
+$(subst $(SPACE),$(INDENT),$(strip $(foreach w,$1,"$w")))
+endef
+
+VSCODE_INCLUDES = $(strip $(foreach p,$(PROJECT_INC),$(subst $(abspath $(PROJECT_DIR)),$(PROJECT_DIR),$(call full_path,$(p)))))
+
+define vscode_c_config
+{
+    "configurations": [
+        {
+            "name": "MUJU",
+            "includePath": [$(call json_list,$(VSCODE_INCLUDES))],
+            "defines": [$(call json_list,$(DEFINES))],
+            "cStandard": "c99",
+            "intelliSenseMode": "$${default}",
+            "compilerPath":"$(subst \,\\,$(shell $(CC) -v 2>&1 | awk '/COLLECT_GCC=/ {sub(/[^=]+=/,"");print}'))"
+        }
+    ],
+	"version": 4
+}
+endef
+
+VSCODE_DIR=$(PROJECT_DIR)/.vscode
+VSCODE_CFG=$(VSCODE_DIR)/c_cpp_properties.json
+
+vscode: |$(VSCODE_DIR)
+	@echo "Creating or replacing $(VSCODE_CFG)"
+	@echo '$(subst $(NEWLINE),\n,${vscode_c_config})' > $(VSCODE_CFG)
+
+$(VSCODE_DIR):
+	-@mkdir -p $(VSCODE_DIR)
