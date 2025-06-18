@@ -48,8 +48,8 @@ extern "C" {
 #if defined(USE_HAL)
 #define LED HAL_GPIO_PC13
 #elif defined(USE_DRIVERS)
-// #define LED_PORT GPIOC
-// #define LED_PIN  GPIO_PIN_3
+#define LED_PORT GPIOC
+#define LED_PIN  GPIO_PIN_3
 #endif
 
 /* === Public data type declarations =========================================================== */

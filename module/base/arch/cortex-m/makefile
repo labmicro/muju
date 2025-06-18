@@ -54,10 +54,10 @@ AFLAGS += -mthumb
 
 # Enable ARM Semihosting support
 $(if $(findstring ENABLE_ARM_SEMIHOSTING,$(DEFINES)),\
-$(eval SPECS = --specs=nano.specs --specs=rdimon.specs) \
+$(eval SPECS ?= --specs=nano.specs --specs=rdimon.specs) \
 $(eval LFLAGS += -l rdimon) \
 , \
-$(eval SPECS = --specs=nano.specs --specs=nosys.specs) \
+$(eval SPECS ?= --specs=nano.specs --specs=nosys.specs) \
 )
 
 # Linker flags
