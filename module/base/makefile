@@ -356,7 +356,7 @@ COMMA := ,
 EMPTY :=
 SPACE := $(EMPTY) $(EMPTY)
 TAB := $(SPACE)$(SPACE)$(SPACE)$(SPACE)
-INDENT := $(COMMA)\n$(TAB)$(TAB)$(TAB)$(TAB)
+INDENT := $(COMMA)$(NEWLINE)$(TAB)$(TAB)$(TAB)$(TAB)
 
 define json_list
 $(subst $(SPACE),$(INDENT),$(strip $(foreach w,$1,"$w")))
@@ -383,9 +383,18 @@ endef
 VSCODE_DIR=$(PROJECT_DIR)/.vscode
 VSCODE_CFG=$(VSCODE_DIR)/c_cpp_properties.json
 
+
 vscode: |$(VSCODE_DIR)
 	@echo "Creating or replacing $(VSCODE_CFG)"
-	@echo '$(subst $(NEWLINE),\n,${vscode_c_config})' > $(VSCODE_CFG)
+	@echo '$(subst $(NEWLINE),>>>>,$(subst ','\'',${vscode_c_config}))' | awk 'gsub(/>>>>/,"\n")' > $(VSCODE_CFG)
 
 $(VSCODE_DIR):
 	-@mkdir -p $(VSCODE_DIR)
+
+CLANGD_CONFIG_FILE = $(PROJECT_DIR)/compile_flags.txt
+
+CLANGD_CONFIG_CONTENT = $(patsubst %,-I%,$(VSCODE_INCLUDES)) $(patsubst %,-D%,$(DEFINES)) -Wall -Wextra -Wpedantic -std=c99
+
+clangd:
+	@echo "Creating or replacing $(CLANGD_CONFIG_FILE)"
+	@echo $(CLANGD_CONFIG_CONTENT) | tr ' ' '\n' >$(CLANGD_CONFIG_FILE)
