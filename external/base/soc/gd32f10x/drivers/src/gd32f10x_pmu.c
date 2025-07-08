@@ -12,6 +12,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -33,6 +34,29 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
@@ -103,7 +127,11 @@ void pmu_to_sleepmode(uint8_t sleepmodecmd)
 {
     /* clear sleepdeep bit of Cortex-M3 system control register */
     SCB->SCR &= ~((uint32_t)SCB_SCR_SLEEPDEEP_Msk);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* select WFI or WFE command to enter sleep mode */
     if(WFI_CMD == sleepmodecmd){
         __WFI();
@@ -119,7 +147,11 @@ void pmu_to_sleepmode(uint8_t sleepmodecmd)
       \arg        PMU_LDO_NORMAL: LDO work in normal power mode when pmu enter deepsleep mode
       \arg        PMU_LDO_LOWPOWER: LDO work in low power mode when pmu enter deepsleep mode
     \param[in]  deepsleepmodecmd:
+<<<<<<< HEAD
                 only one parameter can be selected which is shown as below: 
+=======
+                only one parameter can be selected which is shown as below:
+>>>>>>> origin/main
       \arg        WFI_CMD: use WFI command
       \arg        WFE_CMD: use WFE command
     \param[out] none
@@ -127,6 +159,7 @@ void pmu_to_sleepmode(uint8_t sleepmodecmd)
 */
 void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
 {
+<<<<<<< HEAD
     static uint32_t reg_snap[ 4 ];   
     /* clear stbmod and ldolp bits */
     PMU_CTL &= ~((uint32_t)(PMU_CTL_STBMOD | PMU_CTL_LDOLP));
@@ -134,6 +167,15 @@ void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
     /* set ldolp bit according to pmu_ldo */
     PMU_CTL |= ldo;
     
+=======
+    static uint32_t reg_snap[ 4 ];
+    /* clear stbmod and ldolp bits */
+    PMU_CTL &= ~((uint32_t)(PMU_CTL_STBMOD | PMU_CTL_LDOLP));
+
+    /* set ldolp bit according to pmu_ldo */
+    PMU_CTL |= ldo;
+
+>>>>>>> origin/main
     /* set sleepdeep bit of Cortex-M3 system control register */
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
@@ -141,12 +183,20 @@ void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
     reg_snap[1] = REG32(0xE000E100U);
     reg_snap[2] = REG32(0xE000E104U);
     reg_snap[3] = REG32(0xE000E108U);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     REG32(0xE000E010U) &= 0x00010004U;
     REG32(0xE000E180U)  = 0XFF7FF83DU;
     REG32(0xE000E184U)  = 0XBFFFF8FFU;
     REG32(0xE000E188U)  = 0xFFFFFFFFU;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* select WFI or WFE command to enter deepsleep mode */
     if(WFI_CMD == deepsleepmodecmd){
         __WFI();
@@ -156,10 +206,17 @@ void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
         __WFE();
     }
 
+<<<<<<< HEAD
     REG32(0xE000E010U) = reg_snap[0] ; 
     REG32(0xE000E100U) = reg_snap[1] ;
     REG32(0xE000E104U) = reg_snap[2] ;
     REG32(0xE000E108U) = reg_snap[3] ;  
+=======
+    REG32(0xE000E010U) = reg_snap[0] ;
+    REG32(0xE000E100U) = reg_snap[1] ;
+    REG32(0xE000E104U) = reg_snap[2] ;
+    REG32(0xE000E108U) = reg_snap[3] ;
+>>>>>>> origin/main
 
     /* reset sleepdeep bit of Cortex-M3 system control register */
     SCB->SCR &= ~((uint32_t)SCB_SCR_SLEEPDEEP_Msk);

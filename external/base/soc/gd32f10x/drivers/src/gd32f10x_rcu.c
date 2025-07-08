@@ -11,6 +11,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -32,6 +33,29 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
@@ -277,7 +301,11 @@ void rcu_bkp_reset_disable(void)
 void rcu_system_clock_source_config(uint32_t ck_sys)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG0;
     /* reset the SCS bits and set according to ck_sys */
     reg &= ~RCU_CFG0_SCS;
@@ -309,7 +337,11 @@ uint32_t rcu_system_clock_source_get(void)
 void rcu_ahb_clock_config(uint32_t ck_ahb)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG0;
 
     /* reset the AHBPSC bits and set according to ck_ahb */
@@ -332,7 +364,11 @@ void rcu_ahb_clock_config(uint32_t ck_ahb)
 void rcu_apb1_clock_config(uint32_t ck_apb1)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG0;
 
     /* reset the APB1PSC and set according to ck_apb1 */
@@ -355,7 +391,11 @@ void rcu_apb1_clock_config(uint32_t ck_apb1)
 void rcu_apb2_clock_config(uint32_t ck_apb2)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG0;
 
     /* reset the APB2PSC and set according to ck_apb2 */
@@ -382,7 +422,11 @@ void rcu_apb2_clock_config(uint32_t ck_apb2)
 void rcu_ckout0_config(uint32_t ckout0_src)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG0;
 
     /* reset the CKOUT0SRC, set according to ckout0_src */
@@ -391,7 +435,11 @@ void rcu_ckout0_config(uint32_t ckout0_src)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure the main PLL clock 
+=======
+    \brief      configure the main PLL clock
+>>>>>>> origin/main
     \param[in]  pll_src: PLL clock source selection
                 only one parameter can be selected which is shown as below:
       \arg        RCU_PLLSRC_IRC8M_DIV2: IRC8M/2 clock selected as source clock of PLL
@@ -454,7 +502,11 @@ void rcu_predv0_config(uint32_t predv0_div)
 void rcu_predv0_config(uint32_t predv0_source, uint32_t predv0_div)
 {
     uint32_t reg = 0U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG1;
     /* reset PREDV0SEL and PREDV0 bits */
     reg &= ~(RCU_CFG1_PREDV0SEL | RCU_CFG1_PREDV0);
@@ -475,7 +527,11 @@ void rcu_predv0_config(uint32_t predv0_source, uint32_t predv0_div)
 void rcu_predv1_config(uint32_t predv1_div)
 {
     uint32_t reg = 0U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG1;
     /* reset the PREDV1 bits */
     reg &= ~RCU_CFG1_PREDV1;
@@ -486,7 +542,11 @@ void rcu_predv1_config(uint32_t predv1_div)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure the PLL1 clock 
+=======
+    \brief      configure the PLL1 clock
+>>>>>>> origin/main
     \param[in]  pll_mul: PLL clock multiplication factor
                 only one parameter can be selected which is shown as below:
       \arg        RCU_PLL1_MULx (x = 8..16, 20)
@@ -500,7 +560,11 @@ void rcu_pll1_config(uint32_t pll_mul)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure the PLL2 clock 
+=======
+    \brief      configure the PLL2 clock
+>>>>>>> origin/main
     \param[in]  pll_mul: PLL clock multiplication factor
                 only one parameter can be selected which is shown as below:
       \arg        RCU_PLL2_MULx (x = 8..16, 20)
@@ -510,7 +574,11 @@ void rcu_pll1_config(uint32_t pll_mul)
 void rcu_pll2_config(uint32_t pll_mul)
 {
     RCU_CFG1 &= ~RCU_CFG1_PLL2MF;
+<<<<<<< HEAD
     RCU_CFG1 |= pll_mul; 
+=======
+    RCU_CFG1 |= pll_mul;
+>>>>>>> origin/main
 }
 #endif /* GD32F10X_MD and GD32F10X_HD and GD32F10X_XD */
 
@@ -572,7 +640,11 @@ void rcu_adc_clock_config(uint32_t adc_psc)
 void rcu_usb_clock_config(uint32_t usb_psc)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CFG0;
 
     /* configure the USBD/USBFS prescaler factor */
@@ -599,8 +671,13 @@ void rcu_usb_clock_config(uint32_t usb_psc)
 void rcu_rtc_clock_config(uint32_t rtc_clock_source)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
     reg = RCU_BDCTL; 
+=======
+
+    reg = RCU_BDCTL;
+>>>>>>> origin/main
     /* reset the RTCSRC bits and set according to rtc_clock_source */
     reg &= ~RCU_BDCTL_RTCSRC;
     RCU_BDCTL = (reg | rtc_clock_source);
@@ -619,8 +696,13 @@ void rcu_rtc_clock_config(uint32_t rtc_clock_source)
 void rcu_i2s1_clock_config(uint32_t i2s_clock_source)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
     reg = RCU_CFG1; 
+=======
+
+    reg = RCU_CFG1;
+>>>>>>> origin/main
     /* reset the I2S1SEL bit and set according to i2s_clock_source */
     reg &= ~RCU_CFG1_I2S1SEL;
     RCU_CFG1 = (reg | i2s_clock_source);
@@ -638,8 +720,13 @@ void rcu_i2s1_clock_config(uint32_t i2s_clock_source)
 void rcu_i2s2_clock_config(uint32_t i2s_clock_source)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
     reg = RCU_CFG1; 
+=======
+
+    reg = RCU_CFG1;
+>>>>>>> origin/main
     /* reset the I2S2SEL bit and set according to i2s_clock_source */
     reg &= ~RCU_CFG1_I2S2SEL;
     RCU_CFG1 = (reg | i2s_clock_source);
@@ -789,7 +876,11 @@ ErrStatus rcu_osci_stab_wait(rcu_osci_type_enum osci)
     uint32_t stb_cnt = 0U;
     ErrStatus reval = ERROR;
     FlagStatus osci_stat = RESET;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     switch(osci){
     /* wait HXTAL stable */
     case RCU_HXTAL:
@@ -980,7 +1071,11 @@ void rcu_osci_bypass_mode_enable(rcu_osci_type_enum osci)
 void rcu_osci_bypass_mode_disable(rcu_osci_type_enum osci)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     switch(osci){
     /* disable HXTAL to bypass mode */
     case RCU_HXTAL:
@@ -1039,7 +1134,11 @@ void rcu_hxtal_clock_monitor_disable(void)
 void rcu_irc8m_adjust_value_set(uint8_t irc8m_adjval)
 {
     uint32_t reg;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     reg = RCU_CTL;
     /* reset the IRC8MADJ bits and set according to irc8m_adjval */
     reg &= ~RCU_CTL_IRC8MADJ;
@@ -1058,7 +1157,11 @@ void rcu_irc8m_adjust_value_set(uint8_t irc8m_adjval)
     \retval     none
 */
 void rcu_deepsleep_voltage_set(uint32_t dsvol)
+<<<<<<< HEAD
 {    
+=======
+{
+>>>>>>> origin/main
     dsvol &= RCU_DSV_DSLPVS;
     RCU_DSV = dsvol;
 }
@@ -1163,17 +1266,29 @@ uint32_t rcu_clock_freq_get(rcu_clock_freq_enum clock)
     idx = GET_BITS(RCU_CFG0, 4, 7);
     clk_exp = ahb_exp[idx];
     ahb_freq = cksys_freq >> clk_exp;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* calculate APB1 clock frequency */
     idx = GET_BITS(RCU_CFG0, 8, 10);
     clk_exp = apb1_exp[idx];
     apb1_freq = ahb_freq >> clk_exp;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* calculate APB2 clock frequency */
     idx = GET_BITS(RCU_CFG0, 11, 13);
     clk_exp = apb2_exp[idx];
     apb2_freq = ahb_freq >> clk_exp;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* return the clocks frequency */
     switch(clock){
     case CK_SYS:

@@ -506,7 +506,11 @@ uint16_t spi_crc_polynomial_get(uint32_t spi_periph)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      turn on SPI CRC function 
+=======
+    \brief      turn on SPI CRC function
+>>>>>>> origin/main
     \param[in]  spi_periph: SPIx(x=0,1,2)
     \param[out] none
     \retval     none

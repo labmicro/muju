@@ -11,6 +11,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -32,6 +33,29 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
@@ -311,7 +335,11 @@ void timer_counter_down_direction(uint32_t timer_periph)
 void timer_prescaler_config(uint32_t timer_periph, uint16_t prescaler, uint32_t pscreload)
 {
     TIMER_PSC(timer_periph) = (uint32_t)prescaler;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     if(TIMER_PSC_RELOAD_NOW == pscreload){
         TIMER_SWEVG(timer_periph) |= (uint32_t)TIMER_SWEVG_UPG;
     }
@@ -327,15 +355,24 @@ void timer_prescaler_config(uint32_t timer_periph, uint16_t prescaler, uint32_t 
 void timer_repetition_value_config(uint32_t timer_periph, uint8_t repetition)
 {
     TIMER_CREP(timer_periph) = (uint32_t)repetition;
+<<<<<<< HEAD
 } 
  
+=======
+}
+
+>>>>>>> origin/main
 /*!
     \brief      configure TIMER autoreload register value
     \param[in]  timer_periph: TIMERx(x=0..13)
     \param[in]  autoreload: the counter auto-reload value
     \param[out] none
     \retval     none
+<<<<<<< HEAD
 */         
+=======
+*/
+>>>>>>> origin/main
 void timer_autoreload_value_config(uint32_t timer_periph, uint32_t autoreload)
 {
     TIMER_CAR(timer_periph) = (uint32_t)autoreload;
@@ -347,7 +384,11 @@ void timer_autoreload_value_config(uint32_t timer_periph, uint32_t autoreload)
     \param[in]  counter: the counter value
     \param[out] none
     \retval     none
+<<<<<<< HEAD
 */         
+=======
+*/
+>>>>>>> origin/main
 void timer_counter_value_config(uint32_t timer_periph, uint32_t counter)
 {
     TIMER_CNT(timer_periph) = (uint32_t)counter;
@@ -358,7 +399,11 @@ void timer_counter_value_config(uint32_t timer_periph, uint32_t counter)
     \param[in]  timer_periph: TIMERx(x=0..13)
     \param[out] none
     \retval     counter value
+<<<<<<< HEAD
 */         
+=======
+*/
+>>>>>>> origin/main
 uint32_t timer_counter_read(uint32_t timer_periph)
 {
     uint32_t count_value = 0U;
@@ -371,7 +416,11 @@ uint32_t timer_counter_read(uint32_t timer_periph)
     \param[in]  timer_periph: TIMERx(x=0..13)
     \param[out] none
     \retval     prescaler register value
+<<<<<<< HEAD
 */         
+=======
+*/
+>>>>>>> origin/main
 uint16_t timer_prescaler_read(uint32_t timer_periph)
 {
     uint16_t prescaler_value = 0U;
@@ -396,12 +445,20 @@ void timer_single_pulse_mode_config(uint32_t timer_periph, uint32_t spmode)
     }else if(TIMER_SP_MODE_REPETITIVE == spmode){
         TIMER_CTL0(timer_periph) &= ~((uint32_t)TIMER_CTL0_SPM);
     }else{
+<<<<<<< HEAD
         /* illegal parameters */        
+=======
+        /* illegal parameters */
+>>>>>>> origin/main
     }
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure TIMER update source 
+=======
+    \brief      configure TIMER update source
+>>>>>>> origin/main
     \param[in]  timer_periph: TIMERx(x=0..13)
     \param[in]  update:
                 only one parameter can be selected which is shown as below:
@@ -439,7 +496,11 @@ void timer_update_source_config(uint32_t timer_periph, uint32_t update)
 */
 void timer_dma_enable(uint32_t timer_periph, uint16_t dma)
 {
+<<<<<<< HEAD
     TIMER_DMAINTEN(timer_periph) |= (uint32_t) dma; 
+=======
+    TIMER_DMAINTEN(timer_periph) |= (uint32_t) dma;
+>>>>>>> origin/main
 }
 
 /*!
@@ -459,7 +520,11 @@ void timer_dma_enable(uint32_t timer_periph, uint16_t dma)
 */
 void timer_dma_disable(uint32_t timer_periph, uint16_t dma)
 {
+<<<<<<< HEAD
     TIMER_DMAINTEN(timer_periph) &= (~(uint32_t)(dma)); 
+=======
+    TIMER_DMAINTEN(timer_periph) &= (~(uint32_t)(dma));
+>>>>>>> origin/main
 }
 
 /*!
@@ -468,7 +533,11 @@ void timer_dma_disable(uint32_t timer_periph, uint16_t dma)
     \param[in]  dma_request: channel DMA request source selection
                 only one parameter can be selected which is shown as below:
        \arg        TIMER_DMAREQUEST_CHANNELEVENT: DMA request of channel y is sent when channel y event occurs
+<<<<<<< HEAD
        \arg        TIMER_DMAREQUEST_UPDATEEVENT: DMA request of channel y is sent when update event occurs 
+=======
+       \arg        TIMER_DMAREQUEST_UPDATEEVENT: DMA request of channel y is sent when update event occurs
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -479,7 +548,11 @@ void timer_channel_dma_request_source_select(uint32_t timer_periph, uint32_t dma
     }else if(TIMER_DMAREQUEST_CHANNELEVENT == dma_request){
         TIMER_CTL1(timer_periph) &= ~(uint32_t)TIMER_CTL1_DMAS;
     }else{
+<<<<<<< HEAD
         /* illegal parameters */        
+=======
+        /* illegal parameters */
+>>>>>>> origin/main
     }
 }
 
@@ -520,16 +593,28 @@ void timer_dma_transfer_config(uint32_t timer_periph, uint32_t dma_baseaddr, uin
 }
 
 /*!
+<<<<<<< HEAD
     \brief      software generate events 
+=======
+    \brief      software generate events
+>>>>>>> origin/main
     \param[in]  timer_periph: please refer to the following parameters
     \param[in]  event: the timer software event generation sources
                 one or more parameters can be selected which are shown as below:
       \arg        TIMER_EVENT_SRC_UPG: update event generation, TIMERx(x=0..13)
+<<<<<<< HEAD
       \arg        TIMER_EVENT_SRC_CH0G: channel 0 capture or compare event generation, TIMERx(x=0..4,7..13) 
       \arg        TIMER_EVENT_SRC_CH1G: channel 1 capture or compare event generation, TIMERx(x=0..4,7,8,11)
       \arg        TIMER_EVENT_SRC_CH2G: channel 2 capture or compare event generation, TIMERx(x=0..4,7) 
       \arg        TIMER_EVENT_SRC_CH3G: channel 3 capture or compare event generation, TIMERx(x=0..4,7) 
       \arg        TIMER_EVENT_SRC_CMTG: channel commutation event generation, TIMERx(x=0,7) 
+=======
+      \arg        TIMER_EVENT_SRC_CH0G: channel 0 capture or compare event generation, TIMERx(x=0..4,7..13)
+      \arg        TIMER_EVENT_SRC_CH1G: channel 1 capture or compare event generation, TIMERx(x=0..4,7,8,11)
+      \arg        TIMER_EVENT_SRC_CH2G: channel 2 capture or compare event generation, TIMERx(x=0..4,7)
+      \arg        TIMER_EVENT_SRC_CH3G: channel 3 capture or compare event generation, TIMERx(x=0..4,7)
+      \arg        TIMER_EVENT_SRC_CMTG: channel commutation event generation, TIMERx(x=0,7)
+>>>>>>> origin/main
       \arg        TIMER_EVENT_SRC_TRGG: trigger event generation, TIMERx(x=0..4,7,8,11)
       \arg        TIMER_EVENT_SRC_BRKG:  break event generation, TIMERx(x=0,7)
     \param[out] none
@@ -559,7 +644,11 @@ void timer_break_struct_para_init(timer_break_parameter_struct* breakpara)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure TIMER break function 
+=======
+    \brief      configure TIMER break function
+>>>>>>> origin/main
     \param[in]  timer_periph: TIMERx(x=0,7)
     \param[in]  breakpara: TIMER break parameter struct
                 runoffstate: TIMER_ROS_STATE_ENABLE,TIMER_ROS_STATE_DISABLE
@@ -644,9 +733,15 @@ void timer_primary_output_config(uint32_t timer_periph, ControlStatus newvalue)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      enable or disable channel capture/compare control shadow register 
     \param[in]  timer_periph: TIMERx(x=0,7)
     \param[in]  newvalue: ENABLE or DISABLE 
+=======
+    \brief      enable or disable channel capture/compare control shadow register
+    \param[in]  timer_periph: TIMERx(x=0,7)
+    \param[in]  newvalue: ENABLE or DISABLE
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -665,10 +760,17 @@ void timer_channel_control_shadow_config(uint32_t timer_periph, ControlStatus ne
     \param[in]  ccuctl: channel control shadow register update control
                 only one parameter can be selected which is shown as below:
       \arg        TIMER_UPDATECTL_CCU: the shadow registers update by when CMTG bit is set
+<<<<<<< HEAD
       \arg        TIMER_UPDATECTL_CCUTRI: the shadow registers update by when CMTG bit is set or an rising edge of TRGI occurs 
     \param[out] none
     \retval     none
 */              
+=======
+      \arg        TIMER_UPDATECTL_CCUTRI: the shadow registers update by when CMTG bit is set or an rising edge of TRGI occurs
+    \param[out] none
+    \retval     none
+*/
+>>>>>>> origin/main
 void timer_channel_control_shadow_update_config(uint32_t timer_periph, uint32_t ccuctl)
 {
     if(TIMER_UPDATECTL_CCU == ccuctl){
@@ -676,7 +778,11 @@ void timer_channel_control_shadow_update_config(uint32_t timer_periph, uint32_t 
     }else if(TIMER_UPDATECTL_CCUTRI == ccuctl){
         TIMER_CTL1(timer_periph) |= (uint32_t)TIMER_CTL1_CCUC;
     }else{
+<<<<<<< HEAD
         /* illegal parameters */        
+=======
+        /* illegal parameters */
+>>>>>>> origin/main
     }
 }
 
@@ -1056,7 +1162,11 @@ void timer_channel_output_clear_config(uint32_t timer_periph, uint16_t channel, 
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure TIMER channel output polarity 
+=======
+    \brief      configure TIMER channel output polarity
+>>>>>>> origin/main
     \param[in]  timer_periph: please refer to the following parameters
     \param[in]  channel:
                 only one parameter can be selected which is shown as below:
@@ -1100,14 +1210,22 @@ void timer_channel_output_polarity_config(uint32_t timer_periph, uint16_t channe
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure TIMER channel complementary output polarity 
+=======
+    \brief      configure TIMER channel complementary output polarity
+>>>>>>> origin/main
     \param[in]  timer_periph: please refer to the following parameters
     \param[in]  channel:
                 only one parameter can be selected which is shown as below:
       \arg        TIMER_CH_0: TIMER channel0(TIMERx(x=0..4,7..13))
       \arg        TIMER_CH_1: TIMER channel1(TIMERx(x=0..4,7,8,11))
       \arg        TIMER_CH_2: TIMER channel2(TIMERx(x=0..4,7))
+<<<<<<< HEAD
     \param[in]  ocnpolarity: channel complementary output polarity 
+=======
+    \param[in]  ocnpolarity: channel complementary output polarity
+>>>>>>> origin/main
                 only one parameter can be selected which is shown as below:
       \arg        TIMER_OCN_POLARITY_HIGH: channel complementary output polarity is high
       \arg        TIMER_OCN_POLARITY_LOW: channel complementary output polarity is low
@@ -1148,8 +1266,13 @@ void timer_channel_complementary_output_polarity_config(uint32_t timer_periph, u
       \arg        TIMER_CH_3: TIMER channel3(TIMERx(x=0..4,7))
     \param[in]  state: TIMER channel enable state
                 only one parameter can be selected which is shown as below:
+<<<<<<< HEAD
       \arg        TIMER_CCX_ENABLE: channel enable 
       \arg        TIMER_CCX_DISABLE: channel disable 
+=======
+      \arg        TIMER_CCX_ENABLE: channel enable
+      \arg        TIMER_CCX_DISABLE: channel disable
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -1191,8 +1314,13 @@ void timer_channel_output_state_config(uint32_t timer_periph, uint16_t channel, 
       \arg        TIMER_CH_2: TIMER channel2
     \param[in]  ocnstate: TIMER channel complementary output enable state
                 only one parameter can be selected which is shown as below:
+<<<<<<< HEAD
       \arg        TIMER_CCXN_ENABLE: channel complementary enable 
       \arg        TIMER_CCXN_DISABLE: channel complementary disable 
+=======
+      \arg        TIMER_CCXN_ENABLE: channel complementary enable
+      \arg        TIMER_CCXN_DISABLE: channel complementary disable
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -1235,10 +1363,17 @@ void timer_channel_input_struct_para_init(timer_ic_parameter_struct* icpara)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure TIMER input capture parameter 
     \param[in]  timer_periph: please refer to the following parameters
     \param[in]  channel:
                 only one parameter can be selected which is shown as below: 
+=======
+    \brief      configure TIMER input capture parameter
+    \param[in]  timer_periph: please refer to the following parameters
+    \param[in]  channel:
+                only one parameter can be selected which is shown as below:
+>>>>>>> origin/main
       \arg        TIMER_CH_0: TIMER channel 0(TIMERx(x=0..4,7..13))
       \arg        TIMER_CH_1: TIMER channel 1(TIMERx(x=0..4,7,8,11))
       \arg        TIMER_CH_2: TIMER channel 2(TIMERx(x=0..4,7))
@@ -1274,7 +1409,11 @@ void timer_input_capture_config(uint32_t timer_periph, uint16_t channel, timer_i
         /* set the CH0EN bit */
         TIMER_CHCTL2(timer_periph) |= (uint32_t)TIMER_CHCTL2_CH0EN;
         break;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* configure TIMER_CH_1 */
     case TIMER_CH_1:
         /* reset the CH1EN bit */
@@ -1426,7 +1565,11 @@ uint32_t timer_channel_capture_value_register_read(uint32_t timer_periph, uint16
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure TIMER input pwm capture function 
+=======
+    \brief      configure TIMER input pwm capture function
+>>>>>>> origin/main
     \param[in]  timer_periph: TIMERx(x=0..4,7,8,11)
     \param[in]  channel:
                 only one parameter can be selected which is shown as below:
@@ -1547,19 +1690,31 @@ void timer_input_pwm_capture_config(uint32_t timer_periph, uint16_t channel, tim
     \param[out] none
     \retval     none
 */
+<<<<<<< HEAD
 void timer_hall_mode_config(uint32_t timer_periph, uint32_t hallmode)    
+=======
+void timer_hall_mode_config(uint32_t timer_periph, uint32_t hallmode)
+>>>>>>> origin/main
 {
     if(TIMER_HALLINTERFACE_ENABLE == hallmode){
         TIMER_CTL1(timer_periph) |= (uint32_t)TIMER_CTL1_TI0S;
     }else if(TIMER_HALLINTERFACE_DISABLE == hallmode){
         TIMER_CTL1(timer_periph) &= ~(uint32_t)TIMER_CTL1_TI0S;
     }else{
+<<<<<<< HEAD
         /* illegal parameters */        
+=======
+        /* illegal parameters */
+>>>>>>> origin/main
     }
 }
 
 /*!
+<<<<<<< HEAD
     \brief      select TIMER input trigger source 
+=======
+    \brief      select TIMER input trigger source
+>>>>>>> origin/main
     \param[in]  timer_periph: please refer to the following parameters
     \param[in]  intrigger:
                 only one parameter can be selected which is shown as below:
@@ -1581,10 +1736,17 @@ void timer_input_trigger_source_select(uint32_t timer_periph, uint32_t intrigger
 }
 
 /*!
+<<<<<<< HEAD
     \brief      select TIMER master mode output trigger source 
     \param[in]  timer_periph: TIMERx(x=0..7)
     \param[in]  outrigger:
                 only one parameter can be selected which is shown as below: 
+=======
+    \brief      select TIMER master mode output trigger source
+    \param[in]  timer_periph: TIMERx(x=0..7)
+    \param[in]  outrigger:
+                only one parameter can be selected which is shown as below:
+>>>>>>> origin/main
       \arg        TIMER_TRI_OUT_SRC_RESET: the UPG bit as trigger output(TIMERx(x=0..7))
       \arg        TIMER_TRI_OUT_SRC_ENABLE: the counter enable signal TIMER_CTL0_CEN as trigger output(TIMERx(x=0..7))
       \arg        TIMER_TRI_OUT_SRC_UPDATE: update event as trigger output(TIMERx(x=0..7))
@@ -1603,7 +1765,11 @@ void timer_master_output_trigger_source_select(uint32_t timer_periph, uint32_t o
 }
 
 /*!
+<<<<<<< HEAD
     \brief      select TIMER slave mode 
+=======
+    \brief      select TIMER slave mode
+>>>>>>> origin/main
     \param[in]  timer_periph: TIMERx(x=0..4,7,8,11)
     \param[in]  slavemode:
                 only one parameter can be selected which is shown as below:
@@ -1627,7 +1793,11 @@ void timer_slave_mode_select(uint32_t timer_periph, uint32_t slavemode)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure TIMER master slave mode 
+=======
+    \brief      configure TIMER master slave mode
+>>>>>>> origin/main
     \param[in]  timer_periph: TIMERx(x=0..4,7,8,11)
     \param[in]  masterslave:
                 only one parameter can be selected which is shown as below:
@@ -1635,7 +1805,11 @@ void timer_slave_mode_select(uint32_t timer_periph, uint32_t slavemode)
       \arg        TIMER_MASTER_SLAVE_MODE_DISABLE: master slave mode disable
     \param[out] none
     \retval     none
+<<<<<<< HEAD
 */ 
+=======
+*/
+>>>>>>> origin/main
 void timer_master_slave_mode_config(uint32_t timer_periph, uint32_t masterslave)
 {
     if(TIMER_MASTER_SLAVE_MODE_ENABLE == masterslave){
@@ -1643,7 +1817,11 @@ void timer_master_slave_mode_config(uint32_t timer_periph, uint32_t masterslave)
     }else if(TIMER_MASTER_SLAVE_MODE_DISABLE == masterslave){
         TIMER_SMCFG(timer_periph) &= ~(uint32_t)TIMER_SMCFG_MSM;
     }else{
+<<<<<<< HEAD
         /* illegal parameters */        
+=======
+        /* illegal parameters */
+>>>>>>> origin/main
     }
 }
 
@@ -1718,7 +1896,11 @@ void timer_internal_clock_config(uint32_t timer_periph)
 /*!
     \brief      configure TIMER the internal trigger as external clock input
     \param[in]  timer_periph: TIMERx(x=0..4,7,8,11)
+<<<<<<< HEAD
     \param[in]  intrigger: 
+=======
+    \param[in]  intrigger:
+>>>>>>> origin/main
                 only one parameter can be selected which is shown as below:
       \arg        TIMER_SMCFG_TRGSEL_ITI0: internal trigger 0
       \arg        TIMER_SMCFG_TRGSEL_ITI1: internal trigger 1
@@ -1832,7 +2014,11 @@ void timer_external_clock_mode0_config(uint32_t timer_periph, uint32_t extpresca
       \arg        TIMER_EXT_TRI_PSC_DIV4: divided by 4
       \arg        TIMER_EXT_TRI_PSC_DIV8: divided by 8
     \param[in]  extpolarity:
+<<<<<<< HEAD
                 only one parameter can be selected which is shown as below:  
+=======
+                only one parameter can be selected which is shown as below:
+>>>>>>> origin/main
       \arg        TIMER_ETP_FALLING: active low or falling edge active
       \arg        TIMER_ETP_RISING: active high or rising edge active
     \param[in]  extfilter: a value between 0 and 15
@@ -1859,7 +2045,11 @@ void timer_external_clock_mode1_disable(uint32_t timer_periph)
 
 /*!
     \brief      enable the TIMER interrupt
+<<<<<<< HEAD
     \param[in]  timer_periph: please refer to the following parameters 
+=======
+    \param[in]  timer_periph: please refer to the following parameters
+>>>>>>> origin/main
     \param[in]  interrupt: timer interrupt enable source
                 only one parameter can be selected which is shown as below:
       \arg        TIMER_INT_UP: update interrupt enable, TIMERx(x=0..13)
@@ -1875,7 +2065,11 @@ void timer_external_clock_mode1_disable(uint32_t timer_periph)
 */
 void timer_interrupt_enable(uint32_t timer_periph, uint32_t interrupt)
 {
+<<<<<<< HEAD
     TIMER_DMAINTEN(timer_periph) |= (uint32_t) interrupt; 
+=======
+    TIMER_DMAINTEN(timer_periph) |= (uint32_t) interrupt;
+>>>>>>> origin/main
 }
 
 /*!
@@ -1896,7 +2090,11 @@ void timer_interrupt_enable(uint32_t timer_periph, uint32_t interrupt)
 */
 void timer_interrupt_disable(uint32_t timer_periph, uint32_t interrupt)
 {
+<<<<<<< HEAD
     TIMER_DMAINTEN(timer_periph) &= (~(uint32_t)interrupt); 
+=======
+    TIMER_DMAINTEN(timer_periph) &= (~(uint32_t)interrupt);
+>>>>>>> origin/main
 }
 
 /*!
@@ -1909,7 +2107,11 @@ void timer_interrupt_disable(uint32_t timer_periph, uint32_t interrupt)
       \arg        TIMER_INT_FLAG_CH1: channel 1 interrupt flag,TIMERx(x=0..4,7,8,11)
       \arg        TIMER_INT_FLAG_CH2: channel 2 interrupt flag,TIMERx(x=0..4,7)
       \arg        TIMER_INT_FLAG_CH3: channel 3 interrupt flag,TIMERx(x=0..4,7)
+<<<<<<< HEAD
       \arg        TIMER_INT_FLAG_CMT: channel commutation interrupt flag,TIMERx(x=0,7) 
+=======
+      \arg        TIMER_INT_FLAG_CMT: channel commutation interrupt flag,TIMERx(x=0,7)
+>>>>>>> origin/main
       \arg        TIMER_INT_FLAG_TRG: trigger interrupt flag,TIMERx(x=0,7,8,11)
       \arg        TIMER_INT_FLAG_BRK:  break interrupt flag,TIMERx(x=0,7)
     \param[out] none
@@ -1936,7 +2138,11 @@ FlagStatus timer_interrupt_flag_get(uint32_t timer_periph, uint32_t interrupt)
       \arg        TIMER_INT_FLAG_CH1: channel 1 interrupt flag,TIMERx(x=0..4,7,8,11)
       \arg        TIMER_INT_FLAG_CH2: channel 2 interrupt flag,TIMERx(x=0..4,7)
       \arg        TIMER_INT_FLAG_CH3: channel 3 interrupt flag,TIMERx(x=0..4,7)
+<<<<<<< HEAD
       \arg        TIMER_INT_FLAG_CMT: channel commutation interrupt flag,TIMERx(x=0,7) 
+=======
+      \arg        TIMER_INT_FLAG_CMT: channel commutation interrupt flag,TIMERx(x=0,7)
+>>>>>>> origin/main
       \arg        TIMER_INT_FLAG_TRG: trigger interrupt flag,TIMERx(x=0,7,8,11)
       \arg        TIMER_INT_FLAG_BRK:  break interrupt flag,TIMERx(x=0,7)
     \param[out] none
@@ -1957,8 +2163,13 @@ void timer_interrupt_flag_clear(uint32_t timer_periph, uint32_t interrupt)
       \arg        TIMER_FLAG_CH1: channel 1 flag,TIMERx(x=0..4,7,8,11)
       \arg        TIMER_FLAG_CH2: channel 2 flag,TIMERx(x=0..4,7)
       \arg        TIMER_FLAG_CH3: channel 3 flag,TIMERx(x=0..4,7)
+<<<<<<< HEAD
       \arg        TIMER_FLAG_CMT: channel commutation flag,TIMERx(x=0,7) 
       \arg        TIMER_FLAG_TRG: trigger flag,TIMERx(x=0,7,8,11) 
+=======
+      \arg        TIMER_FLAG_CMT: channel commutation flag,TIMERx(x=0,7)
+      \arg        TIMER_FLAG_TRG: trigger flag,TIMERx(x=0,7,8,11)
+>>>>>>> origin/main
       \arg        TIMER_FLAG_BRK: break flag,TIMERx(x=0,7)
       \arg        TIMER_FLAG_CH0O: channel 0 overcapture flag,TIMERx(x=0..4,7..11)
       \arg        TIMER_FLAG_CH1O: channel 1 overcapture flag,TIMERx(x=0..4,7,8,11)
@@ -1986,8 +2197,13 @@ FlagStatus timer_flag_get(uint32_t timer_periph, uint32_t flag)
       \arg        TIMER_FLAG_CH1: channel 1 flag,TIMERx(x=0..4,7,8,11)
       \arg        TIMER_FLAG_CH2: channel 2 flag,TIMERx(x=0..4,7)
       \arg        TIMER_FLAG_CH3: channel 3 flag,TIMERx(x=0..4,7)
+<<<<<<< HEAD
       \arg        TIMER_FLAG_CMT: channel control update flag,TIMERx(x=0,7) 
       \arg        TIMER_FLAG_TRG: trigger flag,TIMERx(x=0,7,8,11) 
+=======
+      \arg        TIMER_FLAG_CMT: channel control update flag,TIMERx(x=0,7)
+      \arg        TIMER_FLAG_TRG: trigger flag,TIMERx(x=0,7,8,11)
+>>>>>>> origin/main
       \arg        TIMER_FLAG_BRK: break flag,TIMERx(x=0,7)
       \arg        TIMER_FLAG_CH0O: channel 0 overcapture flag,TIMERx(x=0..4,7..11)
       \arg        TIMER_FLAG_CH1O: channel 1 overcapture flag,TIMERx(x=0..4,7,8,11)

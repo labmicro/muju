@@ -1,7 +1,11 @@
 /*!
     \file    gd32f10x_gpio.c
     \brief   GPIO driver
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     \version 2014-12-26, V1.0.0, firmware for GD32F10x
     \version 2017-06-20, V2.0.0, firmware for GD32F10x
     \version 2018-07-31, V2.1.0, firmware for GD32F10x
@@ -11,6 +15,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -32,12 +37,39 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
 #include "gd32f10x_gpio.h"
 
+<<<<<<< HEAD
 #define AFIO_EXTI_SOURCE_MASK              ((uint8_t)0x03U)         /*!< AFIO exti source selection mask*/  
+=======
+#define AFIO_EXTI_SOURCE_MASK              ((uint8_t)0x03U)         /*!< AFIO exti source selection mask*/
+>>>>>>> origin/main
 #define AFIO_EXTI_SOURCE_FIELDS            ((uint8_t)0x04U)         /*!< select AFIO exti source registers */
 #define LSB_16BIT_MASK                     ((uint16_t)0xFFFFU)      /*!< LSB 16-bit mask */
 #define PCF_POSITION_MASK                  ((uint32_t)0x000F0000U)  /*!< AFIO_PCF register position mask */
@@ -110,7 +142,11 @@ void gpio_afio_deinit(void)
 
 /*!
     \brief      GPIO parameter initialization
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  mode: gpio pin mode
                 only one parameter can be selected which is shown as below:
       \arg        GPIO_MODE_AIN: analog input mode
@@ -141,7 +177,11 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
 
     /* GPIO mode configuration */
     temp_mode = (uint32_t)(mode & ((uint32_t)0x0FU));
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* GPIO speed configuration */
     if(((uint32_t)0x00U) != ((uint32_t)mode & ((uint32_t)0x10U))){
             /* output mode max speed:10MHz,2MHz,50MHz */
@@ -152,12 +192,20 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
     for(i = 0U;i < 8U;i++){
         if((1U << i) & pin){
             reg = GPIO_CTL0(gpio_periph);
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> origin/main
             /* clear the specified pin mode bits */
             reg &= ~GPIO_MODE_MASK(i);
             /* set the specified pin mode bits */
             reg |= GPIO_MODE_SET(i, temp_mode);
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> origin/main
             /* set IPD or IPU */
             if(GPIO_MODE_IPD == mode){
                 /* reset the corresponding OCTL bit */
@@ -176,12 +224,20 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
     for(i = 8U;i < 16U;i++){
         if((1U << i) & pin){
             reg = GPIO_CTL1(gpio_periph);
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> origin/main
             /* clear the specified pin mode bits */
             reg &= ~GPIO_MODE_MASK(i - 8U);
             /* set the specified pin mode bits */
             reg |= GPIO_MODE_SET(i - 8U, temp_mode);
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> origin/main
             /* set IPD or IPU */
             if(GPIO_MODE_IPD == mode){
                 /* reset the corresponding OCTL bit */
@@ -200,7 +256,11 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
 
 /*!
     \brief      set GPIO pin
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  pin: GPIO pin
                 one or more parameters can be selected which are shown as below:
       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
@@ -214,7 +274,11 @@ void gpio_bit_set(uint32_t gpio_periph, uint32_t pin)
 
 /*!
     \brief      reset GPIO pin
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  pin: GPIO pin
                 one or more parameters can be selected which are shown as below:
       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
@@ -228,7 +292,11 @@ void gpio_bit_reset(uint32_t gpio_periph, uint32_t pin)
 
 /*!
     \brief      write data to the specified GPIO pin
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  pin: GPIO pin
                 one or more parameters can be selected which are shown as below:
       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
@@ -249,7 +317,11 @@ void gpio_bit_write(uint32_t gpio_periph, uint32_t pin, bit_status bit_value)
 
 /*!
     \brief      write data to the specified GPIO port
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  data: specify the value to be written to the port output data register
     \param[out] none
     \retval     none
@@ -261,7 +333,11 @@ void gpio_port_write(uint32_t gpio_periph,uint16_t data)
 
 /*!
     \brief      get GPIO pin input status
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  pin: GPIO pin
                 one or more parameters can be selected which are shown as below:
       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
@@ -271,7 +347,11 @@ void gpio_port_write(uint32_t gpio_periph,uint16_t data)
 FlagStatus gpio_input_bit_get(uint32_t gpio_periph,uint32_t pin)
 {
     if((uint32_t)RESET != (GPIO_ISTAT(gpio_periph)&(pin))){
+<<<<<<< HEAD
         return SET; 
+=======
+        return SET;
+>>>>>>> origin/main
     }else{
         return RESET;
     }
@@ -279,7 +359,11 @@ FlagStatus gpio_input_bit_get(uint32_t gpio_periph,uint32_t pin)
 
 /*!
     \brief      get GPIO port input status
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[out] none
     \retval     input status of gpio all pins
 */
@@ -290,7 +374,11 @@ uint16_t gpio_input_port_get(uint32_t gpio_periph)
 
 /*!
     \brief      get GPIO pin output status
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  pin: GPIO pin
                 one or more parameters can be selected which are shown as below:
       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL
@@ -308,7 +396,11 @@ FlagStatus gpio_output_bit_get(uint32_t gpio_periph, uint32_t pin)
 
 /*!
     \brief      get GPIO port output status
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[out] none
     \retval     output status of gpio all pins
 */
@@ -326,7 +418,11 @@ uint16_t gpio_output_port_get(uint32_t gpio_periph)
       \arg        GPIO_USART1_REMAP: USART1 remapping
       \arg        GPIO_USART2_PARTIAL_REMAP: USART2 partial remapping
       \arg        GPIO_USART2_FULL_REMAP: USART2 full remapping
+<<<<<<< HEAD
       \arg        GPIO_TIMER0_PARTIAL_REMAP: TIMER0 partial remapping 
+=======
+      \arg        GPIO_TIMER0_PARTIAL_REMAP: TIMER0 partial remapping
+>>>>>>> origin/main
       \arg        GPIO_TIMER0_FULL_REMAP: TIMER0 full remapping
       \arg        GPIO_TIMER1_PARTIAL_REMAP1: TIMER1 partial remapping
       \arg        GPIO_TIMER1_PARTIAL_REMAP2: TIMER1 partial remapping
@@ -342,14 +438,24 @@ uint16_t gpio_output_port_get(uint32_t gpio_periph)
       \arg        GPIO_TIMER4CH3_IREMAP: TIMER4 channel3 internal remapping(only for GD32F10X_CL devices and GD32F10X_HD devices)
       \arg        GPIO_ADC0_ETRGRT_REMAP: ADC0 external trigger routine conversion remapping(only for GD32F10X_MD, GD32F10X_HD devices and GD32F10X_XD devices)
       \arg        GPIO_ADC1_ETRGRT_REMAP: ADC1 external trigger routine conversion remapping(only for GD32F10X_MD, GD32F10X_HD devices and GD32F10X_XD devices)
+<<<<<<< HEAD
       \arg        GPIO_ENET_REMAP: ENET remapping(only for GD32F10X_CL devices) 
+=======
+      \arg        GPIO_ENET_REMAP: ENET remapping(only for GD32F10X_CL devices)
+>>>>>>> origin/main
       \arg        GPIO_CAN1_REMAP: CAN1 remapping(only for GD32F10X_CL devices)
       \arg        GPIO_SWJ_NONJTRST_REMAP: full SWJ(JTAG-DP + SW-DP),but without NJTRST
       \arg        GPIO_SWJ_SWDPENABLE_REMAP: JTAG-DP disabled and SW-DP enabled
       \arg        GPIO_SWJ_DISABLE_REMAP: JTAG-DP disabled and SW-DP disabled
+<<<<<<< HEAD
       \arg        GPIO_SPI2_REMAP: SPI2 remapping(only for GD32F10X_CL, GD32F10X_HD and GD32F10X_XD devices) 
       \arg        GPIO_TIMER1ITI1_REMAP: TIMER1 internal trigger 1 remapping(only for GD32F10X_CL devices) 
       \arg        GPIO_PTP_PPS_REMAP: ethernet PTP PPS remapping(only for GD32F10X_CL devices) 
+=======
+      \arg        GPIO_SPI2_REMAP: SPI2 remapping(only for GD32F10X_CL, GD32F10X_HD and GD32F10X_XD devices)
+      \arg        GPIO_TIMER1ITI1_REMAP: TIMER1 internal trigger 1 remapping(only for GD32F10X_CL devices)
+      \arg        GPIO_PTP_PPS_REMAP: ethernet PTP PPS remapping(only for GD32F10X_CL devices)
+>>>>>>> origin/main
       \arg        GPIO_TIMER8_REMAP: TIMER8 remapping
       \arg        GPIO_TIMER9_REMAP: TIMER9 remapping
       \arg        GPIO_TIMER10_REMAP: TIMER10 remapping
@@ -387,12 +493,20 @@ void gpio_pin_remap_config(uint32_t remap, ControlStatus newvalue)
         temp_reg &= ~(remap1 << ((remap >> 0x15U)*0x10U));
         temp_reg |= ~PCF_SWJCFG_MASK;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* set pin remap value */
     if(DISABLE != newvalue){
         temp_reg |= (remap1 << ((remap >> 0x15U)*0x10U));
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     if(AFIO_PCF1_FIELDS == (remap & AFIO_PCF1_FIELDS)){
         /* set AFIO_PCF1 regiter value */
         AFIO_PCF1 = temp_reg;
@@ -409,7 +523,11 @@ void gpio_pin_remap_config(uint32_t remap, ControlStatus newvalue)
       \arg        GPIO_PORT_SOURCE_GPIOB: output port source B
       \arg        GPIO_PORT_SOURCE_GPIOC: output port source C
       \arg        GPIO_PORT_SOURCE_GPIOD: output port source D
+<<<<<<< HEAD
       \arg        GPIO_PORT_SOURCE_GPIOE: output port source E 
+=======
+      \arg        GPIO_PORT_SOURCE_GPIOE: output port source E
+>>>>>>> origin/main
       \arg        GPIO_PORT_SOURCE_GPIOF: output port source F
       \arg        GPIO_PORT_SOURCE_GPIOG: output port source G
     \param[in]  gpio_outputpin: GPIO_PIN_SOURCE_x(x=0..15)
@@ -462,6 +580,7 @@ void gpio_event_output_config(uint8_t output_port, uint8_t output_pin)
 {
     uint32_t reg = 0U;
     reg = AFIO_EC;
+<<<<<<< HEAD
     
     /* clear AFIO_EC_PORT and AFIO_EC_PIN bits */
     reg &= (uint32_t)(~(AFIO_EC_PORT|AFIO_EC_PIN));
@@ -469,6 +588,15 @@ void gpio_event_output_config(uint8_t output_port, uint8_t output_pin)
     reg |= (uint32_t)((uint32_t)output_port << GPIO_OUTPUT_PORT_OFFSET);
     reg |= (uint32_t)output_pin;
     
+=======
+
+    /* clear AFIO_EC_PORT and AFIO_EC_PIN bits */
+    reg &= (uint32_t)(~(AFIO_EC_PORT|AFIO_EC_PIN));
+
+    reg |= (uint32_t)((uint32_t)output_port << GPIO_OUTPUT_PORT_OFFSET);
+    reg |= (uint32_t)output_pin;
+
+>>>>>>> origin/main
     AFIO_EC = reg;
 }
 
@@ -496,7 +624,11 @@ void gpio_event_output_disable(void)
 
 /*!
     \brief      lock GPIO pin
+<<<<<<< HEAD
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+=======
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
+>>>>>>> origin/main
     \param[in]  pin: GPIO pin
                 one or more parameters can be selected which are shown as below:
       \arg        GPIO_PIN_x(x=0..15), GPIO_PIN_ALL

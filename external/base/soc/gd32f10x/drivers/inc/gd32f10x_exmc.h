@@ -1,7 +1,11 @@
 /*!
     \file  gd32f10x_exmc.h
     \brief definitions for the EXMC
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     \version 2014-12-26, V1.0.0, firmware for GD32F10x
     \version 2017-06-20, V2.0.0, firmware for GD32F10x
     \version 2018-07-31, V2.1.0, firmware for GD32F10x
@@ -11,6 +15,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -32,6 +37,29 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
@@ -185,7 +213,11 @@ typedef struct
     uint32_t databus_width;                                             /*!< specifies the databus width of external memory */
     uint32_t memory_type;                                               /*!< specifies the type of external memory */
     uint32_t address_data_mux;                                          /*!< specifies whether the data bus and address bus are multiplexed */
+<<<<<<< HEAD
     exmc_norsram_timing_parameter_struct* read_write_timing;            /*!< timing parameters for read and write if the extended mode is not used or the timing 
+=======
+    exmc_norsram_timing_parameter_struct* read_write_timing;            /*!< timing parameters for read and write if the extended mode is not used or the timing
+>>>>>>> origin/main
                                                                              parameters for read if the extended mode is used */
     exmc_norsram_timing_parameter_struct* write_timing;                 /*!< timing parameters for write when the extended mode is used */
 }exmc_norsram_parameter_struct;
@@ -202,7 +234,11 @@ typedef struct
 /* EXMC NAND initialize struct */
 typedef struct
 {
+<<<<<<< HEAD
     uint32_t nand_bank;                                                 /*!< select the bank of NAND */ 
+=======
+    uint32_t nand_bank;                                                 /*!< select the bank of NAND */
+>>>>>>> origin/main
     uint32_t ecc_size;                                                  /*!< the page size for the ECC calculation */
     uint32_t atr_latency;                                               /*!< configure the latency of ALE low to RB low */
     uint32_t ctr_latency;                                               /*!< configure the latency of CLE low to RB low */
@@ -220,7 +256,11 @@ typedef struct
     uint32_t ctr_latency;                                               /*!< configure the latency of CLE low to RB low */
     uint32_t wait_feature;                                              /*!< enables or disables the Wait feature */
     exmc_nand_pccard_timing_parameter_struct*  common_space_timing;     /*!< the timing parameters for NAND flash common space */
+<<<<<<< HEAD
     exmc_nand_pccard_timing_parameter_struct*  attribute_space_timing;  /*!< the timing parameters for NAND flash attribute space */  
+=======
+    exmc_nand_pccard_timing_parameter_struct*  attribute_space_timing;  /*!< the timing parameters for NAND flash attribute space */
+>>>>>>> origin/main
     exmc_nand_pccard_timing_parameter_struct*  io_space_timing;         /*!< the timing parameters for NAND flash IO space */
 }exmc_pccard_parameter_struct;;
 

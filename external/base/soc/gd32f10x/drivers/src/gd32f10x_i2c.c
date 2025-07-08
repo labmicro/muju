@@ -1,7 +1,11 @@
 /*!
     \file    gd32f10x_i2c.c
     \brief   I2C driver
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     \version 2014-12-26, V1.0.0, firmware for GD32F10x
     \version 2017-06-20, V2.0.0, firmware for GD32F10x
     \version 2018-07-31, V2.1.0, firmware for GD32F10x
@@ -12,6 +16,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -33,6 +38,29 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
@@ -78,7 +106,11 @@ void i2c_deinit(uint32_t i2c_periph)
     \param[in]  clkspeed: I2C clock speed, supports standard mode (up to 100 kHz), fast mode (up to 400 kHz)
     \param[in]  dutycyc: duty cycle in fast mode
                 only one parameter can be selected which is shown as below:
+<<<<<<< HEAD
       \arg        I2C_DTCY_2: T_low/T_high=2 
+=======
+      \arg        I2C_DTCY_2: T_low/T_high=2
+>>>>>>> origin/main
       \arg        I2C_DTCY_16_9: T_low/T_high=16/9
     \param[out] none
     \retval     none
@@ -87,7 +119,11 @@ void i2c_clock_config(uint32_t i2c_periph, uint32_t clkspeed, uint32_t dutycyc)
 {
     uint32_t pclk1, clkc, freq, risetime;
     uint32_t temp;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     pclk1 = rcu_clock_freq_get(CK_APB1);
     /* I2C peripheral clock frequency */
     freq = (uint32_t)(pclk1/1000000U);
@@ -97,9 +133,15 @@ void i2c_clock_config(uint32_t i2c_periph, uint32_t clkspeed, uint32_t dutycyc)
     temp = I2C_CTL1(i2c_periph);
     temp &= ~I2C_CTL1_I2CCLK;
     temp |= freq;
+<<<<<<< HEAD
     
     I2C_CTL1(i2c_periph) = temp;
     
+=======
+
+    I2C_CTL1(i2c_periph) = temp;
+
+>>>>>>> origin/main
     if(100000U >= clkspeed){
         /* the maximum SCL rise time is 1000ns in standard mode */
         risetime = (uint32_t)((pclk1/1000000U)+1U);
@@ -110,7 +152,11 @@ void i2c_clock_config(uint32_t i2c_periph, uint32_t clkspeed, uint32_t dutycyc)
         }else{
             I2C_RT(i2c_periph) = risetime;
         }
+<<<<<<< HEAD
         clkc = (uint32_t)(pclk1/(clkspeed*2U)); 
+=======
+        clkc = (uint32_t)(pclk1/(clkspeed*2U));
+>>>>>>> origin/main
         if(clkc < 0x04U){
             /* the CLKC in standard mode minmum value is 4 */
             clkc = 0x04U;
@@ -131,7 +177,11 @@ void i2c_clock_config(uint32_t i2c_periph, uint32_t clkspeed, uint32_t dutycyc)
         }
         if(0U == (clkc & I2C_CKCFG_CLKC)){
             /* the CLKC in fast mode minmum value is 1 */
+<<<<<<< HEAD
             clkc |= 0x0001U;  
+=======
+            clkc |= 0x0001U;
+>>>>>>> origin/main
         }
         I2C_CKCFG(i2c_periph) |= I2C_CKCFG_FAST;
         I2C_CKCFG(i2c_periph) |= clkc;
@@ -140,7 +190,11 @@ void i2c_clock_config(uint32_t i2c_periph, uint32_t clkspeed, uint32_t dutycyc)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      configure I2C address 
+=======
+    \brief      configure I2C address
+>>>>>>> origin/main
     \param[in]  i2c_periph: I2Cx(x=0,1)
     \param[in]  mode:
                 only one parameter can be selected which is shown as below:
@@ -158,9 +212,15 @@ void i2c_mode_addr_config(uint32_t i2c_periph, uint32_t mode, uint32_t addformat
 {
     /* SMBus/I2C mode selected */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_SMBEN); 
+=======
+
+    ctl = I2C_CTL0(i2c_periph);
+    ctl &= ~(I2C_CTL0_SMBEN);
+>>>>>>> origin/main
     ctl |= mode;
     I2C_CTL0(i2c_periph) = ctl;
     /* configure address */
@@ -230,11 +290,19 @@ void i2c_ackpos_config(uint32_t i2c_periph, uint32_t pos)
 /*!
     \brief      master sends slave address
     \param[in]  i2c_periph: I2Cx(x=0,1)
+<<<<<<< HEAD
     \param[in]  addr: slave address  
     \param[in]  trandirection: transmitter or receiver
                 only one parameter can be selected which is shown as below:
       \arg        I2C_TRANSMITTER: transmitter  
       \arg        I2C_RECEIVER: receiver  
+=======
+    \param[in]  addr: slave address
+    \param[in]  trandirection: transmitter or receiver
+                only one parameter can be selected which is shown as below:
+      \arg        I2C_TRANSMITTER: transmitter
+      \arg        I2C_RECEIVER: receiver
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -266,7 +334,11 @@ void i2c_dualaddr_enable(uint32_t i2c_periph, uint32_t addr)
 
 /*!
     \brief      disable dual-address mode
+<<<<<<< HEAD
     \param[in]  i2c_periph: I2Cx(x=0,1) 
+=======
+    \param[in]  i2c_periph: I2Cx(x=0,1)
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -277,7 +349,11 @@ void i2c_dualaddr_disable(uint32_t i2c_periph)
 
 /*!
     \brief      enable I2C
+<<<<<<< HEAD
     \param[in]  i2c_periph: I2Cx(x=0,1) 
+=======
+    \param[in]  i2c_periph: I2Cx(x=0,1)
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -288,7 +364,11 @@ void i2c_enable(uint32_t i2c_periph)
 
 /*!
     \brief      disable I2C
+<<<<<<< HEAD
     \param[in]  i2c_periph: I2Cx(x=0,1) 
+=======
+    \param[in]  i2c_periph: I2Cx(x=0,1)
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -322,7 +402,11 @@ void i2c_stop_on_bus(uint32_t i2c_periph)
 /*!
     \brief      I2C transmit data function
     \param[in]  i2c_periph: I2Cx(x=0,1)
+<<<<<<< HEAD
     \param[in]  data: data of transmission 
+=======
+    \param[in]  data: data of transmission
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -356,9 +440,15 @@ void i2c_dma_config(uint32_t i2c_periph, uint32_t dmastate)
 {
     /* configure I2C DMA function */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
     ctl = I2C_CTL1(i2c_periph);
     ctl &= ~(I2C_CTL1_DMAON); 
+=======
+
+    ctl = I2C_CTL1(i2c_periph);
+    ctl &= ~(I2C_CTL1_DMAON);
+>>>>>>> origin/main
     ctl |= dmastate;
     I2C_CTL1(i2c_periph) = ctl;
 }
@@ -377,9 +467,15 @@ void i2c_dma_last_transfer_config(uint32_t i2c_periph, uint32_t dmalast)
 {
     /* configure DMA last transfer */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
     ctl = I2C_CTL1(i2c_periph);
     ctl &= ~(I2C_CTL1_DMALST); 
+=======
+
+    ctl = I2C_CTL1(i2c_periph);
+    ctl &= ~(I2C_CTL1_DMALST);
+>>>>>>> origin/main
     ctl |= dmalast;
     I2C_CTL1(i2c_periph) = ctl;
 }
@@ -398,9 +494,15 @@ void i2c_stretch_scl_low_config(uint32_t i2c_periph, uint32_t stretchpara)
 {
     /* configure I2C SCL strerching */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_SS); 
+=======
+
+    ctl = I2C_CTL0(i2c_periph);
+    ctl &= ~(I2C_CTL0_SS);
+>>>>>>> origin/main
     ctl |= stretchpara;
     I2C_CTL0(i2c_periph) = ctl;
 }
@@ -419,9 +521,15 @@ void i2c_slave_response_to_gcall_config(uint32_t i2c_periph, uint32_t gcallpara)
 {
     /* configure slave response to a general call enable or disable */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_GCEN); 
+=======
+
+    ctl = I2C_CTL0(i2c_periph);
+    ctl &= ~(I2C_CTL0_GCEN);
+>>>>>>> origin/main
     ctl |= gcallpara;
     I2C_CTL0(i2c_periph) = ctl;
 }
@@ -440,9 +548,15 @@ void i2c_software_reset_config(uint32_t i2c_periph, uint32_t sreset)
 {
     /* modify CTL0 and configure software reset I2C state */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_SRESET); 
+=======
+
+    ctl = I2C_CTL0(i2c_periph);
+    ctl &= ~(I2C_CTL0_SRESET);
+>>>>>>> origin/main
     ctl |= sreset;
     I2C_CTL0(i2c_periph) = ctl;
 }
@@ -452,8 +566,13 @@ void i2c_software_reset_config(uint32_t i2c_periph, uint32_t sreset)
     \param[in]  i2c_periph: I2Cx(x=0,1)
     \param[in]  pecstate:
                 only one parameter can be selected which is shown as below:
+<<<<<<< HEAD
       \arg        I2C_PEC_ENABLE: PEC calculation on 
       \arg        I2C_PEC_DISABLE: PEC calculation off 
+=======
+      \arg        I2C_PEC_ENABLE: PEC calculation on
+      \arg        I2C_PEC_DISABLE: PEC calculation off
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -461,7 +580,11 @@ void i2c_pec_config(uint32_t i2c_periph, uint32_t pecstate)
 {
     /* on/off PEC calculation */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_PECEN);
     ctl |= pecstate;
@@ -473,8 +596,13 @@ void i2c_pec_config(uint32_t i2c_periph, uint32_t pecstate)
     \param[in]  i2c_periph: I2Cx(x=0,1)
     \param[in]  pecpara:
                 only one parameter can be selected which is shown as below:
+<<<<<<< HEAD
       \arg        I2C_PECTRANS_ENABLE: transfer PEC 
       \arg        I2C_PECTRANS_DISABLE: not transfer PEC 
+=======
+      \arg        I2C_PECTRANS_ENABLE: transfer PEC
+      \arg        I2C_PECTRANS_DISABLE: not transfer PEC
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -482,7 +610,11 @@ void i2c_pec_transfer_config(uint32_t i2c_periph, uint32_t pecpara)
 {
     /* whether to transfer PEC */
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_PECTRANS);
     ctl |= pecpara;
@@ -505,8 +637,13 @@ uint8_t i2c_pec_value_get(uint32_t i2c_periph)
     \param[in]  i2c_periph: I2Cx(x=0,1)
     \param[in]  smbuspara:
                 only one parameter can be selected which is shown as below:
+<<<<<<< HEAD
       \arg        I2C_SALTSEND_ENABLE: issue alert through SMBA pin 
       \arg        I2C_SALTSEND_DISABLE: not issue alert through SMBA pin 
+=======
+      \arg        I2C_SALTSEND_ENABLE: issue alert through SMBA pin
+      \arg        I2C_SALTSEND_DISABLE: not issue alert through SMBA pin
+>>>>>>> origin/main
     \param[out] none
     \retval     none
 */
@@ -514,7 +651,11 @@ void i2c_smbus_alert_config(uint32_t i2c_periph, uint32_t smbuspara)
 {
     /* issue alert through SMBA pin configure*/
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_SALT);
     ctl |= smbuspara;
@@ -535,7 +676,11 @@ void i2c_smbus_arp_config(uint32_t i2c_periph, uint32_t arpstate)
 {
     /* enable or disable I2C ARP protocol*/
     uint32_t ctl = 0U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     ctl = I2C_CTL0(i2c_periph);
     ctl &= ~(I2C_CTL0_ARPEN);
     ctl |= arpstate;
@@ -588,9 +733,15 @@ FlagStatus i2c_flag_get(uint32_t i2c_periph, i2c_flag_enum flag)
       \arg       I2C_FLAG_SMBALT: SMBus alert status
       \arg       I2C_FLAG_SMBTO: timeout signal in SMBus mode
       \arg       I2C_FLAG_PECERR: PEC error when receiving data
+<<<<<<< HEAD
       \arg       I2C_FLAG_OUERR: over-run or under-run situation occurs in slave mode    
       \arg       I2C_FLAG_AERR: acknowledge error
       \arg       I2C_FLAG_LOSTARB: arbitration lost in master mode   
+=======
+      \arg       I2C_FLAG_OUERR: over-run or under-run situation occurs in slave mode
+      \arg       I2C_FLAG_AERR: acknowledge error
+      \arg       I2C_FLAG_LOSTARB: arbitration lost in master mode
+>>>>>>> origin/main
       \arg       I2C_FLAG_BERR: a bus error occurs indication a unexpected start or stop condition on I2C bus
       \arg       I2C_FLAG_ADDSEND: address is sent in master mode or received and matches in slave mode
     \param[out] none
@@ -613,7 +764,11 @@ void i2c_flag_clear(uint32_t i2c_periph, i2c_flag_enum flag)
     \param[in]  interrupt: I2C interrupts, refer to i2c_interrupt_enum
                 only one parameter can be selected which is shown as below:
       \arg        I2C_INT_ERR: error interrupt
+<<<<<<< HEAD
       \arg        I2C_INT_EV: event interrupt 
+=======
+      \arg        I2C_INT_EV: event interrupt
+>>>>>>> origin/main
       \arg        I2C_INT_BUF: buffer interrupt
     \param[out] none
     \retval     none
@@ -628,8 +783,13 @@ void i2c_interrupt_enable(uint32_t i2c_periph, i2c_interrupt_enum interrupt)
     \param[in]  i2c_periph: I2Cx(x=0,1)
     \param[in]  interrupt: I2C interrupts, refer to i2c_flag_enum
                 only one parameter can be selected which is shown as below:
+<<<<<<< HEAD
       \arg        I2C_INT_ERR: error interrupt enable 
       \arg        I2C_INT_EV: event interrupt enable 
+=======
+      \arg        I2C_INT_ERR: error interrupt enable
+      \arg        I2C_INT_EV: event interrupt enable
+>>>>>>> origin/main
       \arg        I2C_INT_BUF: buffer interrupt enable
     \param[out] none
     \retval     none
@@ -664,10 +824,17 @@ void i2c_interrupt_disable(uint32_t i2c_periph, i2c_interrupt_enum interrupt)
 FlagStatus i2c_interrupt_flag_get(uint32_t i2c_periph, i2c_interrupt_flag_enum int_flag)
 {
     uint32_t intenable = 0U, flagstatus = 0U, bufie;
+<<<<<<< HEAD
     
     /* check BUFIE */
     bufie = I2C_CTL1(i2c_periph)&I2C_CTL1_BUFIE;
     
+=======
+
+    /* check BUFIE */
+    bufie = I2C_CTL1(i2c_periph)&I2C_CTL1_BUFIE;
+
+>>>>>>> origin/main
     /* get the interrupt enable bit status */
     intenable = (I2C_REG_VAL(i2c_periph, int_flag) & BIT(I2C_BIT_POS(int_flag)));
     /* get the corresponding flag bit status */
@@ -675,7 +842,11 @@ FlagStatus i2c_interrupt_flag_get(uint32_t i2c_periph, i2c_interrupt_flag_enum i
 
     if((I2C_INT_FLAG_RBNE == int_flag) || (I2C_INT_FLAG_TBE == int_flag)){
         if(intenable && bufie){
+<<<<<<< HEAD
             intenable = 1U;                       
+=======
+            intenable = 1U;
+>>>>>>> origin/main
         }else{
             intenable = 0U;
         }
@@ -683,7 +854,11 @@ FlagStatus i2c_interrupt_flag_get(uint32_t i2c_periph, i2c_interrupt_flag_enum i
     if((0U != flagstatus) && (0U != intenable)){
         return SET;
     }else{
+<<<<<<< HEAD
         return RESET; 
+=======
+        return RESET;
+>>>>>>> origin/main
     }
 }
 

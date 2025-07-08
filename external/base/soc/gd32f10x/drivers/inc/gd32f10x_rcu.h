@@ -1,7 +1,11 @@
 /*!
     \file    gd32f10x_rcu.h
     \brief   definitions for the RCU
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     \version 2014-12-26, V1.0.0, firmware for GD32F10x
     \version 2017-06-20, V2.0.0, firmware for GD32F10x
     \version 2018-07-31, V2.1.0, firmware for GD32F10x
@@ -11,6 +15,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -32,6 +37,29 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
@@ -390,7 +418,11 @@ typedef enum
     RCU_ENETTX    = RCU_REGIDX_BIT(AHBEN_REG_OFFSET, 15U),                  /*!< ENETTX clock */
     RCU_ENETRX    = RCU_REGIDX_BIT(AHBEN_REG_OFFSET, 16U),                  /*!< ENETRX clock */
 #endif /* GD32F10X_MD and GD32F10X_HD and GD32F10X_XD */
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* APB1 peripherals */
     RCU_TIMER1    = RCU_REGIDX_BIT(APB1EN_REG_OFFSET, 0U),                  /*!< TIMER1 clock */
     RCU_TIMER2    = RCU_REGIDX_BIT(APB1EN_REG_OFFSET, 1U),                  /*!< TIMER2 clock */
@@ -423,7 +455,11 @@ typedef enum
     RCU_PMU       = RCU_REGIDX_BIT(APB1EN_REG_OFFSET, 28U),                 /*!< PMU clock */
     RCU_DAC       = RCU_REGIDX_BIT(APB1EN_REG_OFFSET, 29U),                 /*!< DAC clock */
     RCU_RTC       = RCU_REGIDX_BIT(BDCTL_REG_OFFSET, 15U),                  /*!< RTC clock */
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* APB2 peripherals */
     RCU_AF        = RCU_REGIDX_BIT(APB2EN_REG_OFFSET, 0U),                  /*!< alternate function clock */
     RCU_GPIOA     = RCU_REGIDX_BIT(APB2EN_REG_OFFSET, 2U),                  /*!< GPIOA clock */
@@ -465,7 +501,11 @@ typedef enum
     RCU_USBFSRST     = RCU_REGIDX_BIT(AHBRST_REG_OFFSET, 12U),              /*!< USBFS clock reset */
     RCU_ENETRST      = RCU_REGIDX_BIT(AHBRST_REG_OFFSET, 14U),              /*!< ENET clock reset */
 #endif /* GD32F10X_CL */
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* APB1 peripherals */
     RCU_TIMER1RST    = RCU_REGIDX_BIT(APB1RST_REG_OFFSET, 0U),              /*!< TIMER1 clock reset */
     RCU_TIMER2RST    = RCU_REGIDX_BIT(APB1RST_REG_OFFSET, 1U),              /*!< TIMER2 clock reset */
@@ -497,7 +537,11 @@ typedef enum
     RCU_BKPIRST      = RCU_REGIDX_BIT(APB1RST_REG_OFFSET, 27U),             /*!< BKPI clock reset */
     RCU_PMURST       = RCU_REGIDX_BIT(APB1RST_REG_OFFSET, 28U),             /*!< PMU clock reset */
     RCU_DACRST       = RCU_REGIDX_BIT(APB1RST_REG_OFFSET, 29U),             /*!< DAC clock reset */
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     /* APB2 peripherals */
     RCU_AFRST        = RCU_REGIDX_BIT(APB2RST_REG_OFFSET, 0U),              /*!< alternate function clock reset */
     RCU_GPIOARST     = RCU_REGIDX_BIT(APB2RST_REG_OFFSET, 2U),              /*!< GPIOA clock reset */

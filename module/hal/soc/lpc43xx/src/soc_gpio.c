@@ -260,7 +260,7 @@ void GpioBitClear(hal_gpio_bit_t gpio) {
     }
 }
 
-void GpioBitToogle(hal_gpio_bit_t gpio) {
+void GpioBitToggle(hal_gpio_bit_t gpio) {
     if (gpio) {
         Chip_GPIO_SetPinToggle(LPC_GPIO_PORT, gpio->gpio, gpio->bit);
     }

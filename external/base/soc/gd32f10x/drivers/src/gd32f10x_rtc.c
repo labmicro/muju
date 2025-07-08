@@ -1,7 +1,11 @@
 /*!
     \file    gd32f10x_rtc.c
     \brief   RTC driver
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     \version 2014-12-26, V1.0.0, firmware for GD32F10x
     \version 2017-06-20, V2.0.0, firmware for GD32F10x
     \version 2018-07-31, V2.1.0, firmware for GD32F10x
@@ -11,6 +15,7 @@
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
+<<<<<<< HEAD
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
@@ -32,6 +37,29 @@ NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
 PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+=======
+    Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
+       specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+>>>>>>> origin/main
 OF SUCH DAMAGE.
 */
 
@@ -56,7 +84,11 @@ void rtc_configuration_mode_enter(void)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      exit RTC configuration mode 
+=======
+    \brief      exit RTC configuration mode
+>>>>>>> origin/main
     \param[in]  none
     \param[out] none
     \retval     none
@@ -151,7 +183,11 @@ void rtc_alarm_config(uint32_t alarm)
 uint32_t rtc_counter_get(void)
 {
     uint32_t temp = 0x0U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     temp = RTC_CNTL;
     temp |= (RTC_CNTH << RTC_HIGH_BITS_OFFSET);
     return temp;
@@ -166,14 +202,22 @@ uint32_t rtc_counter_get(void)
 uint32_t rtc_divider_get(void)
 {
     uint32_t temp = 0x00U;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/main
     temp = ((RTC_DIVH & RTC_DIVH_DIV) << RTC_HIGH_BITS_OFFSET);
     temp |= RTC_DIVL;
     return temp;
 }
 
 /*!
+<<<<<<< HEAD
     \brief      get RTC flag status 
+=======
+    \brief      get RTC flag status
+>>>>>>> origin/main
     \param[in]  flag: specify which flag status to get
                 only one parameter can be selected which is shown as below:
       \arg        RTC_FLAG_SECOND: second interrupt flag
@@ -211,7 +255,11 @@ void rtc_flag_clear(uint32_t flag)
 }
 
 /*!
+<<<<<<< HEAD
     \brief      get RTC interrupt flag status 
+=======
+    \brief      get RTC interrupt flag status
+>>>>>>> origin/main
     \param[in]  flag: specify which flag status to get
                 only one parameter can be selected which is shown as below:
       \arg        RTC_INT_FLAG_SECOND: second interrupt flag

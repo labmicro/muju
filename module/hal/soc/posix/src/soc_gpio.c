@@ -170,7 +170,7 @@ static void * KeyboardThread(void * _) {
         if ((key >= '1') && (key <= '8')) {
             gpio.gpio = 0;
             gpio.bit = key - '1';
-            GpioBitToogle(&gpio);
+            GpioBitToggle(&gpio);
 
             event_handler_t descriptor = &event_handlers[8 * gpio.gpio + gpio.bit];
             if (descriptor->handler != NULL) {
@@ -265,7 +265,7 @@ void GpioBitClear(hal_gpio_bit_t gpio) {
     }
 }
 
-void GpioBitToogle(hal_gpio_bit_t gpio) {
+void GpioBitToggle(hal_gpio_bit_t gpio) {
     if (gpio) {
         gpio_emulation[gpio->gpio] ^= (1 << gpio->bit);
         RefreshStatus(gpio);

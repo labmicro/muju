@@ -10,7 +10,11 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
+<<<<<<< HEAD
   RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K 
+=======
+  RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K
+>>>>>>> origin/main
   FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 128K
 }
 
@@ -83,7 +87,11 @@ SECTIONS
   _sidata = LOADADDR(.data);
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
+<<<<<<< HEAD
   .data : 
+=======
+  .data :
+>>>>>>> origin/main
   {
     . = ALIGN(4);
     _sdata = .;        /* create a global symbol at data start */
@@ -94,7 +102,11 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> origin/main
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -122,7 +134,11 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> origin/main
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
