@@ -25,17 +25,14 @@
 
 CPU = nuclei-n200
 
-# Variable with RV core module root foder
-RV_CORE := external/base/arch/rv32/core
-
-# Variable with SOC drivers module root foder
-CPU_FOLDER := external/base/cpu/$(CPU)
-
 # Variable with SOC drivers module root foder
 SOC_FOLDER := external/base/soc/$(SOC)
 
+# Variable with Nuclei NMSSI core module root foder
+NMSIS_CORE := external/base/arch/rv32/nmsis_core
+
 # Variable with the list of folders containing source files for device support
-DEVICE_SRC :=  $(RV_CORE)/src $(SOC_FOLDER)/device/src
+DEVICE_SRC := $(SOC_FOLDER)/device/src $(SOC_FOLDER)/device/src/gcc $(SOC_FOLDER)/device/src/stubs/newlib
 
 # Variable with the list of folders containing header files for statup device
 $(if $(findstring $(DEVICE_SRC),$(PROJECT_SRC)),,$(eval PROJECT_SRC += $(DEVICE_SRC)))
@@ -44,7 +41,7 @@ $(if $(findstring $(DEVICE_SRC),$(PROJECT_SRC)),,$(eval PROJECT_SRC += $(DEVICE_
 $(eval NAME = $(call module_name,board/$(BOARD)))
 
 # Folder with device header to board module headers
-$(eval $(NAME)_INC += $(RV_CORE)/inc $(CPU_FOLDER)/inc $(SOC_FOLDER)/device/inc)
+$(eval $(NAME)_INC += $(NMSIS_CORE) $(SOC_FOLDER)/device/inc)
 
 # Folder with architeture source code to board module
 $(eval $(NAME)_SRC += $(CPU_FOLDER)/src)

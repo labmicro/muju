@@ -12,27 +12,27 @@
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
 <<<<<<< HEAD
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 =======
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -302,7 +302,7 @@ void rcu_system_clock_source_config(uint32_t ck_sys)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -338,7 +338,7 @@ void rcu_ahb_clock_config(uint32_t ck_ahb)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -365,7 +365,7 @@ void rcu_apb1_clock_config(uint32_t ck_apb1)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -392,7 +392,7 @@ void rcu_apb2_clock_config(uint32_t ck_apb2)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -423,7 +423,7 @@ void rcu_ckout0_config(uint32_t ckout0_src)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -436,7 +436,7 @@ void rcu_ckout0_config(uint32_t ckout0_src)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure the main PLL clock 
+    \brief      configure the main PLL clock
 =======
     \brief      configure the main PLL clock
 >>>>>>> origin/main
@@ -503,7 +503,7 @@ void rcu_predv0_config(uint32_t predv0_source, uint32_t predv0_div)
 {
     uint32_t reg = 0U;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -528,7 +528,7 @@ void rcu_predv1_config(uint32_t predv1_div)
 {
     uint32_t reg = 0U;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -543,7 +543,7 @@ void rcu_predv1_config(uint32_t predv1_div)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure the PLL1 clock 
+    \brief      configure the PLL1 clock
 =======
     \brief      configure the PLL1 clock
 >>>>>>> origin/main
@@ -561,7 +561,7 @@ void rcu_pll1_config(uint32_t pll_mul)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure the PLL2 clock 
+    \brief      configure the PLL2 clock
 =======
     \brief      configure the PLL2 clock
 >>>>>>> origin/main
@@ -575,7 +575,7 @@ void rcu_pll2_config(uint32_t pll_mul)
 {
     RCU_CFG1 &= ~RCU_CFG1_PLL2MF;
 <<<<<<< HEAD
-    RCU_CFG1 |= pll_mul; 
+    RCU_CFG1 |= pll_mul;
 =======
     RCU_CFG1 |= pll_mul;
 >>>>>>> origin/main
@@ -641,7 +641,7 @@ void rcu_usb_clock_config(uint32_t usb_psc)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -672,8 +672,8 @@ void rcu_rtc_clock_config(uint32_t rtc_clock_source)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
-    reg = RCU_BDCTL; 
+
+    reg = RCU_BDCTL;
 =======
 
     reg = RCU_BDCTL;
@@ -697,8 +697,8 @@ void rcu_i2s1_clock_config(uint32_t i2s_clock_source)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
-    reg = RCU_CFG1; 
+
+    reg = RCU_CFG1;
 =======
 
     reg = RCU_CFG1;
@@ -721,8 +721,8 @@ void rcu_i2s2_clock_config(uint32_t i2s_clock_source)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
-    reg = RCU_CFG1; 
+
+    reg = RCU_CFG1;
 =======
 
     reg = RCU_CFG1;
@@ -877,7 +877,7 @@ ErrStatus rcu_osci_stab_wait(rcu_osci_type_enum osci)
     ErrStatus reval = ERROR;
     FlagStatus osci_stat = RESET;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1072,7 +1072,7 @@ void rcu_osci_bypass_mode_disable(rcu_osci_type_enum osci)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1135,7 +1135,7 @@ void rcu_irc8m_adjust_value_set(uint8_t irc8m_adjval)
 {
     uint32_t reg;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1158,7 +1158,7 @@ void rcu_irc8m_adjust_value_set(uint8_t irc8m_adjval)
 */
 void rcu_deepsleep_voltage_set(uint32_t dsvol)
 <<<<<<< HEAD
-{    
+{
 =======
 {
 >>>>>>> origin/main
@@ -1267,7 +1267,7 @@ uint32_t rcu_clock_freq_get(rcu_clock_freq_enum clock)
     clk_exp = ahb_exp[idx];
     ahb_freq = cksys_freq >> clk_exp;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1276,7 +1276,7 @@ uint32_t rcu_clock_freq_get(rcu_clock_freq_enum clock)
     clk_exp = apb1_exp[idx];
     apb1_freq = ahb_freq >> clk_exp;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1285,7 +1285,7 @@ uint32_t rcu_clock_freq_get(rcu_clock_freq_enum clock)
     clk_exp = apb2_exp[idx];
     apb2_freq = ahb_freq >> clk_exp;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main

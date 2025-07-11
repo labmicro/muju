@@ -13,27 +13,27 @@
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
 <<<<<<< HEAD
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 =======
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -69,7 +69,7 @@ static ErrStatus dma_periph_and_channel_check(uint32_t dma_periph, dma_channel_e
 
 /*!
 <<<<<<< HEAD
-    \brief      deinitialize DMA a channel registers 
+    \brief      deinitialize DMA a channel registers
 =======
     \brief      deinitialize DMA a channel registers
 >>>>>>> origin/main
@@ -87,7 +87,7 @@ void dma_deinit(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -112,7 +112,7 @@ void dma_struct_para_init(dma_parameter_struct* init_struct)
     /* set the DMA struct with the default values */
     init_struct->periph_addr  = 0U;
 <<<<<<< HEAD
-    init_struct->periph_width = 0U; 
+    init_struct->periph_width = 0U;
 =======
     init_struct->periph_width = 0U;
 >>>>>>> origin/main
@@ -136,7 +136,7 @@ void dma_struct_para_init(dma_parameter_struct* init_struct)
                   periph_addr: peripheral base address
                   periph_width: DMA_PERIPHERAL_WIDTH_8BIT, DMA_PERIPHERAL_WIDTH_16BIT, DMA_PERIPHERAL_WIDTH_32BIT
 <<<<<<< HEAD
-                  periph_inc: DMA_PERIPH_INCREASE_ENABLE, DMA_PERIPH_INCREASE_DISABLE 
+                  periph_inc: DMA_PERIPH_INCREASE_ENABLE, DMA_PERIPH_INCREASE_DISABLE
 =======
                   periph_inc: DMA_PERIPH_INCREASE_ENABLE, DMA_PERIPH_INCREASE_DISABLE
 >>>>>>> origin/main
@@ -153,20 +153,20 @@ void dma_init(uint32_t dma_periph, dma_channel_enum channelx, dma_parameter_stru
 {
     uint32_t ctl;
 <<<<<<< HEAD
-    
+
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
         DMA_WRONG_HANDLE
     }
-    
+
     /* configure peripheral base address */
     DMA_CHPADDR(dma_periph, channelx) = init_struct->periph_addr;
-    
+
     /* configure memory base address */
     DMA_CHMADDR(dma_periph, channelx) = init_struct->memory_addr;
-    
+
     /* configure the number of remaining data to be transferred */
     DMA_CHCNT(dma_periph, channelx) = (init_struct->number & DMA_CHANNEL_CNT_MASK);
-    
+
 =======
 
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
@@ -203,7 +203,7 @@ void dma_init(uint32_t dma_periph, dma_channel_enum channelx, dma_parameter_stru
         DMA_CHCTL(dma_periph, channelx) &= ~DMA_CHXCTL_MNAGA;
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -213,11 +213,11 @@ void dma_init(uint32_t dma_periph, dma_channel_enum channelx, dma_parameter_stru
     }else{
         DMA_CHCTL(dma_periph, channelx) |= DMA_CHXCTL_DIR;
 <<<<<<< HEAD
-    } 
+    }
 }
 
 /*!
-    \brief      enable DMA circulation mode  
+    \brief      enable DMA circulation mode
 =======
     }
 }
@@ -232,7 +232,7 @@ void dma_init(uint32_t dma_periph, dma_channel_enum channelx, dma_parameter_stru
       \arg        DMA0: DMA_CHx(x=0..6), DMA1: DMA_CHx(x=0..4)
     \param[out] none
 <<<<<<< HEAD
-    \retval     none 
+    \retval     none
 =======
     \retval     none
 >>>>>>> origin/main
@@ -248,14 +248,14 @@ void dma_circulation_enable(uint32_t dma_periph, dma_channel_enum channelx)
 
 /*!
 <<<<<<< HEAD
-    \brief      disable DMA circulation mode  
+    \brief      disable DMA circulation mode
     \param[in]  dma_periph: DMAx(x=0,1)
       \arg        DMAx(x=0,1)
-    \param[in]  channelx: specify which DMA channel 
+    \param[in]  channelx: specify which DMA channel
                 only one parameter can be selected which is shown as below:
       \arg        DMA0: DMA_CHx(x=0..6), DMA1: DMA_CHx(x=0..4)
     \param[out] none
-    \retval     none 
+    \retval     none
 =======
     \brief      disable DMA circulation mode
     \param[in]  dma_periph: DMAx(x=0,1)
@@ -273,7 +273,7 @@ void dma_circulation_disable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -285,7 +285,7 @@ void dma_circulation_disable(uint32_t dma_periph, dma_channel_enum channelx)
     \param[in]  dma_periph: DMAx(x=0,1)
       \arg        DMAx(x=0,1)
 <<<<<<< HEAD
-    \param[in]  channelx: specify which DMA channel 
+    \param[in]  channelx: specify which DMA channel
 =======
     \param[in]  channelx: specify which DMA channel
 >>>>>>> origin/main
@@ -300,7 +300,7 @@ void dma_memory_to_memory_enable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -323,7 +323,7 @@ void dma_memory_to_memory_disable(uint32_t dma_periph, dma_channel_enum channelx
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -332,7 +332,7 @@ void dma_memory_to_memory_disable(uint32_t dma_periph, dma_channel_enum channelx
 
 /*!
 <<<<<<< HEAD
-    \brief      enable DMA channel 
+    \brief      enable DMA channel
 =======
     \brief      enable DMA channel
 >>>>>>> origin/main
@@ -343,7 +343,7 @@ void dma_memory_to_memory_disable(uint32_t dma_periph, dma_channel_enum channelx
       \arg        DMA0: DMA_CHx(x=0..6), DMA1: DMA_CHx(x=0..4)
     \param[out] none
 <<<<<<< HEAD
-    \retval     none 
+    \retval     none
 =======
     \retval     none
 >>>>>>> origin/main
@@ -354,7 +354,7 @@ void dma_channel_enable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -363,7 +363,7 @@ void dma_channel_enable(uint32_t dma_periph, dma_channel_enum channelx)
 
 /*!
 <<<<<<< HEAD
-    \brief      disable DMA channel 
+    \brief      disable DMA channel
 =======
     \brief      disable DMA channel
 >>>>>>> origin/main
@@ -374,7 +374,7 @@ void dma_channel_enable(uint32_t dma_periph, dma_channel_enum channelx)
       \arg        DMA0: DMA_CHx(x=0..6), DMA1: DMA_CHx(x=0..4)
     \param[out] none
 <<<<<<< HEAD
-    \retval     none 
+    \retval     none
 =======
     \retval     none
 >>>>>>> origin/main
@@ -385,7 +385,7 @@ void dma_channel_disable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -394,7 +394,7 @@ void dma_channel_disable(uint32_t dma_periph, dma_channel_enum channelx)
 
 /*!
 <<<<<<< HEAD
-    \brief      set DMA peripheral base address  
+    \brief      set DMA peripheral base address
 =======
     \brief      set DMA peripheral base address
 >>>>>>> origin/main
@@ -406,7 +406,7 @@ void dma_channel_disable(uint32_t dma_periph, dma_channel_enum channelx)
     \param[in]  address: peripheral base address
     \param[out] none
 <<<<<<< HEAD
-    \retval     none 
+    \retval     none
 =======
     \retval     none
 >>>>>>> origin/main
@@ -417,7 +417,7 @@ void dma_periph_address_config(uint32_t dma_periph, dma_channel_enum channelx, u
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -426,7 +426,7 @@ void dma_periph_address_config(uint32_t dma_periph, dma_channel_enum channelx, u
 
 /*!
 <<<<<<< HEAD
-    \brief      set DMA memory base address  
+    \brief      set DMA memory base address
 =======
     \brief      set DMA memory base address
 >>>>>>> origin/main
@@ -438,7 +438,7 @@ void dma_periph_address_config(uint32_t dma_periph, dma_channel_enum channelx, u
     \param[in]  address: memory base address
     \param[out] none
 <<<<<<< HEAD
-    \retval     none 
+    \retval     none
 =======
     \retval     none
 >>>>>>> origin/main
@@ -449,7 +449,7 @@ void dma_memory_address_config(uint32_t dma_periph, dma_channel_enum channelx, u
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -458,7 +458,7 @@ void dma_memory_address_config(uint32_t dma_periph, dma_channel_enum channelx, u
 
 /*!
 <<<<<<< HEAD
-    \brief      set the number of remaining data to be transferred by the DMA 
+    \brief      set the number of remaining data to be transferred by the DMA
 =======
     \brief      set the number of remaining data to be transferred by the DMA
 >>>>>>> origin/main
@@ -471,7 +471,7 @@ void dma_memory_address_config(uint32_t dma_periph, dma_channel_enum channelx, u
       \arg        0x0000-0xFFFF
     \param[out] none
 <<<<<<< HEAD
-    \retval     none 
+    \retval     none
 =======
     \retval     none
 >>>>>>> origin/main
@@ -482,7 +482,7 @@ void dma_transfer_number_config(uint32_t dma_periph, dma_channel_enum channelx, 
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -491,14 +491,14 @@ void dma_transfer_number_config(uint32_t dma_periph, dma_channel_enum channelx, 
 
 /*!
 <<<<<<< HEAD
-    \brief      get the number of remaining data to be transferred by the DMA  
+    \brief      get the number of remaining data to be transferred by the DMA
     \param[in]  dma_periph: DMAx(x=0,1)
       \arg        DMAx(x=0,1)
-    \param[in]  channelx: specify which DMA channel to set number 
+    \param[in]  channelx: specify which DMA channel to set number
                 only one parameter can be selected which is shown as below:
       \arg        DMA0: DMA_CHx(x=0..6), DMA1: DMA_CHx(x=0..4)
     \param[out] none
-    \retval     uint32_t: the number of remaining data to be transferred by the DMA 
+    \retval     uint32_t: the number of remaining data to be transferred by the DMA
 =======
     \brief      get the number of remaining data to be transferred by the DMA
     \param[in]  dma_periph: DMAx(x=0,1)
@@ -516,7 +516,7 @@ uint32_t dma_transfer_number_get(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -525,7 +525,7 @@ uint32_t dma_transfer_number_get(uint32_t dma_periph, dma_channel_enum channelx)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure priority level of DMA channel 
+    \brief      configure priority level of DMA channel
 =======
     \brief      configure priority level of DMA channel
 >>>>>>> origin/main
@@ -542,7 +542,7 @@ uint32_t dma_transfer_number_get(uint32_t dma_periph, dma_channel_enum channelx)
       \arg        DMA_PRIORITY_ULTRA_HIGH: ultra high priority
     \param[out] none
 <<<<<<< HEAD
-    \retval     none 
+    \retval     none
 =======
     \retval     none
 >>>>>>> origin/main
@@ -551,11 +551,11 @@ void dma_priority_config(uint32_t dma_periph, dma_channel_enum channelx, uint32_
 {
     uint32_t ctl;
 <<<<<<< HEAD
-    
+
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
         DMA_WRONG_HANDLE
     }
-    
+
 =======
 
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
@@ -573,7 +573,7 @@ void dma_priority_config(uint32_t dma_periph, dma_channel_enum channelx, uint32_
 
 /*!
 <<<<<<< HEAD
-    \brief      configure transfer data size of memory 
+    \brief      configure transfer data size of memory
 =======
     \brief      configure transfer data size of memory
 >>>>>>> origin/main
@@ -594,11 +594,11 @@ void dma_memory_width_config(uint32_t dma_periph, dma_channel_enum channelx, uin
 {
     uint32_t ctl;
 <<<<<<< HEAD
-    
+
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
         DMA_WRONG_HANDLE
     }
-    
+
 =======
 
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
@@ -616,7 +616,7 @@ void dma_memory_width_config(uint32_t dma_periph, dma_channel_enum channelx, uin
 
 /*!
 <<<<<<< HEAD
-    \brief      configure transfer data size of peripheral 
+    \brief      configure transfer data size of peripheral
 =======
     \brief      configure transfer data size of peripheral
 >>>>>>> origin/main
@@ -637,11 +637,11 @@ void dma_periph_width_config(uint32_t dma_periph, dma_channel_enum channelx, uin
 {
     uint32_t ctl;
 <<<<<<< HEAD
-    
+
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
         DMA_WRONG_HANDLE
     }
-    
+
 =======
 
     if(ERROR == dma_periph_and_channel_check(dma_periph, channelx)){
@@ -659,7 +659,7 @@ void dma_periph_width_config(uint32_t dma_periph, dma_channel_enum channelx, uin
 
 /*!
 <<<<<<< HEAD
-    \brief      enable next address increasement algorithm of memory  
+    \brief      enable next address increasement algorithm of memory
 =======
     \brief      enable next address increasement algorithm of memory
 >>>>>>> origin/main
@@ -677,7 +677,7 @@ void dma_memory_increase_enable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -686,7 +686,7 @@ void dma_memory_increase_enable(uint32_t dma_periph, dma_channel_enum channelx)
 
 /*!
 <<<<<<< HEAD
-    \brief      disable next address increasement algorithm of memory  
+    \brief      disable next address increasement algorithm of memory
 =======
     \brief      disable next address increasement algorithm of memory
 >>>>>>> origin/main
@@ -704,7 +704,7 @@ void dma_memory_increase_disable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -727,7 +727,7 @@ void dma_periph_increase_enable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -736,7 +736,7 @@ void dma_periph_increase_enable(uint32_t dma_periph, dma_channel_enum channelx)
 
 /*!
 <<<<<<< HEAD
-    \brief      disable next address increasement algorithm of peripheral 
+    \brief      disable next address increasement algorithm of peripheral
 =======
     \brief      disable next address increasement algorithm of peripheral
 >>>>>>> origin/main
@@ -754,7 +754,7 @@ void dma_periph_increase_disable(uint32_t dma_periph, dma_channel_enum channelx)
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -763,7 +763,7 @@ void dma_periph_increase_disable(uint32_t dma_periph, dma_channel_enum channelx)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure the direction of data transfer on the channel  
+    \brief      configure the direction of data transfer on the channel
 =======
     \brief      configure the direction of data transfer on the channel
 >>>>>>> origin/main
@@ -785,7 +785,7 @@ void dma_transfer_direction_config(uint32_t dma_periph, dma_channel_enum channel
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -798,7 +798,7 @@ void dma_transfer_direction_config(uint32_t dma_periph, dma_channel_enum channel
 
 /*!
 <<<<<<< HEAD
-    \brief      check DMA flag is set or not 
+    \brief      check DMA flag is set or not
 =======
     \brief      check DMA flag is set or not
 >>>>>>> origin/main
@@ -827,7 +827,7 @@ FlagStatus dma_flag_get(uint32_t dma_periph, dma_channel_enum channelx, uint32_t
         reval = RESET;
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -857,7 +857,7 @@ void dma_flag_clear(uint32_t dma_periph, dma_channel_enum channelx, uint32_t fla
 
 /*!
 <<<<<<< HEAD
-    \brief      check DMA flag and interrupt enable bit is set or not 
+    \brief      check DMA flag and interrupt enable bit is set or not
 =======
     \brief      check DMA flag and interrupt enable bit is set or not
 >>>>>>> origin/main
@@ -878,7 +878,7 @@ FlagStatus dma_interrupt_flag_get(uint32_t dma_periph, dma_channel_enum channelx
 {
     uint32_t interrupt_enable = 0U, interrupt_flag = 0U;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -902,8 +902,8 @@ FlagStatus dma_interrupt_flag_get(uint32_t dma_periph, dma_channel_enum channelx
             DMA_WRONG_HANDLE
         }
 <<<<<<< HEAD
-    
-    /* when the interrupt flag is set and enabled, return SET */    
+
+    /* when the interrupt flag is set and enabled, return SET */
 =======
 
     /* when the interrupt flag is set and enabled, return SET */
@@ -941,7 +941,7 @@ void dma_interrupt_flag_clear(uint32_t dma_periph, dma_channel_enum channelx, ui
     \param[in]  dma_periph: DMAx(x=0,1)
       \arg        DMAx(x=0,1)
 <<<<<<< HEAD
-    \param[in]  channelx: specify which DMA channel 
+    \param[in]  channelx: specify which DMA channel
 =======
     \param[in]  channelx: specify which DMA channel
 >>>>>>> origin/main
@@ -961,7 +961,7 @@ void dma_interrupt_enable(uint32_t dma_periph, dma_channel_enum channelx, uint32
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -989,7 +989,7 @@ void dma_interrupt_disable(uint32_t dma_periph, dma_channel_enum channelx, uint3
         DMA_WRONG_HANDLE
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1010,7 +1010,7 @@ static ErrStatus dma_periph_and_channel_check(uint32_t dma_periph, dma_channel_e
 {
     ErrStatus val = SUCCESS;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1021,7 +1021,7 @@ static ErrStatus dma_periph_and_channel_check(uint32_t dma_periph, dma_channel_e
         }
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main

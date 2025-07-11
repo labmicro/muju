@@ -31,6 +31,4 @@ DEFINES += HXTAL_VALUE=8000000U
 LINKSCRIPT = external/base/mcu/$(MCU)/linker/release.ld
 
 # Flash commandfor OpenOCD download target
-FLASH_WRITER_COMMANDS = -c "init" -c "reset halt" -c "flash protect 0 0 last off"
-FLASH_WRITER_COMMANDS += -c "program $(TARGET_ELF) verify;"
-FLASH_WRITER_COMMANDS += -c "reset run; exit 0;"
+FLASH_WRITER_COMMANDS = -c "program $(TARGET_ELF) verify reset exit"

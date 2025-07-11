@@ -2,12 +2,11 @@
     \file    gd32vf103_pmu.c
     \brief   PMU driver
 
-    \version 2019-06-05, V1.0.0, firmware for GD32VF103
-    \version 2020-08-04, V1.1.0, firmware for GD32VF103
+    \version 2019-6-5, V1.0.0, firmware for GD32VF103
 */
 
 /*
-    Copyright (c) 2020, GigaDevice Semiconductor Inc.
+    Copyright (c) 2019, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -34,7 +33,7 @@ OF SUCH DAMAGE.
 */
 
 #include "gd32vf103_pmu.h"
-#include "riscv_encoding.h"
+#include "core_feature_base.h"
 
 /*!
     \brief      reset PMU register
@@ -100,22 +99,23 @@ void pmu_lvd_disable(void)
 void pmu_to_sleepmode(uint8_t sleepmodecmd)
 {
     /* clear sleepdeep bit of RISC-V system control register */
-    clear_csr(0x811U, 0x1U);
+    __set_wfi_sleepmode(WFI_SHALLOW_SLEEP);
 
     /* select WFI or WFE command to enter sleep mode */
-    if(WFI_CMD == sleepmodecmd){
+    if (WFI_CMD == sleepmodecmd) {
         __WFI();
-    }else{
-        clear_csr(mstatus, MSTATUS_MIE);
-        set_csr(0x810U, 0x1U);
-        __WFI();
-        clear_csr(0x810U, 0x1U);
-        set_csr(mstatus, MSTATUS_MIE);
+    } else {
+        __disable_irq();
+        __WFE();
+        __enable_irq();
     }
 }
 
 /*!
     \brief      PMU work at deepsleep mode
+
+    NB: Deep sleep mode sets the clock to IRC8M. Thus, you may need to restore
+        your original clock settings. For example, by calling system_clock_config().
     \param[in]  ldo:
                 only one parameter can be selected which is shown as below:
       \arg        PMU_LDO_NORMAL: LDO work at normal power mode when pmu enter deepsleep mode
@@ -127,26 +127,24 @@ void pmu_to_sleepmode(uint8_t sleepmodecmd)
     \param[out] none
     \retval     none
 */
-void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
+void pmu_to_deepsleepmode(uint32_t ldo, uint8_t deepsleepmodecmd)
 {
     /* clear stbmod and ldolp bits */
     PMU_CTL &= ~((uint32_t)(PMU_CTL_STBMOD | PMU_CTL_LDOLP));
     /* set ldolp bit according to pmu_ldo */
     PMU_CTL |= ldo;
     /* set CSR_SLEEPVALUE bit of RISC-V system control register */
-    set_csr(0x811U, 0x1U);
+    __set_wfi_sleepmode(WFI_DEEP_SLEEP);
     /* select WFI or WFE command to enter deepsleep mode */
-    if(WFI_CMD == deepsleepmodecmd){
+    if (WFI_CMD == deepsleepmodecmd) {
         __WFI();
-    }else{
-        clear_csr(mstatus, MSTATUS_MIE);
-        set_csr(0x810U, 0x1U);
-        __WFI();
-        clear_csr(0x810U, 0x1U);
-        set_csr(mstatus, MSTATUS_MIE);
+    } else {
+        __disable_irq();
+        __WFE();
+        __enable_irq();
     }
     /* reset sleepdeep bit of RISC-V system control register */
-    clear_csr(0x811U, 0x1U);
+    __set_wfi_sleepmode(WFI_SHALLOW_SLEEP);
 }
 
 /*!
@@ -161,7 +159,7 @@ void pmu_to_deepsleepmode(uint32_t ldo,uint8_t deepsleepmodecmd)
 void pmu_to_standbymode(uint8_t standbymodecmd)
 {
     /* set CSR_SLEEPVALUE bit of RISC-V system control register */
-    set_csr(0x811U, 0x1U);
+    __set_wfi_sleepmode(WFI_DEEP_SLEEP);
 
     /* set stbmod bit */
     PMU_CTL |= PMU_CTL_STBMOD;
@@ -170,16 +168,14 @@ void pmu_to_standbymode(uint8_t standbymodecmd)
     PMU_CTL |= PMU_CTL_WURST;
 
     /* select WFI or WFE command to enter standby mode */
-    if(WFI_CMD == standbymodecmd){
+    if (WFI_CMD == standbymodecmd) {
         __WFI();
-    }else{
-        clear_csr(mstatus, MSTATUS_MIE);
-        set_csr(0x810U, 0x1U);
-        __WFI();
-        clear_csr(0x810U, 0x1U);
-        set_csr(mstatus, MSTATUS_MIE);
+        // system resets on wakeup
+    } else {
+        __disable_irq();
+        __WFE();
+        // system resets on wakeup
     }
-    clear_csr(0x811U, 0x1U);
 }
 
 /*!
@@ -238,9 +234,9 @@ void pmu_backup_write_disable(void)
 */
 FlagStatus pmu_flag_get(uint32_t flag)
 {
-    if(PMU_CS & flag){
+    if (PMU_CS & flag) {
         return  SET;
-    }else{
+    } else {
         return  RESET;
     }
 }
@@ -256,16 +252,16 @@ FlagStatus pmu_flag_get(uint32_t flag)
 */
 void pmu_flag_clear(uint32_t flag_reset)
 {
-    switch(flag_reset){
-    case PMU_FLAG_RESET_WAKEUP:
-        /* reset wakeup flag */
-        PMU_CTL |= PMU_CTL_WURST;
-        break;
-    case PMU_FLAG_RESET_STANDBY:
-        /* reset standby flag */
-        PMU_CTL |= PMU_CTL_STBRST;
-        break;
-    default :
-        break;
+    switch (flag_reset) {
+        case PMU_FLAG_RESET_WAKEUP:
+            /* reset wakeup flag */
+            PMU_CTL |= PMU_CTL_WURST;
+            break;
+        case PMU_FLAG_RESET_STANDBY:
+            /* reset standby flag */
+            PMU_CTL |= PMU_CTL_STBRST;
+            break;
+        default :
+            break;
     }
 }

@@ -230,6 +230,15 @@ OF SUCH DAMAGE.
 #define RCU_DSV_DSLPVS                  BITS(0,1)                 /*!< deep-sleep mode voltage select */
 
 /* constants definitions */
+/* define clock source */
+#define SEL_IRC8M                   ((uint16_t)0U)
+#define SEL_HXTAL                   ((uint16_t)1U)
+#define SEL_PLL                     ((uint16_t)2U)
+
+/* define startup timeout count */
+#define OSC_STARTUP_TIMEOUT         ((uint32_t)0xFFFFFU)
+#define LXTAL_STARTUP_TIMEOUT       ((uint32_t)0x3FFFFFFU)
+
 /* define the peripheral clock enable bit position and its register index offset */
 #define RCU_REGIDX_BIT(regidx, bitpos)      (((uint32_t)(regidx) << 6) | (uint32_t)(bitpos))
 #define RCU_REG_VAL(periph)                 (REG32(RCU + ((uint32_t)(periph) >> 6)))

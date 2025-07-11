@@ -171,17 +171,75 @@ typedef enum IRQn
     ECLIC_NUM_INTERRUPTS
 } IRQn_Type;
 
-/* includes */
-#ifdef USE_DRIVERS
-  #include "system_gd32vf103.h"
-#endif
+#define SOC_INT_MAX ECLIC_NUM_INTERRUPTS
 
+/* =========================================================================================================================== */
+/* ================                                  Exception Code Definition                                ================ */
+/* =========================================================================================================================== */
+
+typedef enum EXCn {
+    /* =======================================  Nuclei N/NX Specific Exception Code  ======================================== */
+    InsUnalign_EXCn          =   0,              /*!<  Instruction address misaligned */
+    InsAccFault_EXCn         =   1,              /*!<  Instruction access fault */
+    IlleIns_EXCn             =   2,              /*!<  Illegal instruction */
+    Break_EXCn               =   3,              /*!<  Beakpoint */
+    LdAddrUnalign_EXCn       =   4,              /*!<  Load address misaligned */
+    LdFault_EXCn             =   5,              /*!<  Load access fault */
+    StAddrUnalign_EXCn       =   6,              /*!<  Store or AMO address misaligned */
+    StAccessFault_EXCn       =   7,              /*!<  Store or AMO access fault */
+    UmodeEcall_EXCn          =   8,              /*!<  Environment call from User mode */
+    SmodeEcall_EXCn          =   9,              /*!<  Environment call from S-mode */
+    MmodeEcall_EXCn          =  11,              /*!<  Environment call from Machine mode */
+    InsPageFault_EXCn        =  12,              /*!<  Instruction page fault */
+    LdPageFault_EXCn         =  13,              /*!<  Load page fault */
+    StPageFault_EXCn         =  15,              /*!<  Store or AMO page fault */
+    NMI_EXCn                 =  0xfff,           /*!<  NMI interrupt */
+} EXCn_Type;
+
+
+/* =========================================================================================================================== */
+/* ================                           Processor and Core Peripheral Section                           ================ */
+/* =========================================================================================================================== */
+
+/* ToDo: set the defines according your Device */
+/* ToDo: define the correct core revision */
+#define __NUCLEI_N_REV            0x0100    /*!< Core Revision r1p0 */
+
+/* ToDo: define the correct core features for the nuclei_soc */
+#define __ECLIC_PRESENT           1                     /*!< Set to 1 if ECLIC is present */
+#define __ECLIC_BASEADDR          0xD2000000UL          /*!< Set to ECLIC baseaddr of your device */
+
+#define __ECLIC_INTCTLBITS        4                     /*!< Set to 1 - 8, the number of hardware bits are actually implemented in the clicintctl registers. */
+#define __ECLIC_INTNUM            86                    /*!< Set to 1 - 1005, the external interrupt number of ECLIC Unit */
+#define __SYSTIMER_PRESENT        1                     /*!< Set to 1 if System Timer is present */
+#define __SYSTIMER_BASEADDR       0xD1000000UL          /*!< Set to SysTimer baseaddr of your device */
+
+/*!< Set to 0, 1, or 2, 0 not present, 1 single floating point unit present, 2 double floating point unit present */
+#define __FPU_PRESENT             0
+
+#define __DSP_PRESENT             0                     /*!< Set to 1 if DSP is present */
+#define __PMP_PRESENT             1                     /*!< Set to 1 if PMP is present */
+#define __PMP_ENTRY_NUM           8                     /*!< Set to 8 or 16, the number of PMP entries */
+#define __ICACHE_PRESENT          0                     /*!< Set to 1 if I-Cache is present */
+#define __DCACHE_PRESENT          0                     /*!< Set to 1 if D-Cache is present */
+#define __INC_INTRINSIC_API       0                     /*!< Set to 1 if intrinsic api header files need to be included */
+#define __Vendor_SysTickConfig    0                     /*!< Set to 1 if different SysTick Config is used */
+#define __Vendor_EXCEPTION        0                     /*!< Set to 1 if vendor exception hander is present */
+
+#define SysTimerSW_IRQn   CLIC_INT_SFT
+#define SysTimer_IRQn     CLIC_INT_TMR
+
+/* includes */
+#include <nmsis_core.h>                         /*!< Nuclei N/NX class processor and core peripherals */
+#include "system_gd32vf103.h"
 #include <stdint.h>
-#include <stdbool.h>
+
+// The TIMER frequency is just the RTC frequency
+#define SOC_TIMER_FREQ     ((uint32_t)SystemCoreClock >> 2)  //LXTAL_VALUE units HZ
 
 /* enum definitions */
 typedef enum {DISABLE = 0, ENABLE = !DISABLE} EventStatus, ControlStatus;
-// typedef enum {FALSE = 0, TRUE = !FALSE} bool;
+typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 typedef enum {RESET = 0, SET = !RESET} FlagStatus;
 typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrStatus;
 
@@ -233,28 +291,27 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrStatus;
 #define USBFS_BASE            (AHB1_BUS_BASE + 0x0FFE8000U)  /*!< USBFS base address               */
 
 #ifdef USE_DRIVERS
-  #include "gd32vf103_adc.h"
-  #include "gd32vf103_bkp.h"
-  #include "gd32vf103_can.h"
-  #include "gd32vf103_crc.h"
-  #include "gd32vf103_dac.h"
-  #include "gd32vf103_dma.h"
-  #include "gd32vf103_eclic.h"
-  #include "gd32vf103_exmc.h"
-  #include "gd32vf103_exti.h"
-  #include "gd32vf103_fmc.h"
-  #include "gd32vf103_gpio.h"
-  #include "gd32vf103_i2c.h"
-  #include "gd32vf103_fwdgt.h"
-  #include "gd32vf103_dbg.h"
-  #include "gd32vf103_pmu.h"
-  #include "gd32vf103_rcu.h"
-  #include "gd32vf103_rtc.h"
-  #include "gd32vf103_spi.h"
-  #include "gd32vf103_timer.h"
-  #include "gd32vf103_usart.h"
-  #include "gd32vf103_wwdgt.h"
-  #include "n200_func.h"
+    #include "gd32vf103_adc.h"
+    #include "gd32vf103_bkp.h"
+    #include "gd32vf103_can.h"
+    #include "gd32vf103_crc.h"
+    #include "gd32vf103_dac.h"
+    #include "gd32vf103_dma.h"
+    #include "gd32vf103_eclic.h"
+    #include "gd32vf103_exmc.h"
+    #include "gd32vf103_exti.h"
+    #include "gd32vf103_fmc.h"
+    #include "gd32vf103_gpio.h"
+    #include "gd32vf103_i2c.h"
+    #include "gd32vf103_fwdgt.h"
+    #include "gd32vf103_dbg.h"
+    #include "gd32vf103_pmu.h"
+    #include "gd32vf103_rcu.h"
+    #include "gd32vf103_rtc.h"
+    #include "gd32vf103_spi.h"
+    #include "gd32vf103_timer.h"
+    #include "gd32vf103_usart.h"
+    #include "gd32vf103_wwdgt.h"
 #endif /* USE_DRIVERS */
 
 #ifdef __cplusplus

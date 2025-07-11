@@ -12,27 +12,27 @@
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
 <<<<<<< HEAD
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 =======
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -85,7 +85,7 @@ OF SUCH DAMAGE.
 
 /*!
 <<<<<<< HEAD
-    \brief      reset ADC 
+    \brief      reset ADC
 =======
     \brief      reset ADC
 >>>>>>> origin/main
@@ -163,11 +163,11 @@ void adc_special_function_config(uint32_t adc_periph, uint32_t function, Control
             /* enable inserted channel group convert automatically */
             ADC_CTL0(adc_periph) |= ADC_INSERTED_CHANNEL_AUTO;
 <<<<<<< HEAD
-        } 
+        }
         if(0U != (function & ADC_CONTINUOUS_MODE)){
             /* enable continuous mode */
             ADC_CTL1(adc_periph) |= ADC_CONTINUOUS_MODE;
-        }        
+        }
 =======
         }
         if(0U != (function & ADC_CONTINUOUS_MODE)){
@@ -184,11 +184,11 @@ void adc_special_function_config(uint32_t adc_periph, uint32_t function, Control
             /* disable inserted channel group convert automatically */
             ADC_CTL0(adc_periph) &= ~ADC_INSERTED_CHANNEL_AUTO;
 <<<<<<< HEAD
-        } 
+        }
         if(0U != (function & ADC_CONTINUOUS_MODE)){
             /* disable continuous mode */
             ADC_CTL1(adc_periph) &= ~ADC_CONTINUOUS_MODE;
-        }       
+        }
 =======
         }
         if(0U != (function & ADC_CONTINUOUS_MODE)){
@@ -201,7 +201,7 @@ void adc_special_function_config(uint32_t adc_periph, uint32_t function, Control
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC data alignment 
+    \brief      configure ADC data alignment
 =======
     \brief      configure ADC data alignment
 >>>>>>> origin/main
@@ -236,7 +236,7 @@ void adc_enable(uint32_t adc_periph)
         /* enable ADC */
         ADC_CTL1(adc_periph) |= (uint32_t)ADC_CTL1_ADCON;
 <<<<<<< HEAD
-    }       
+    }
 =======
     }
 >>>>>>> origin/main
@@ -300,7 +300,7 @@ void adc_tempsensor_vrefint_disable(void)
 
 /*!
 <<<<<<< HEAD
-    \brief      enable DMA request 
+    \brief      enable DMA request
 =======
     \brief      enable DMA request
 >>>>>>> origin/main
@@ -316,7 +316,7 @@ void adc_dma_mode_enable(uint32_t adc_periph)
 
 /*!
 <<<<<<< HEAD
-    \brief      disable DMA request 
+    \brief      disable DMA request
 =======
     \brief      disable DMA request
 >>>>>>> origin/main
@@ -332,7 +332,7 @@ void adc_dma_mode_disable(uint32_t adc_periph)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC discontinuous mode 
+    \brief      configure ADC discontinuous mode
 =======
     \brief      configure ADC discontinuous mode
 >>>>>>> origin/main
@@ -403,7 +403,7 @@ void adc_channel_length_config(uint32_t adc_periph, uint8_t adc_channel_group, u
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC regular channel 
+    \brief      configure ADC regular channel
 =======
     \brief      configure ADC regular channel
 >>>>>>> origin/main
@@ -412,7 +412,7 @@ void adc_channel_length_config(uint32_t adc_periph, uint8_t adc_channel_group, u
     \param[in]  adc_channel: the selected ADC channel
                 only one parameter can be selected which is shown as below:
 <<<<<<< HEAD
-      \arg        ADC_CHANNEL_x(x=0..17)(x=16 and x=17 are only for ADC0): ADC Channelx 
+      \arg        ADC_CHANNEL_x(x=0..17)(x=16 and x=17 are only for ADC0): ADC Channelx
 =======
       \arg        ADC_CHANNEL_x(x=0..17)(x=16 and x=17 are only for ADC0): ADC Channelx
 >>>>>>> origin/main
@@ -433,7 +433,7 @@ void adc_regular_channel_config(uint32_t adc_periph, uint8_t rank, uint8_t adc_c
 {
     uint32_t rsq,sampt;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -462,7 +462,7 @@ void adc_regular_channel_config(uint32_t adc_periph, uint8_t rank, uint8_t adc_c
     }else{
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -487,7 +487,7 @@ void adc_regular_channel_config(uint32_t adc_periph, uint8_t rank, uint8_t adc_c
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC inserted channel 
+    \brief      configure ADC inserted channel
 =======
     \brief      configure ADC inserted channel
 >>>>>>> origin/main
@@ -522,7 +522,7 @@ void adc_inserted_channel_config(uint32_t adc_periph, uint8_t rank, uint8_t adc_
     ADC_ISQ(adc_periph) = isq;
 
 <<<<<<< HEAD
-    /* ADC sampling time config */  
+    /* ADC sampling time config */
 =======
     /* ADC sampling time config */
 >>>>>>> origin/main
@@ -546,7 +546,7 @@ void adc_inserted_channel_config(uint32_t adc_periph, uint8_t rank, uint8_t adc_
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC inserted channel offset 
+    \brief      configure ADC inserted channel offset
 =======
     \brief      configure ADC inserted channel offset
 >>>>>>> origin/main
@@ -569,7 +569,7 @@ void adc_inserted_channel_offset_config(uint32_t adc_periph, uint8_t inserted_ch
     inserted_length = (uint8_t)GET_BITS(ADC_ISQ(adc_periph) , 20U , 21U);
     num = ((uint32_t)ADC_OFFSET_LENGTH - ((uint32_t)inserted_length - (uint32_t)inserted_channel));
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -579,11 +579,11 @@ void adc_inserted_channel_offset_config(uint32_t adc_periph, uint8_t inserted_ch
         /* config the offset of the selected channels */
         REG32((adc_periph) + 0x14U + num) = IOFFX_IOFF((uint32_t)offset);
 <<<<<<< HEAD
-    }  
+    }
 }
 
 /*!
-    \brief      configure ADC external trigger source 
+    \brief      configure ADC external trigger source
 =======
     }
 }
@@ -600,39 +600,39 @@ void adc_inserted_channel_offset_config(uint32_t adc_periph, uint8_t inserted_ch
                 only one parameter can be selected
                 for regular channel:
 <<<<<<< HEAD
-      \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH0: TIMER0 CH0 event select 
-      \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH1: TIMER0 CH1 event select 
-      \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH2: TIMER0 CH2 event select 
-      \arg        ADC0_1_EXTTRIG_REGULAR_T1_CH1: TIMER1 CH1 event select 
-      \arg        ADC0_1_EXTTRIG_REGULAR_T2_TRGO: TIMER2 TRGO event select 
-      \arg        ADC0_1_EXTTRIG_REGULAR_T3_CH3: TIMER3 CH3 event select 
-      \arg        ADC0_1_EXTTRIG_REGULAR_T7_TRGO: TIMER7 TRGO event select 
-      \arg        ADC0_1_EXTTRIG_REGULAR_EXTI_11: external interrupt line 11 
-      \arg        ADC2_EXTTRIG_REGULAR_T2_CH0: TIMER2 CH0 event select 
-      \arg        ADC2_EXTTRIG_REGULAR_T1_CH2: TIMER1 CH2 event select 
-      \arg        ADC2_EXTTRIG_REGULAR_T0_CH2: TIMER0 CH2 event select 
-      \arg        ADC2_EXTTRIG_REGULAR_T7_CH0: TIMER7 CH0 event select 
-      \arg        ADC2_EXTTRIG_REGULAR_T7_TRGO: TIMER7 TRGO event select 
-      \arg        ADC2_EXTTRIG_REGULAR_T4_CH0: TIMER4 CH0 event select 
+      \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH0: TIMER0 CH0 event select
+      \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH1: TIMER0 CH1 event select
+      \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH2: TIMER0 CH2 event select
+      \arg        ADC0_1_EXTTRIG_REGULAR_T1_CH1: TIMER1 CH1 event select
+      \arg        ADC0_1_EXTTRIG_REGULAR_T2_TRGO: TIMER2 TRGO event select
+      \arg        ADC0_1_EXTTRIG_REGULAR_T3_CH3: TIMER3 CH3 event select
+      \arg        ADC0_1_EXTTRIG_REGULAR_T7_TRGO: TIMER7 TRGO event select
+      \arg        ADC0_1_EXTTRIG_REGULAR_EXTI_11: external interrupt line 11
+      \arg        ADC2_EXTTRIG_REGULAR_T2_CH0: TIMER2 CH0 event select
+      \arg        ADC2_EXTTRIG_REGULAR_T1_CH2: TIMER1 CH2 event select
+      \arg        ADC2_EXTTRIG_REGULAR_T0_CH2: TIMER0 CH2 event select
+      \arg        ADC2_EXTTRIG_REGULAR_T7_CH0: TIMER7 CH0 event select
+      \arg        ADC2_EXTTRIG_REGULAR_T7_TRGO: TIMER7 TRGO event select
+      \arg        ADC2_EXTTRIG_REGULAR_T4_CH0: TIMER4 CH0 event select
       \arg        ADC2_EXTTRIG_REGULAR_T4_CH2: TIMER4 CH2 event select
-      \arg        ADC0_1_2_EXTTRIG_REGULAR_NONE: software trigger      
+      \arg        ADC0_1_2_EXTTRIG_REGULAR_NONE: software trigger
                 for inserted channel:
-      \arg        ADC0_1_EXTTRIG_INSERTED_T0_TRGO: TIMER0 TRGO event select 
-      \arg        ADC0_1_EXTTRIG_INSERTED_T0_CH3: TIMER0 CH3 event select 
-      \arg        ADC0_1_EXTTRIG_INSERTED_T1_TRGO: TIMER1 TRGO event select 
-      \arg        ADC0_1_EXTTRIG_INSERTED_T1_CH0: TIMER1 CH0 event select 
-      \arg        ADC0_1_EXTTRIG_INSERTED_T2_CH3: TIMER2 CH3 event select 
-      \arg        ADC0_1_EXTTRIG_INSERTED_T3_TRGO: TIMER3 TRGO event select 
-      \arg        ADC0_1_EXTTRIG_INSERTED_EXTI_15: external interrupt line 15 
-      \arg        ADC0_1_EXTTRIG_INSERTED_T7_CH3: TIMER7 CH3 event select 
-      \arg        ADC2_EXTTRIG_INSERTED_T0_TRGO: TIMER0 TRGO event select 
-      \arg        ADC2_EXTTRIG_INSERTED_T0_CH3: TIMER0 CH3 event select 
-      \arg        ADC2_EXTTRIG_INSERTED_T3_CH2: TIMER3 CH2 event select 
-      \arg        ADC2_EXTTRIG_INSERTED_T7_CH1: TIMER7 CH1 event select 
-      \arg        ADC2_EXTTRIG_INSERTED_T7_CH3: TIMER7 CH3 event select 
+      \arg        ADC0_1_EXTTRIG_INSERTED_T0_TRGO: TIMER0 TRGO event select
+      \arg        ADC0_1_EXTTRIG_INSERTED_T0_CH3: TIMER0 CH3 event select
+      \arg        ADC0_1_EXTTRIG_INSERTED_T1_TRGO: TIMER1 TRGO event select
+      \arg        ADC0_1_EXTTRIG_INSERTED_T1_CH0: TIMER1 CH0 event select
+      \arg        ADC0_1_EXTTRIG_INSERTED_T2_CH3: TIMER2 CH3 event select
+      \arg        ADC0_1_EXTTRIG_INSERTED_T3_TRGO: TIMER3 TRGO event select
+      \arg        ADC0_1_EXTTRIG_INSERTED_EXTI_15: external interrupt line 15
+      \arg        ADC0_1_EXTTRIG_INSERTED_T7_CH3: TIMER7 CH3 event select
+      \arg        ADC2_EXTTRIG_INSERTED_T0_TRGO: TIMER0 TRGO event select
+      \arg        ADC2_EXTTRIG_INSERTED_T0_CH3: TIMER0 CH3 event select
+      \arg        ADC2_EXTTRIG_INSERTED_T3_CH2: TIMER3 CH2 event select
+      \arg        ADC2_EXTTRIG_INSERTED_T7_CH1: TIMER7 CH1 event select
+      \arg        ADC2_EXTTRIG_INSERTED_T7_CH3: TIMER7 CH3 event select
       \arg        ADC2_EXTTRIG_INSERTED_T4_TRGO: TIMER4 TRGO event select
       \arg        ADC2_EXTTRIG_INSERTED_T4_CH3: TIMER4 CH3 event select
-      \arg        ADC0_1_2_EXTTRIG_INSERTED_NONE: software trigger      
+      \arg        ADC0_1_2_EXTTRIG_INSERTED_NONE: software trigger
 =======
       \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH0: TIMER0 CH0 event select
       \arg        ADC0_1_EXTTRIG_REGULAR_T0_CH1: TIMER0 CH1 event select
@@ -673,7 +673,7 @@ void adc_inserted_channel_offset_config(uint32_t adc_periph, uint8_t inserted_ch
 */
 void adc_external_trigger_source_config(uint32_t adc_periph, uint8_t adc_channel_group, uint32_t external_trigger_source)
 <<<<<<< HEAD
-{   
+{
 =======
 {
 >>>>>>> origin/main
@@ -695,7 +695,7 @@ void adc_external_trigger_source_config(uint32_t adc_periph, uint8_t adc_channel
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC external trigger 
+    \brief      configure ADC external trigger
 =======
     \brief      configure ADC external trigger
 >>>>>>> origin/main
@@ -719,7 +719,7 @@ void adc_external_trigger_config(uint32_t adc_periph, uint8_t adc_channel_group,
             /* enable ADC inserted channel group external trigger */
             ADC_CTL1(adc_periph) |= ADC_CTL1_ETEIC;
 <<<<<<< HEAD
-        }        
+        }
 =======
         }
 >>>>>>> origin/main
@@ -732,7 +732,7 @@ void adc_external_trigger_config(uint32_t adc_periph, uint8_t adc_channel_group,
             /* disable ADC regular channel group external trigger */
             ADC_CTL1(adc_periph) &= ~ADC_CTL1_ETEIC;
 <<<<<<< HEAD
-        }      
+        }
 =======
         }
 >>>>>>> origin/main
@@ -741,7 +741,7 @@ void adc_external_trigger_config(uint32_t adc_periph, uint8_t adc_channel_group,
 
 /*!
 <<<<<<< HEAD
-    \brief      enable ADC software trigger 
+    \brief      enable ADC software trigger
 =======
     \brief      enable ADC software trigger
 >>>>>>> origin/main
@@ -767,7 +767,7 @@ void adc_software_trigger_enable(uint32_t adc_periph, uint8_t adc_channel_group)
 
 /*!
 <<<<<<< HEAD
-    \brief      read ADC regular group data register 
+    \brief      read ADC regular group data register
 =======
     \brief      read ADC regular group data register
 >>>>>>> origin/main
@@ -783,7 +783,7 @@ uint16_t adc_regular_data_read(uint32_t adc_periph)
 
 /*!
 <<<<<<< HEAD
-    \brief      read ADC inserted group data register 
+    \brief      read ADC inserted group data register
 =======
     \brief      read ADC inserted group data register
 >>>>>>> origin/main
@@ -840,7 +840,7 @@ uint32_t adc_sync_mode_convert_value_read(void)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC analog watchdog single channel 
+    \brief      configure ADC analog watchdog single channel
 =======
     \brief      configure ADC analog watchdog single channel
 >>>>>>> origin/main
@@ -861,10 +861,10 @@ void adc_watchdog_single_channel_enable(uint32_t adc_periph, uint8_t adc_channel
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC analog watchdog group channel 
+    \brief      configure ADC analog watchdog group channel
     \param[in]  adc_periph: ADCx, x=0,1,2
     \param[in]  adc_channel_group: the channel group use analog watchdog
-                only one parameter can be selected which is shown as below: 
+                only one parameter can be selected which is shown as below:
 =======
     \brief      configure ADC analog watchdog group channel
     \param[in]  adc_periph: ADCx, x=0,1,2
@@ -901,7 +901,7 @@ void adc_watchdog_group_channel_enable(uint32_t adc_periph, uint8_t adc_channel_
 
 /*!
 <<<<<<< HEAD
-    \brief      disable ADC analog watchdog 
+    \brief      disable ADC analog watchdog
 =======
     \brief      disable ADC analog watchdog
 >>>>>>> origin/main
@@ -916,7 +916,7 @@ void adc_watchdog_disable(uint32_t adc_periph)
 
 /*!
 <<<<<<< HEAD
-    \brief      configure ADC analog watchdog threshold 
+    \brief      configure ADC analog watchdog threshold
 =======
     \brief      configure ADC analog watchdog threshold
 >>>>>>> origin/main
@@ -1066,7 +1066,7 @@ void adc_interrupt_flag_clear(uint32_t adc_periph, uint32_t adc_interrupt)
 
 /*!
 <<<<<<< HEAD
-    \brief      enable ADC interrupt 
+    \brief      enable ADC interrupt
 =======
     \brief      enable ADC interrupt
 >>>>>>> origin/main
@@ -1085,13 +1085,13 @@ void adc_interrupt_enable(uint32_t adc_periph, uint32_t adc_interrupt)
     if(0U != (adc_interrupt & ADC_INT_WDE)){
         ADC_CTL0(adc_periph) |= (uint32_t) ADC_CTL0_WDEIE;
 <<<<<<< HEAD
-    }  
+    }
     /* enable ADC end of group conversion interrupt */
-    if(0U != (adc_interrupt & ADC_INT_EOC)){      
+    if(0U != (adc_interrupt & ADC_INT_EOC)){
         ADC_CTL0(adc_periph) |= (uint32_t) ADC_CTL0_EOCIE;
-    }  
+    }
     /* enable ADC end of inserted group conversion interrupt */
-    if(0U != (adc_interrupt & ADC_INT_EOIC)){      
+    if(0U != (adc_interrupt & ADC_INT_EOIC)){
 =======
     }
     /* enable ADC end of group conversion interrupt */
@@ -1107,7 +1107,7 @@ void adc_interrupt_enable(uint32_t adc_periph, uint32_t adc_interrupt)
 
 /*!
 <<<<<<< HEAD
-    \brief      disable ADC interrupt 
+    \brief      disable ADC interrupt
 =======
     \brief      disable ADC interrupt
 >>>>>>> origin/main
@@ -1122,17 +1122,17 @@ void adc_interrupt_enable(uint32_t adc_periph, uint32_t adc_interrupt)
 */
 void adc_interrupt_disable(uint32_t adc_periph, uint32_t adc_interrupt)
 <<<<<<< HEAD
-{  
+{
     /* disable ADC analog watchdog interrupt */
-    if(0U != (adc_interrupt & ADC_INT_WDE)){  
+    if(0U != (adc_interrupt & ADC_INT_WDE)){
         ADC_CTL0(adc_periph) &= ~(uint32_t) ADC_CTL0_WDEIE;
-    }  
+    }
     /* disable ADC end of group conversion interrupt */
-    if(0U != (adc_interrupt & ADC_INT_EOC)){      
+    if(0U != (adc_interrupt & ADC_INT_EOC)){
         ADC_CTL0(adc_periph) &= ~(uint32_t) ADC_CTL0_EOCIE;
-    }  
+    }
     /* disable ADC end of inserted group conversion interrupt */
-    if(0U != (adc_interrupt & ADC_INT_EOIC)){      
+    if(0U != (adc_interrupt & ADC_INT_EOIC)){
 =======
 {
     /* disable ADC analog watchdog interrupt */

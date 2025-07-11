@@ -10,27 +10,27 @@
     All rights reserved.
 
 <<<<<<< HEAD
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 =======
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -204,7 +204,7 @@ void SystemInit(void)
 
     /* reset PLLSEL, PREDV0_LSB, PLLMF, USBFSPSC bits */
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -233,7 +233,7 @@ void SystemInit(void)
     /* Configure the System clock source, PLL Multiplier, AHB/APBx prescalers and Flash settings */
     system_clock_config();
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -256,10 +256,10 @@ static void system_clock_hxtal(void)
     uint32_t timeout = 0U;
     uint32_t stab_flag = 0U;
 <<<<<<< HEAD
-    
+
     /* enable HXTAL */
     RCU_CTL |= RCU_CTL_HXTALEN;
-    
+
 =======
 
     /* enable HXTAL */
@@ -272,7 +272,7 @@ static void system_clock_hxtal(void)
         stab_flag = (RCU_CTL & RCU_CTL_HXTALSTB);
     }while((0U == stab_flag) && (HXTAL_STARTUP_TIMEOUT != timeout));
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -282,7 +282,7 @@ static void system_clock_hxtal(void)
         }
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -293,11 +293,11 @@ static void system_clock_hxtal(void)
     /* APB1 = AHB/2 */
     RCU_CFG0 |= RCU_APB1_CKAHB_DIV2;
 <<<<<<< HEAD
-    
+
     /* select HXTAL as system clock */
     RCU_CFG0 &= ~RCU_CFG0_SCS;
     RCU_CFG0 |= RCU_CKSYSSRC_HXTAL;
-    
+
 =======
 
     /* select HXTAL as system clock */
@@ -660,11 +660,11 @@ static void system_clock_72m_hxtal(void)
 
 #elif defined(GD32F10X_CL)
 <<<<<<< HEAD
-    /* CK_PLL = (CK_PREDIV0) * 18 = 72 MHz */ 
+    /* CK_PLL = (CK_PREDIV0) * 18 = 72 MHz */
     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
     RCU_CFG0 |= (RCU_PLLSRC_HXTAL | RCU_PLL_MUL18);
 
-    /* CK_PREDIV0 = (CK_HXTAL)/5 *8 /10 = 4 MHz */ 
+    /* CK_PREDIV0 = (CK_HXTAL)/5 *8 /10 = 4 MHz */
 =======
     /* CK_PLL = (CK_PREDIV0) * 18 = 72 MHz */
     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
@@ -820,11 +820,11 @@ static void system_clock_108m_hxtal(void)
 
 #elif defined(GD32F10X_CL)
 <<<<<<< HEAD
-    /* CK_PLL = (CK_PREDIV0) * 27 = 108 MHz */ 
+    /* CK_PLL = (CK_PREDIV0) * 27 = 108 MHz */
     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
     RCU_CFG0 |= (RCU_PLLSRC_HXTAL | RCU_PLL_MUL27);
 
-    /* CK_PREDIV0 = (CK_HXTAL)/5 *8 /10 = 4 MHz */ 
+    /* CK_PREDIV0 = (CK_HXTAL)/5 *8 /10 = 4 MHz */
 =======
     /* CK_PLL = (CK_PREDIV0) * 27 = 108 MHz */
     RCU_CFG0 &= ~(RCU_CFG0_PLLMF | RCU_CFG0_PLLMF_4);
@@ -870,7 +870,7 @@ static void system_clock_48m_irc8m(void)
     uint32_t timeout = 0U;
     uint32_t stab_flag = 0U;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -930,7 +930,7 @@ static void system_clock_72m_irc8m(void)
     uint32_t timeout = 0U;
     uint32_t stab_flag = 0U;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -990,7 +990,7 @@ static void system_clock_108m_irc8m(void)
     uint32_t timeout = 0U;
     uint32_t stab_flag = 0U;
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -1064,7 +1064,7 @@ void SystemCoreClockUpdate(void)
             SystemCoreClock = IRC8M_VALUE;
             break;
 <<<<<<< HEAD
-            
+
 =======
 
 >>>>>>> origin/main
@@ -1073,7 +1073,7 @@ void SystemCoreClockUpdate(void)
             SystemCoreClock = HXTAL_VALUE;
             break;
 <<<<<<< HEAD
-            
+
 =======
 
 >>>>>>> origin/main
@@ -1089,7 +1089,7 @@ void SystemCoreClockUpdate(void)
                 /* PLL clock source is HXTAL */
                 ck_src = HXTAL_VALUE;
 <<<<<<< HEAD
-            
+
 =======
 
 >>>>>>> origin/main
