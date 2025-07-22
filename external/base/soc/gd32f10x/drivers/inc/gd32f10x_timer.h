@@ -12,27 +12,27 @@
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
 <<<<<<< HEAD
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 =======
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -136,7 +136,7 @@ OF SUCH DAMAGE.
 #define TIMER_SMCFG_SMC1                 BIT(14)             /*!< part of SMC for enable external clock mode 1 */
 #define TIMER_SMCFG_ETP                  BIT(15)             /*!< external trigger polarity */
 <<<<<<< HEAD
- 
+
 =======
 
 >>>>>>> origin/main
@@ -278,7 +278,7 @@ OF SUCH DAMAGE.
 /* TIMER init parameter struct definitions */
 typedef struct
 <<<<<<< HEAD
-{ 
+{
 =======
 {
 >>>>>>> origin/main
@@ -293,7 +293,7 @@ typedef struct
 /* break parameter struct definitions*/
 typedef struct
 <<<<<<< HEAD
-{ 
+{
 =======
 {
 >>>>>>> origin/main
@@ -309,7 +309,7 @@ typedef struct
 /* channel output parameter struct definitions */
 typedef struct
 <<<<<<< HEAD
-{ 
+{
 =======
 {
 >>>>>>> origin/main
@@ -324,7 +324,7 @@ typedef struct
 /* channel input parameter struct definitions */
 typedef struct
 <<<<<<< HEAD
-{ 
+{
 =======
 {
 >>>>>>> origin/main
@@ -353,7 +353,7 @@ typedef struct
 #define TIMER_INT_FLAG_CMT                  TIMER_INT_CMT                           /*!< channel commutation interrupt flag */
 #define TIMER_INT_FLAG_TRG                  TIMER_INT_TRG                           /*!< trigger interrupt */
 <<<<<<< HEAD
-#define TIMER_INT_FLAG_BRK                  TIMER_INT_BRK  
+#define TIMER_INT_FLAG_BRK                  TIMER_INT_BRK
 =======
 #define TIMER_INT_FLAG_BRK                  TIMER_INT_BRK
 >>>>>>> origin/main
@@ -381,7 +381,7 @@ typedef struct
 #define TIMER_DMA_TRGD                      ((uint16_t)TIMER_DMAINTEN_TRGDEN)       /*!< trigger DMA enable */
 
 <<<<<<< HEAD
-/* channel DMA request source selection */ 
+/* channel DMA request source selection */
 =======
 /* channel DMA request source selection */
 >>>>>>> origin/main
@@ -475,7 +475,7 @@ typedef struct
 #define TIMER_ROS_STATE_DISABLE             ((uint16_t)0x0000U)                     /*!< when POEN bit is set, the channel output signals(CHx_O/CHx_ON) are disabled */
 
 <<<<<<< HEAD
-/* idle mode off-state configure */                                                 
+/* idle mode off-state configure */
 =======
 /* idle mode off-state configure */
 >>>>>>> origin/main
@@ -524,11 +524,11 @@ typedef struct
 #define TIMER_OCN_POLARITY_LOW              ((uint16_t)0x0008U)                     /*!< channel complementary output polarity is low */
 
 <<<<<<< HEAD
-/* idle state of channel output */ 
+/* idle state of channel output */
 #define TIMER_OC_IDLE_STATE_HIGH            ((uint16_t)0x0100)                      /*!< idle state of channel output is high */
 #define TIMER_OC_IDLE_STATE_LOW             ((uint16_t)0x0000)                      /*!< idle state of channel output is low */
 
-/* idle state of channel complementary output */ 
+/* idle state of channel complementary output */
 =======
 /* idle state of channel output */
 #define TIMER_OC_IDLE_STATE_HIGH            ((uint16_t)0x0100)                      /*!< idle state of channel output is high */
@@ -562,7 +562,7 @@ typedef struct
 #define TIMER_OC_CLEAR_DISABLE              ((uint16_t)0x0000U)                     /*!< channel output clear function disable */
 
 <<<<<<< HEAD
-/* channel control shadow register update control */ 
+/* channel control shadow register update control */
 =======
 /* channel control shadow register update control */
 >>>>>>> origin/main
@@ -608,7 +608,7 @@ typedef struct
 
 /* slave mode control */
 <<<<<<< HEAD
-#define SMCFG_SMC(regval)                   (BITS(0, 2) & ((uint32_t)(regval) << 0U)) 
+#define SMCFG_SMC(regval)                   (BITS(0, 2) & ((uint32_t)(regval) << 0U))
 =======
 #define SMCFG_SMC(regval)                   (BITS(0, 2) & ((uint32_t)(regval) << 0U))
 >>>>>>> origin/main
@@ -622,7 +622,7 @@ typedef struct
 #define TIMER_SLAVE_MODE_EXTERNAL0          SMCFG_SMC(7)                            /*!< external clock mode 0 */
 
 <<<<<<< HEAD
-/* master slave mode selection */ 
+/* master slave mode selection */
 =======
 /* master slave mode selection */
 >>>>>>> origin/main
@@ -641,7 +641,7 @@ typedef struct
 #define TIMER_ETP_RISING                    ((uint32_t)0x00000000U)                 /*!< active high or rising edge active */
 
 <<<<<<< HEAD
-/* channel 0 trigger input selection */ 
+/* channel 0 trigger input selection */
 =======
 /* channel 0 trigger input selection */
 >>>>>>> origin/main

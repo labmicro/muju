@@ -12,27 +12,27 @@
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
 <<<<<<< HEAD
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 =======
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -65,7 +65,7 @@ OF SUCH DAMAGE.
 #ifdef cplusplus
  extern "C" {
 <<<<<<< HEAD
-#endif 
+#endif
 =======
 #endif
 >>>>>>> origin/main
@@ -74,11 +74,11 @@ OF SUCH DAMAGE.
 #if !defined (GD32F10X_MD) && !defined (GD32F10X_HD) && !defined (GD32F10X_XD) && !defined (GD32F10X_CL)
   /* #define GD32F10X_MD */     /*!< GD32F10X_MD: GD32 Medium density devices */
 <<<<<<< HEAD
-  /* #define GD32F10X_HD */     /*!< GD32F10X_HD: GD32 High density Value Line devices */  
+  /* #define GD32F10X_HD */     /*!< GD32F10X_HD: GD32 High density Value Line devices */
   /* #define GD32F10X_XD */     /*!< GD32F10X_XD: GD32 Extra density devices */
-  /* #define GD32F10X_CL */     /*!< GD32F10X_CL: GD32 Connectivity line devices */  
+  /* #define GD32F10X_CL */     /*!< GD32F10X_CL: GD32 Connectivity line devices */
 #endif /* define GD32F10x */
-   
+
 =======
   /* #define GD32F10X_HD */     /*!< GD32F10X_HD: GD32 High density Value Line devices */
   /* #define GD32F10X_XD */     /*!< GD32F10X_XD: GD32 Extra density devices */
@@ -92,10 +92,10 @@ OF SUCH DAMAGE.
 
 /* define value of high speed crystal oscillator (HXTAL) in Hz */
 <<<<<<< HEAD
-#if !defined  HXTAL_VALUE    
-#ifdef GD32F10X_CL   
+#if !defined  HXTAL_VALUE
+#ifdef GD32F10X_CL
 #define HXTAL_VALUE    ((uint32_t)25000000) /*!< value of the external oscillator in Hz */
-#else 
+#else
 =======
 #if !defined  HXTAL_VALUE
 #ifdef GD32F10X_CL
@@ -113,7 +113,7 @@ OF SUCH DAMAGE.
 
 /* define value of internal 8MHz RC oscillator (IRC8M) in Hz */
 <<<<<<< HEAD
-#if !defined  (IRC8M_VALUE) 
+#if !defined  (IRC8M_VALUE)
 =======
 #if !defined  (IRC8M_VALUE)
 >>>>>>> origin/main
@@ -127,7 +127,7 @@ OF SUCH DAMAGE.
 
 /* define value of internal 40KHz RC oscillator(IRC40K) in Hz */
 <<<<<<< HEAD
-#if !defined  (IRC40K_VALUE) 
+#if !defined  (IRC40K_VALUE)
 =======
 #if !defined  (IRC40K_VALUE)
 >>>>>>> origin/main
@@ -136,7 +136,7 @@ OF SUCH DAMAGE.
 
 /* define value of low speed crystal oscillator (LXTAL)in Hz */
 <<<<<<< HEAD
-#if !defined  (LXTAL_VALUE) 
+#if !defined  (LXTAL_VALUE)
 =======
 #if !defined  (LXTAL_VALUE)
 >>>>>>> origin/main
@@ -148,7 +148,7 @@ OF SUCH DAMAGE.
 #define __GD32F10x_STDPERIPH_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version     */
 #define __GD32F10x_STDPERIPH_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version     */
 <<<<<<< HEAD
-#define __GD32F10x_STDPERIPH_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
+#define __GD32F10x_STDPERIPH_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 =======
 #define __GD32F10x_STDPERIPH_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 >>>>>>> origin/main
@@ -380,7 +380,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrStatus;
 #define REG8(addr)                   (*(volatile uint8_t *)(uint32_t)(addr))
 #define BIT(x)                       ((uint32_t)((uint32_t)0x01U<<(x)))
 <<<<<<< HEAD
-#define BITS(start, end)             ((0xFFFFFFFFUL << (start)) & (0xFFFFFFFFUL >> (31U - (uint32_t)(end)))) 
+#define BITS(start, end)             ((0xFFFFFFFFUL << (start)) & (0xFFFFFFFFUL >> (31U - (uint32_t)(end))))
 =======
 #define BITS(start, end)             ((0xFFFFFFFFUL << (start)) & (0xFFFFFFFFUL >> (31U - (uint32_t)(end))))
 >>>>>>> origin/main
@@ -458,7 +458,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrStatus;
 }
 #endif
 <<<<<<< HEAD
-#endif 
+#endif
 =======
 #endif
 >>>>>>> origin/main

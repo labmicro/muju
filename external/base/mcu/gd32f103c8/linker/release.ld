@@ -11,7 +11,7 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 MEMORY
 {
 <<<<<<< HEAD
-  RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K 
+  RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K
 =======
   RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K
 >>>>>>> origin/main
@@ -88,7 +88,7 @@ SECTIONS
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
 <<<<<<< HEAD
-  .data : 
+  .data :
 =======
   .data :
 >>>>>>> origin/main
@@ -103,7 +103,7 @@ SECTIONS
   } >RAM AT> FLASH
 
 <<<<<<< HEAD
-  
+
 =======
 
 >>>>>>> origin/main
@@ -135,7 +135,7 @@ SECTIONS
   } >RAM
 
 <<<<<<< HEAD
-  
+
 =======
 
 >>>>>>> origin/main

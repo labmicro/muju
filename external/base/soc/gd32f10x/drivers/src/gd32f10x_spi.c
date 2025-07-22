@@ -507,7 +507,7 @@ uint16_t spi_crc_polynomial_get(uint32_t spi_periph)
 
 /*!
 <<<<<<< HEAD
-    \brief      turn on SPI CRC function 
+    \brief      turn on SPI CRC function
 =======
     \brief      turn on SPI CRC function
 >>>>>>> origin/main

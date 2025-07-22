@@ -59,8 +59,8 @@ DAP ?= ftdi/um232h
 
 # Command flags for gdb server
 GDB_SERVER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-GDB_SERVER_FLAGS += -f interface/$(DAP).cfg -f target/gd32vf103.cfg
+GDB_SERVER_FLAGS += -f interface/$(DAP).cfg -f $(MUJU)/$(SOC_FOLDER)/openocd/gd32vf103.cfg
 
 # Command flags for download target
 FLASH_WRITER_FLAGS += $(if $(USB_LOCATION), -c "adapter usb location $(USB_LOCATION)")
-FLASH_WRITER_FLAGS += -f interface/$(DAP).cfg -f target/gd32vf103.cfg
+FLASH_WRITER_FLAGS += -f interface/$(DAP).cfg -f $(MUJU)/$(SOC_FOLDER)/openocd/gd32vf103.cfg

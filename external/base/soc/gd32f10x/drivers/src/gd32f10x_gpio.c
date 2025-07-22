@@ -2,7 +2,7 @@
     \file    gd32f10x_gpio.c
     \brief   GPIO driver
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -16,27 +16,27 @@
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
 <<<<<<< HEAD
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 =======
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -66,7 +66,7 @@ OF SUCH DAMAGE.
 #include "gd32f10x_gpio.h"
 
 <<<<<<< HEAD
-#define AFIO_EXTI_SOURCE_MASK              ((uint8_t)0x03U)         /*!< AFIO exti source selection mask*/  
+#define AFIO_EXTI_SOURCE_MASK              ((uint8_t)0x03U)         /*!< AFIO exti source selection mask*/
 =======
 #define AFIO_EXTI_SOURCE_MASK              ((uint8_t)0x03U)         /*!< AFIO exti source selection mask*/
 >>>>>>> origin/main
@@ -143,7 +143,7 @@ void gpio_afio_deinit(void)
 /*!
     \brief      GPIO parameter initialization
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -178,7 +178,7 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
     /* GPIO mode configuration */
     temp_mode = (uint32_t)(mode & ((uint32_t)0x0FU));
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -193,7 +193,7 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
         if((1U << i) & pin){
             reg = GPIO_CTL0(gpio_periph);
 <<<<<<< HEAD
-            
+
 =======
 
 >>>>>>> origin/main
@@ -202,7 +202,7 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
             /* set the specified pin mode bits */
             reg |= GPIO_MODE_SET(i, temp_mode);
 <<<<<<< HEAD
-            
+
 =======
 
 >>>>>>> origin/main
@@ -225,7 +225,7 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
         if((1U << i) & pin){
             reg = GPIO_CTL1(gpio_periph);
 <<<<<<< HEAD
-            
+
 =======
 
 >>>>>>> origin/main
@@ -234,7 +234,7 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
             /* set the specified pin mode bits */
             reg |= GPIO_MODE_SET(i - 8U, temp_mode);
 <<<<<<< HEAD
-            
+
 =======
 
 >>>>>>> origin/main
@@ -257,7 +257,7 @@ void gpio_init(uint32_t gpio_periph, uint32_t mode, uint32_t speed, uint32_t pin
 /*!
     \brief      set GPIO pin
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -275,7 +275,7 @@ void gpio_bit_set(uint32_t gpio_periph, uint32_t pin)
 /*!
     \brief      reset GPIO pin
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -293,7 +293,7 @@ void gpio_bit_reset(uint32_t gpio_periph, uint32_t pin)
 /*!
     \brief      write data to the specified GPIO pin
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -318,7 +318,7 @@ void gpio_bit_write(uint32_t gpio_periph, uint32_t pin, bit_status bit_value)
 /*!
     \brief      write data to the specified GPIO port
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -334,7 +334,7 @@ void gpio_port_write(uint32_t gpio_periph,uint16_t data)
 /*!
     \brief      get GPIO pin input status
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -348,7 +348,7 @@ FlagStatus gpio_input_bit_get(uint32_t gpio_periph,uint32_t pin)
 {
     if((uint32_t)RESET != (GPIO_ISTAT(gpio_periph)&(pin))){
 <<<<<<< HEAD
-        return SET; 
+        return SET;
 =======
         return SET;
 >>>>>>> origin/main
@@ -360,7 +360,7 @@ FlagStatus gpio_input_bit_get(uint32_t gpio_periph,uint32_t pin)
 /*!
     \brief      get GPIO port input status
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -375,7 +375,7 @@ uint16_t gpio_input_port_get(uint32_t gpio_periph)
 /*!
     \brief      get GPIO pin output status
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -397,7 +397,7 @@ FlagStatus gpio_output_bit_get(uint32_t gpio_periph, uint32_t pin)
 /*!
     \brief      get GPIO port output status
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main
@@ -419,7 +419,7 @@ uint16_t gpio_output_port_get(uint32_t gpio_periph)
       \arg        GPIO_USART2_PARTIAL_REMAP: USART2 partial remapping
       \arg        GPIO_USART2_FULL_REMAP: USART2 full remapping
 <<<<<<< HEAD
-      \arg        GPIO_TIMER0_PARTIAL_REMAP: TIMER0 partial remapping 
+      \arg        GPIO_TIMER0_PARTIAL_REMAP: TIMER0 partial remapping
 =======
       \arg        GPIO_TIMER0_PARTIAL_REMAP: TIMER0 partial remapping
 >>>>>>> origin/main
@@ -439,7 +439,7 @@ uint16_t gpio_output_port_get(uint32_t gpio_periph)
       \arg        GPIO_ADC0_ETRGRT_REMAP: ADC0 external trigger routine conversion remapping(only for GD32F10X_MD, GD32F10X_HD devices and GD32F10X_XD devices)
       \arg        GPIO_ADC1_ETRGRT_REMAP: ADC1 external trigger routine conversion remapping(only for GD32F10X_MD, GD32F10X_HD devices and GD32F10X_XD devices)
 <<<<<<< HEAD
-      \arg        GPIO_ENET_REMAP: ENET remapping(only for GD32F10X_CL devices) 
+      \arg        GPIO_ENET_REMAP: ENET remapping(only for GD32F10X_CL devices)
 =======
       \arg        GPIO_ENET_REMAP: ENET remapping(only for GD32F10X_CL devices)
 >>>>>>> origin/main
@@ -448,9 +448,9 @@ uint16_t gpio_output_port_get(uint32_t gpio_periph)
       \arg        GPIO_SWJ_SWDPENABLE_REMAP: JTAG-DP disabled and SW-DP enabled
       \arg        GPIO_SWJ_DISABLE_REMAP: JTAG-DP disabled and SW-DP disabled
 <<<<<<< HEAD
-      \arg        GPIO_SPI2_REMAP: SPI2 remapping(only for GD32F10X_CL, GD32F10X_HD and GD32F10X_XD devices) 
-      \arg        GPIO_TIMER1ITI1_REMAP: TIMER1 internal trigger 1 remapping(only for GD32F10X_CL devices) 
-      \arg        GPIO_PTP_PPS_REMAP: ethernet PTP PPS remapping(only for GD32F10X_CL devices) 
+      \arg        GPIO_SPI2_REMAP: SPI2 remapping(only for GD32F10X_CL, GD32F10X_HD and GD32F10X_XD devices)
+      \arg        GPIO_TIMER1ITI1_REMAP: TIMER1 internal trigger 1 remapping(only for GD32F10X_CL devices)
+      \arg        GPIO_PTP_PPS_REMAP: ethernet PTP PPS remapping(only for GD32F10X_CL devices)
 =======
       \arg        GPIO_SPI2_REMAP: SPI2 remapping(only for GD32F10X_CL, GD32F10X_HD and GD32F10X_XD devices)
       \arg        GPIO_TIMER1ITI1_REMAP: TIMER1 internal trigger 1 remapping(only for GD32F10X_CL devices)
@@ -494,7 +494,7 @@ void gpio_pin_remap_config(uint32_t remap, ControlStatus newvalue)
         temp_reg |= ~PCF_SWJCFG_MASK;
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -503,7 +503,7 @@ void gpio_pin_remap_config(uint32_t remap, ControlStatus newvalue)
         temp_reg |= (remap1 << ((remap >> 0x15U)*0x10U));
     }
 <<<<<<< HEAD
-    
+
 =======
 
 >>>>>>> origin/main
@@ -524,7 +524,7 @@ void gpio_pin_remap_config(uint32_t remap, ControlStatus newvalue)
       \arg        GPIO_PORT_SOURCE_GPIOC: output port source C
       \arg        GPIO_PORT_SOURCE_GPIOD: output port source D
 <<<<<<< HEAD
-      \arg        GPIO_PORT_SOURCE_GPIOE: output port source E 
+      \arg        GPIO_PORT_SOURCE_GPIOE: output port source E
 =======
       \arg        GPIO_PORT_SOURCE_GPIOE: output port source E
 >>>>>>> origin/main
@@ -581,13 +581,13 @@ void gpio_event_output_config(uint8_t output_port, uint8_t output_pin)
     uint32_t reg = 0U;
     reg = AFIO_EC;
 <<<<<<< HEAD
-    
+
     /* clear AFIO_EC_PORT and AFIO_EC_PIN bits */
     reg &= (uint32_t)(~(AFIO_EC_PORT|AFIO_EC_PIN));
-    
+
     reg |= (uint32_t)((uint32_t)output_port << GPIO_OUTPUT_PORT_OFFSET);
     reg |= (uint32_t)output_pin;
-    
+
 =======
 
     /* clear AFIO_EC_PORT and AFIO_EC_PIN bits */
@@ -625,7 +625,7 @@ void gpio_event_output_disable(void)
 /*!
     \brief      lock GPIO pin
 <<<<<<< HEAD
-    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G) 
+    \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 =======
     \param[in]  gpio_periph: GPIOx(x = A,B,C,D,E,F,G)
 >>>>>>> origin/main

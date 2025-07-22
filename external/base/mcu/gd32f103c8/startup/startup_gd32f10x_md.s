@@ -2,11 +2,6 @@
   .cpu cortex-m3
   .fpu softvfp
   .thumb
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> origin/main
 .global  g_pfnVectors
 .global  Default_Handler
 
@@ -25,15 +20,9 @@ defined in linker script */
 .section  .text.Reset_Handler
   .weak  Reset_Handler
   .type  Reset_Handler, %function
-<<<<<<< HEAD
-Reset_Handler:  
-
-/* Copy the data segment initializers from flash to SRAM */  
-=======
 Reset_Handler:
 
 /* Copy the data segment initializers from flash to SRAM */
->>>>>>> origin/main
   movs  r1, #0
   b  LoopCopyDataInit
 
@@ -42,11 +31,6 @@ CopyDataInit:
   ldr  r3, [r3, r1]
   str  r3, [r0, r1]
   adds  r1, r1, #4
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> origin/main
 LoopCopyDataInit:
   ldr  r0, =_sdata
   ldr  r3, =_edata
@@ -55,46 +39,22 @@ LoopCopyDataInit:
   bcc  CopyDataInit
   ldr  r2, =_sbss
   b  LoopFillZerobss
-<<<<<<< HEAD
-/* Zero fill the bss segment. */  
-=======
 /* Zero fill the bss segment. */
->>>>>>> origin/main
 FillZerobss:
   movs  r3, #0
   str  r3, [r2]
   adds r2, r2, #4
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> origin/main
 LoopFillZerobss:
   ldr  r3, = _ebss
   cmp  r2, r3
   bcc  FillZerobss
 
 /* Call the clock system initialization function.*/
-<<<<<<< HEAD
-  bl  SystemInit   
-=======
   bl  SystemInit
->>>>>>> origin/main
 /* Call into static constructors (C++) */
   bl __libc_init_array
 /* Call the application's entry point.*/
   bl  main
-<<<<<<< HEAD
-  bx  lr    
-.size  Reset_Handler, .-Reset_Handler
-
-/**
- * @brief  This is the code that gets called when the processor receives an 
- *         unexpected interrupt.  This simply enters an infinite loop, preserving
- *         the system state for examination by a debugger.
- * @param  None     
- * @retval None       
-=======
   bx  lr
 .size  Reset_Handler, .-Reset_Handler
 
@@ -104,7 +64,6 @@ LoopFillZerobss:
  *         the system state for examination by a debugger.
  * @param  None
  * @retval None
->>>>>>> origin/main
 */
     .section  .text.Default_Handler,"ax",%progbits
 Default_Handler:
@@ -116,11 +75,7 @@ Infinite_Loop:
 * The minimal vector table for a Cortex M4. Note that the proper constructs
 * must be placed on this to ensure that it ends up at physical address
 * 0x0000.0000.
-<<<<<<< HEAD
-* 
-=======
 *
->>>>>>> origin/main
 *******************************************************************************/
    .section  .isr_vector,"a",%progbits
   .type  g_pfnVectors, %object
@@ -195,13 +150,8 @@ g_pfnVectors:
 
 /*******************************************************************************
 *
-<<<<<<< HEAD
-* Provide weak aliases for each Exception handler to the Default_Handler. 
-* As they are weak aliases, any function with the same name will override 
-=======
 * Provide weak aliases for each Exception handler to the Default_Handler.
 * As they are weak aliases, any function with the same name will override
->>>>>>> origin/main
 * this definition.
 *
 *******************************************************************************/
