@@ -164,7 +164,7 @@ define library_link_rule
     $(call show_message,Definiendo regla de enlazar $(LIB_DIR)/$1.a)
 PROJECT_LIB += $(LIB_DIR)/$1.a
 $(LIB_DIR)/$1.a: $$($2_OBJ)
-	$$(call show_action,Building $$(call short_path,$$<))
+	$$(call show_action,Building $$(call short_path,$$@))
 	-@mkdir -p $$(@D)
 	$$(QUIET) $$(AR) rcs $$@ $$^
 endef
