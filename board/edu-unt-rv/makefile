@@ -1,10 +1,9 @@
-
 ##################################################################################################
-# Copyright (c) 2022-2023, Laboratorio de Microprocesadores
+# Copyright (c) 2022-2024, Laboratorio de Microprocesadores
 # Facultad de Ciencias Exactas y Tecnología, Universidad Nacional de Tucumán
 # https://www.microprocesadores.unt.edu.ar/
 #
-# Copyright (c) 2022-2023, Esteban Volentini <evolentini@herrera.unt.edu.ar>
+# Copyright (c) 2022-2024, Esteban Volentini <evolentini@herrera.unt.edu.ar>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 # associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -24,11 +23,6 @@
 # SPDX-License-Identifier: MIT
 ##################################################################################################
 
-SOC = gd32vf103
+MCU         ?= gd32vf103cbt6
 
-DEFINES += HXTAL_VALUE=8000000U
-
-LINKSCRIPT = external/base/mcu/$(MCU)/linker/release.ld
-
-# Flash commandfor OpenOCD download target
-FLASH_WRITER_COMMANDS = -c "program $(TARGET_ELF) verify reset exit"
+USE_DRIVERS ?= y
