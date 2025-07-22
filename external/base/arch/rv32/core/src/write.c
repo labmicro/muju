@@ -20,26 +20,22 @@ extern int _put_char(int ch) __attribute__((weak));
 size_t __write(int handle, const unsigned char *buf, size_t bufSize)
 {
   size_t nChars = 0;
-
   if (handle == -1)
   {
     return 0;
   }
-
   for (; bufSize > 0; --bufSize)
   {
     _put_char((uint8_t) *buf);
     ++buf;
     ++nChars;
   }
-
   return nChars;
  }
 
 int puts(const char* string) {
     return __write(0, (const void *) string, strlen(string));
 }
-
 #elif defined ( __GNUC__ )
 ssize_t _write(int fd, const void* ptr, size_t len) {
     const uint8_t * current = (const uint8_t *) ptr;

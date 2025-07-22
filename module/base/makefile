@@ -269,6 +269,8 @@ DEFINES += $(call convert_defines, $(BOARD) $(SOC) $(MCU) $(CPU) $(ARCH) $(RTOS)
 TARGET_NAME ?= $(BIN_DIR)/$(PROJECT_NAME)
 TARGET_ELF = $(TARGET_NAME).$(LD_EXTENSION)
 
+-include $(patsubst %.o,%.d,$(PROJECT_OBJ))
+
 ##################################################################################################
 #
 PROJECT_OBJ += $(call objects_list,$(PROJECT_SRC),c)
