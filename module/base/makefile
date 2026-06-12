@@ -366,6 +366,14 @@ endef
 
 VSCODE_INCLUDES = $(strip $(foreach p,$(PROJECT_INC),$(subst $(abspath $(PROJECT_DIR)),$(PROJECT_DIR),$(call full_path,$(p)))))
 
+
+define vscode_c_config_ceedling_compat
+,
+            "compileCommands": [
+                "$${workspaceFolder}/$(BUILD_DIR)/artifacts/compile_commands.json"
+            ]
+endef
+
 define vscode_c_config
 {
     "configurations": [
@@ -375,7 +383,7 @@ define vscode_c_config
             "defines": [$(call json_list,$(DEFINES))],
             "cStandard": "c99",
             "intelliSenseMode": "$${default}",
-            "compilerPath":"$(subst \,\\,$(shell $(CC) -v 2>&1 | awk '/COLLECT_GCC=/ {sub(/[^=]+=/,"");print}'))"
+            "compilerPath":"$(subst \,\\,$(shell $(CC) -v 2>&1 | awk '/COLLECT_GCC=/ {sub(/[^=]+=/,"");print}'))"$(if $(wildcard $(BUILD_DIR)/artifacts/compile_commands.json),$(vscode_c_config_ceedling_compat))
         }
     ],
 	"version": 4
