@@ -26,16 +26,25 @@
 MUJU := $(abspath $(dir $(lastword $(MAKEFILE_LIST)))../..)
 include $(MUJU)/external/gmsl/gmsl
 
+
+##################################################################################################
+# Function to obtain the last directory of a path
+define lastdir
+$(strip \
+    $(lastword $(filter-out .,$(subst /, ,$(patsubst %/,%,$(strip $1)))))
+)
+endef
+
 ##################################################################################################
 # Defintion of project name based on project paths if it was not defined in
 # project makefile, used to define binary file and default target
 ifneq ($(PROJECT), )
     -include $(PROJECT)/makefile
-    PROJECT_NAME ?= $(lastword $(subst /, , $(PROJECT)))
+    PROJECT_NAME ?= $(call lastdir, $(PROJECT))
     PROJECT_DIR = $(abspath $(PROJECT))
 else
     PROJECT = .
-    PROJECT_NAME ?= $(lastword $(subst /, , $(CURDIR)))
+    PROJECT_NAME ?= $(call lastdir, $(CURDIR))
     PROJECT_DIR = $(PROJECT)
 endif
 
@@ -161,9 +170,12 @@ endef
 ##################################################################################################
 # Dynamic rule to link static library file from module with source code
 define library_link_rule
-    $(call show_message,Definiendo regla de enlazar $(LIB_DIR)/$1.a)
-PROJECT_LIB += $(LIB_DIR)/$1.a
-$(LIB_DIR)/$1.a: $$($2_OBJ)
+    $(call show_message,Regla de enlazar $1)
+    $(call show_message, Short path: $(LIB_DIR)/$(call lastdir,$1).a)
+    $(call show_message, Full path: $(call full_path,$(BUILD_DIR)))
+    $(call show_message,Definiendo regla de enlazar $(LIB_DIR)/$(call lastdir,$1).a)
+PROJECT_LIB += $(LIB_DIR)/$(call lastdir,$1).a
+$(LIB_DIR)/$(call lastdir,$1).a: $$($2_OBJ)
 	$$(call show_action,Building $$(call short_path,$$@))
 	-@mkdir -p $$(@D)
 	$$(QUIET) $$(AR) rcs $$@ $$^
